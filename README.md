@@ -7,6 +7,8 @@ This repo documents my understanding of Docker. The structure of my notes are as
 1. [Introduction](#1)
     1. [What is Docker](#2)
     2. [Virtual machines vs. Containers](#3)
+    3. [Docker architecture](#4)
+    4. [Development workflow](#5)
 
 
 2. [The Linux Command Line](#4)
