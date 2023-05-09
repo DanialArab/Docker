@@ -61,7 +61,7 @@ In our development workflow when using docker, we take an application and docker
 + environment variables
 +  ...
 
-so we create a docker file and give it to docker for packaging an application into an image. When we have an image we tell docker to start an application using that image. A container is just a process, a special process, because it has its own files system, which is provided by the image. So our application gets loaded inside the container or process and this is how we run our application locally on our development machine like 
+so we create a docker file and give it to docker for packaging our application into an image. When we have an image we tell docker to start an application using that image. A container is just a process, a special process, because it has its own files system, which is provided by the image. So our application gets loaded inside the container or process and this is how we run our application locally on our development machine like 
 
   docker run ... 
 
