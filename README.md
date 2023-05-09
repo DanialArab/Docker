@@ -50,6 +50,25 @@ Docker uses a client-server architecture. So it has a client component that talk
 
 ### Development workflow
 
+In our development workflow when using docker, we take an application and dockerize it meaning we make a small change to it so that it can be run by docker. How? We just add a docker file to it.
+
+**Docker file** is a plain text file that includes instructions that docker uses to package our application into an image. This image contains everything our application need to run. Typically, an image contains:
+
++ a cut-down OS
++ a runtime environment (like Node or python)
++ application files
++ third-party libraries
++ environment variables
++  ...
+
+so we create a docker file and give it to docker for packaging an application into an image. When we have an image we tell docker to start an application using that image. A container is just a process, a special process, because it has its own files system, which is provided by the image. So our application gets loaded inside the container or process and this is how we run our application locally on our development machine like 
+
+  docker run ... 
+
+this way we run our application inside a container in an isolated environemnt. 
+
+Once we have the image we can push it to the docker registry like docker hub. Docker hub to docker is like GitHub to Git. It is a storage for docker images that anyone can use. So once our application's image is on docker hub then we can pull it on any machine running docker. This machine has the same image as we have in our development machine which contains a specific version of our application with everything it needs. So we can start our application the same way we started in our development machine. We just tell docker to start a container using this image. So with docker we no longer need to maintain a long complex released documents that has to be precisely followed. All the instructions for buildiong an image of our application are written in a docker file. With that we can package our application into an image and run it virtually anywhere 
+
 
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
 
