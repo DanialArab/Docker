@@ -8,11 +8,6 @@ This repo documents my understanding of Docker. The structure of my notes are as
 
 2. [The Linux Command Line](#2)
 
-3. [](#3)
-
-4. [](#4)
-    1. [](#5)
-    2. [](#6)
 
 <a name="1"></a>
 ## 1. Introduction
