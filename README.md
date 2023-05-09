@@ -11,7 +11,7 @@ This repo documents my understanding of Docker. The structure of my notes are as
     4. [Development workflow](#5)
 
 
-2. [The Linux Command Line](#4)
+2. [The Linux Command Line](#6)
 
 
 <a name="1"></a>
