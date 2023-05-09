@@ -15,6 +15,7 @@ This repo documents my understanding of Docker. The structure of my notes are as
 <a name="1"></a>
 ## 1. Introduction
 
+<a name="2"></b>
 ### What is Docker:
 
 Docker is a platform for **building, running, and shipping pplications** in a **consistent manner**. It solves the problem of "my application works on my machine though!:)". The three reasons behind this problem could be:
@@ -25,6 +26,7 @@ Docker is a platform for **building, running, and shipping pplications** in a **
 
 Docker comes to rescue to solve the above issues. 
  
+ <a name="3"></b>
 ### Virtual machines vs. Containers
 
 A container is an isolated environment for running an application. 
@@ -55,10 +57,12 @@ Containes compatred to VMs:
 
 so due to the above benefits we can run even 100s of containers on a single machine side by side.
 
+<a name="4"></b>
 ### Docker architecture
 
 Docker uses a client-server architecture. So it has a client component that talks to a server component using a REST API. The server, also called docker engine, sits in the background and takes care of building and running docker containers. 
 
+<a name="5"></b>
 ### Development workflow
 
 In our development workflow when using docker, we take an application and dockerize it meaning we make a small change to it so that it can be run by docker. How? We just add a docker file to it.
@@ -80,7 +84,7 @@ this way we run our application inside a container in an isolated environment.
 
 Once we have the image we can push it to the **docker registry** like **docker hub**. **Docker hub to docker is like GitHub to Git**. It is a storage for docker images that anyone can use. So once our application's image is on docker hub then we can pull it on any machine running docker. This machine has the same image as we have on our development machine which contains a specific version of our application with everything it needs. So we can start our application the same way we started in our development machine. We just tell docker to start a container using this image. So with docker we no longer need to maintain a long complex released document that has to be precisely followed. All the instructions for buildiong an image of our application are written in a docker file. With that we can package our application into an image and run it virtually anywhere 
 
-<a name="2"></a>
+<a name="6"></a>
 ## 2. .The Linux Command Line
 
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
