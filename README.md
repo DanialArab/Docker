@@ -4,7 +4,7 @@ This repo documents my understanding of Docker. The structure of my notes are as
 
 ## 1. Introduction
 
-+ What is Docker:
+### What is Docker:
 
 kkk 
 + Virtual machines vs. Containers
