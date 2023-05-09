@@ -52,7 +52,7 @@ Docker uses a client-server architecture. So it has a client component that talk
 
 In our development workflow when using docker, we take an application and dockerize it meaning we make a small change to it so that it can be run by docker. How? We just add a docker file to it.
 
-**Docker file** is a plain text file that includes instructions that docker uses to package our application into an image. This image contains everything our application need to run. Typically, an image contains:
+**Docker file** is a plain text file that includes instructions that docker uses to package our application into an image. This image contains everything our application needs to run. Typically, an image contains:
 
 + a cut-down OS
 + a runtime environment (like Node or python)
