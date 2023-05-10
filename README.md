@@ -1,7 +1,6 @@
 # Docker
 
-This repo documents my understanding of Docker. The structure of my notes are as follows, and more details on each topic is presented in the Markdown files, named consistently with the first-level headings below, attached to this repo.
-
+This repo documents my understanding of Docker. The structure of my notes are as follows:
 # Table of content
 
 1. [Introduction](#1)
