@@ -46,7 +46,7 @@ The problems of using virtual machines:
 + slow to start, because the entire OS has to be loaded just like starting your computer 
 + resource intensive, because each VM takes a slice of actual physical hardware resources like CPU, Memory and disk space
 
-So due to the above issues we h+may have limited number of VMs on our machine. 
+So due to the above issues we may have limited number of VMs on our machine. 
 
 Containes compatred to VMs:
 
