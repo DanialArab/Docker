@@ -91,22 +91,24 @@ Once we have the image we can push it to the **docker registry** like **docker h
 
 Some points:
 + To package our application, we typically start from a base image. I can find the base images from dockerhub, which is a registry for docker images, (https://hub.docker.com/) and then add additional files on top of it, it is like inheritance in programming. We put all the instruction to package our application in the Dockerfile (without an extension) in our app directory, as an example the following is a Dockerfile:
-        FROM node:alpine
-        COPY . /app (we need to copy our application/program files, we want to copy all the files in the current directory into the app directory inro that image, so that image has a file system and in that file system we want to create a directory called app)
-        WORKDIR /app
-        CMD node app.js
+
+            FROM node:alpine
+            COPY . /app (we need to copy our application/program files, we want to copy all the files in the current directory into the app directory inro that image, so that image has a file system and in that file system we want to create a directory called app)
+            WORKDIR /app
+            CMD node app.js
+        
 + Then we go to terminal to tell docker to package our applciation:
-        docker build -t hello-docker . (in the end we need to specidy where docker can find the Dockerfile, I put period because the Dockerfile is in the current directory)
+            docker build -t hello-docker . (in the end we need to specidy where docker can find the Dockerfile, I put period because the Dockerfile is in the current directory)
 + to see all the images in the computer 
-        docker images OR docker image ls
+             docker images OR docker image ls
 + Now that I craeted an image I can run it on any computer running docker like
-        docker run hello-docker (the image name in this case is hello-docker. Also it does not matter which directory I am in, because this image contains all the files for running our application) 
+             docker run hello-docker (the image name in this case is hello-docker. Also it does not matter which directory I am in, because this image contains all the files for running our application) 
  + I can publish my image to dockerhub so that everyone can pull and run it on any machine   
  +  https://www.docker.com/play-with-docker/ is pretty cool, which gives you virtual machine which has Linux and Docker. Here I can experiment and pull the docker images already published on dockerhub like
-        docker pull path_to_the_image
-        docker images
-        docker run name_of_the_image
-        
+            docker pull path_to_the_image
+            docker images
+            docker run name_of_the_image
+
         
 <a name="6"></a>
 ## 2. .The Linux Command Line
