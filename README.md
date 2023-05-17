@@ -115,7 +115,25 @@ Some points:
             docker pull path_to_the_image_on_dockerhub
             docker images
             docker run name_of_the_image
-
++ to delete a docker image:
+            docker rmi name_of_image
+            
+            BUT I may need to first remove the container first, to list all the containers on my system, including the stopped ones:
+            
+            docker ps -a
+            
+            then 
+            
+            docker rm container_name
+            
+            then I can remove the image:
+            
+            docker rmi hello-docker
+            
+            When you remove a Docker image, the space it occupied on your disk is not automatically freed up. This is because Docker uses a layered file system, and each image is built on top of a base image with multiple layers. These layers are shared among images and containers, which allows for efficient storage and reduces redundancy. However, you can use the following command to clean up unused images, containers, networks, and volumes, thereby reclaiming disk space. Here's how you can do it:
+            
+            docker system prune 
+            
         
 <a name="6"></a>
 ## 2. .The Linux Command Line
