@@ -245,7 +245,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
 
 <a name="17"></a>
 ## 3. Building Images
-
+HERE
 
 <a name="10"></a>
 ## 10. Reference
