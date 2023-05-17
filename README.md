@@ -155,6 +155,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         apt install nano
         apt remove nano
         
+<a name="9"></b>
 ### Navigating the file system
 
         pwd # to print the working directory
@@ -165,6 +166,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         cd .. # to go one level up
         cd ~ # to go to the home directory
 
+<a name="10"></b>
 ### Manipulating files and directories
 
         mkdir test # to create the test directory
@@ -174,6 +176,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         rm hello.txt # to remove a file
         rm -r docker # to recursively remove a directory
 
+<a name="11"></b>
 ### Editing and viewing files
 
         nano file.txt # to edit file.txt
@@ -184,6 +187,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         tail file.txt # to view the last 10 lines
         tail -n 5 file.txt # to view the last 5 lines
 
+<a name="12"></b>
 ### Searching for text
 
         grep hello file.txt # to search for hello in file.txt
@@ -191,6 +195,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         grep -i hello file*.txt # to search in files with a pattern
         grep -i -r hello . # to search in the current directory
 
+<a name="13"></b>
 ### Finding files and directories
 
         find # to list all files and directories
@@ -198,6 +203,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         find -type f # to list files only
         find -name “f*” # to filter by name using a pattern
 
+<a name="14"></b>
 ### Managing environment variables
 
         printenv # to list all variables and their value
@@ -205,11 +211,13 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         echo $PATH # to view the value of PATH
         export name=bob # to set a variable in the current session
 
+<a name="15"></b>
 ### Managing processes
 
         ps # to list the running processes
         kill 37 # to kill the process with ID 37
 
+<a name="16"></b>
 ### Managing users and groups
 
         useradd -m john # to create a user with a home directory
@@ -221,6 +229,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         groupmod # to modify a group
         groupdel # to delete a group
 
+<a name="17"></b>
 ### File permissions
 
         chmod u+x deploy.sh # give the owning user execute permission
