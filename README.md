@@ -243,6 +243,6 @@ When you remove a Docker image, the space it occupied on your disk is not automa
 
 
 <a name="10"></a>
-## 1. Reference
+## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
 
