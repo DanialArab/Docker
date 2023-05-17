@@ -8,6 +8,7 @@ This repo documents my understanding of Docker. The structure of my notes are as
     2. [Virtual machines vs. Containers](#3)
     3. [Docker architecture](#4)
     4. [Development workflow](#5)
+    5. [Docker in action](#6)
 
 
 2. [The Linux Command Line](#6)
@@ -85,7 +86,28 @@ this way we run our application inside a container in an isolated environment.
 
 Once we have the image we can push it to the **docker registry** like **docker hub**. **Docker hub to docker is like GitHub to Git**. It is a storage for docker images that anyone can use. So once our application's image is on docker hub then we can pull it on any machine running docker. This machine has the same image as we have on our development machine which contains a specific version of our application with everything it needs. So we can start our application the same way we started in our development machine. We just tell docker to start a container using this image. So with docker we no longer need to maintain a long complex released document that has to be precisely followed. All the instructions for buildiong an image of our application are written in a docker file. With that we can package our application into an image and run it virtually anywhere 
 
-## HERE 7- Docker in Action
+<a name="6"></b>
+## Docker in Action
+
+Some points:
++ To package our application, we typically start from a base image. I can find the base images from dockerhub, which is a registry for docker images, (https://hub.docker.com/) and then add additional files on top of it, it is like inheritance in programming. We put all the instruction to package our application in the Dockerfile (without an extension) in our app directory, as an example the following is a Dockerfile:
+        FROM node:alpine
+        COPY . /app (we need to copy our application/program files, we want to copy all the files in the current directory into the app directory inro that image, so that image has a file system and in that file system we want to create a directory called app)
+        WORKDIR /app
+        CMD node app.js
++ Then we go to terminal to tell docker to package our applciation:
+        docker build -t hello-docker . (in the end we need to specidy where docker can find the Dockerfile, I put period because the Dockerfile is in the current directory)
++ to see all the images in the computer 
+        docker images OR docker image ls
++ Now that I craeted an image I can run it on any computer running docker like
+        docker run hello-docker (the image name in this case is hello-docker. Also it does not matter which directory I am in, because this image contains all the files for running our application) 
+ + I can publish my image to dockerhub so that everyone can pull and run it on any machine   
+ +  https://www.docker.com/play-with-docker/ is pretty cool, which gives you virtual machine which has Linux and Docker. Here I can experiment and pull the docker images already published on dockerhub like
+        docker pull path_to_the_image
+        docker images
+        docker run name_of_the_image
+        
+        
 <a name="6"></a>
 ## 2. .The Linux Command Line
 
