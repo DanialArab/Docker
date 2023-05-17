@@ -10,8 +10,7 @@ This repo documents my understanding of Docker. The structure of my notes are as
     4. [Development workflow](#5)
     5. [Docker in action](#6)
 
-
-2. [The Linux Command Line](#6)
+2. [The Linux Command Line](#7)
 
 
 <a name="1"></a>
@@ -136,8 +135,16 @@ When you remove a Docker image, the space it occupied on your disk is not automa
             docker system prune 
             
         
-<a name="6"></a>
+<a name="7"></a>
 ## 2. .The Linux Command Line
 
+### Managing packages
+
+        apt update
+        apt list
+        apt install nano
+        apt remove nano
+        
+        
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
 
