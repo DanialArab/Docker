@@ -93,7 +93,7 @@ Some points:
 + To package our application, we typically start from a base image. I can find the base images from dockerhub, which is a registry for docker images, (https://hub.docker.com/) and then add additional files on top of it, it is like inheritance in programming. We put all the instruction to package our application in the Dockerfile (**without an extension**) in our app directory. The following is an example of a Dockerfile:
 
             FROM node:alpine
-            COPY . /app (we need to copy our application/program files, we want to copy all the files in the current directory into the app directory inro that image, so that image has a file system and in that file system we want to create a directory called app)
+            COPY . /app (we need to copy our application/program files, we want to copy all the files in the current directory into the app directory into that image, so that image has a file system and in that file system we want to create a directory called app)
             WORKDIR /app
             CMD node app.js
         
