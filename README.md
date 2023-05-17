@@ -21,6 +21,8 @@ This repo documents my understanding of Docker. The structure of my notes are as
     8. [Managing users and groups](#15)
     9. [File permissions](#16)
 
+3. [Building Images](#17)
+
 10. [Reference](#20)
 
 <a name="1"></a>
@@ -240,6 +242,9 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         # execute permission
         chmod ug-x deploy.sh # to remove the execute permission from
         # the owning user and group
+
+<a name="17"></a>
+## 3. Building Images
 
 
 <a name="10"></a>
