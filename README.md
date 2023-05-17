@@ -21,6 +21,7 @@ This repo documents my understanding of Docker. The structure of my notes are as
     8. [Managing users and groups](#15)
     9. [File permissions](#16)
 
+10. [Reference](#20)
 
 <a name="1"></a>
 ## 1. Introduction
@@ -241,5 +242,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         # the owning user and group
 
 
+<a name="10"></a>
+## 1. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
 
