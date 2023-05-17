@@ -112,7 +112,7 @@ Some points:
  + I can publish my image to dockerhub so that everyone can pull and run it on any machine   
  +  https://www.docker.com/play-with-docker/ is pretty cool, which gives you virtual machine which has Linux and Docker. Here I can experiment and pull the docker images already published on dockerhub like
  
-            docker pull path_to_the_image
+            docker pull path_to_the_image_on_dockerhub
             docker images
             docker run name_of_the_image
 
