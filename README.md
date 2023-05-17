@@ -11,6 +11,15 @@ This repo documents my understanding of Docker. The structure of my notes are as
     5. [Docker in action](#6)
 
 2. [The Linux Command Line](#7)
+    1. [Managing packages](#8)
+    2. [Navigating the file system](#9)
+    3. [Manipulating files and directories](#10)
+    4. [Editing and viewing files](#11)
+    5. [Finding files and directories](#12)
+    6. [Managing environment variables](#13)
+    7. [Managing processes](#14)
+    8. [Managing users and groups](#15)
+    9. [File permissions](#16)
 
 
 <a name="1"></a>
@@ -138,6 +147,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
 <a name="7"></a>
 ## 2. .The Linux Command Line
 
+<a name="8"></b>
 ### Managing packages
 
         apt update
