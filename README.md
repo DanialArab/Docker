@@ -130,7 +130,7 @@ Some points:
 
             docker rmi name_of_image
             
-BUT I may need to first remove the container first, to list all the containers on my system, including the stopped ones:
+BUT I may need to first remove the container, to list all the containers on my system, including the stopped ones:
             
             docker ps -a
             
@@ -148,7 +148,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
             
         
 <a name="7"></a>
-## 2. .The Linux Command Line
+## 2. The Linux Command Line
 
 <a name="8"></b>
 ### Managing packages
