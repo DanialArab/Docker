@@ -1,6 +1,8 @@
 # Docker
 
-This repo documents my understanding of Docker. The structure of my notes are as follows:
+This repo documents my understanding of Docker. The structure of my notes from the "The Ultimate Docker" course by Mosh Hamedani is as follows. For my hands-on experience with Docker, please visit the following link:
+
+
 # Table of content
 
 1. [Introduction](#1)
