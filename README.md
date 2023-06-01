@@ -24,7 +24,8 @@ This repo documents my understanding of Docker. The structure of my notes from t
     9. [File permissions](#16)
 
 3. [Building Images](#17)
-
+    1. [Images vs. containes](#18)
+    2. 
 10. [Reference](#20)
 
 <a name="1"></a>
@@ -33,7 +34,7 @@ This repo documents my understanding of Docker. The structure of my notes from t
 <a name="2"></b>
 ### What is Docker:
 
-Docker is a platform for **building, running, and shipping pplications** in a **consistent manner**. It solves the problem of "my application works on my machine though!:)". The three reasons behind this problem could be:
+Docker is a platform for **building, running, and shipping applications** in a **consistent manner**. It solves the problem of "my application works on my machine though!:)". The three reasons behind this problem could be:
 
 + one or more files missing (your application is not completely deployed and misses something)
 + software version mismatch 
@@ -247,7 +248,44 @@ When you remove a Docker image, the space it occupied on your disk is not automa
 
 <a name="17"></a>
 ## 3. Building Images
-HERE
+
+Topics will be discussed:
++ creating docker files
++ versioning images
++ sharing images
++ saving and loading images
++ reducing the image size
++ speeding up builds
+
+<a name="18"></a>
+### Images vs. containes
+
+An image includes everyhting (all the files and configuration settings) an application needs to run like
++ a cut-down OS
++ application files
++ third-party libraries
++ environment variables
++  ...
+
+Once we have an image we can start a container from it. A container is kind of liek a virtual machine in a sense that:
++ it provides an isolated environment for executing an application
++ can be stopped & restarted like VMs
++ a container is technically an operating system process, a special process because it has its own file system provided by the image
+
+to see the running processes or containes:
+
+        docker ps
+        
+how to start a new container from the same image? to start a container from an image:
+
+        docker run -it name_of_the_image
+
+the container gets its file system from the image but each congtainer has its own write layer so what we write in a given container is invisible from other containers, of course there is a way to share data between containers and we will talk about it later in the course. But it is critical to understand that each container is an isolated environemnt for executing an application, it is an isolated universe. 
+
+
+
+
+
 
 <a name="10"></a>
 ## 10. Reference
