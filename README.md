@@ -186,13 +186,27 @@ so I logged in as root user, the default, after the @ I have the name of the mac
 <a name="9"></b>
 ### Managing packages
 
+Most operating systems and development platforms come with a package manager like:
+
++ pip
++ npm
++ yarn
++ NuGet
++ ... 
+
+In ubuntu we also have a package manager called **apt** which is short for **advanced packege tool**. apt is the newer package manager we also have apt-get. But we work with apt which is easier to work with.
+
+**take away:** before installing a package I should always run **apt update** to update my package database then I can install it like **apt install package_name**. 
+
         apt update
-        apt list
+        apt list (gives me back a list of all the packages in the database installed or uninstalled)
         apt install nano
         apt remove nano
-        
+
+we can clear the terminal window by pressing ctrl + l.
+
 <a name="10"></b>
-### Navigating the file system
+### Navigating the file system HERE
 
         pwd # to print the working directory
         ls # to list the files and directories
