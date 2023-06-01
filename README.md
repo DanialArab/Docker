@@ -13,18 +13,19 @@ This repo documents my understanding of Docker. The structure of my notes from t
     5. [Docker in action](#6)
 
 2. [The Linux Command Line](#7)
-    1. [Managing packages](#8)
-    2. [Navigating the file system](#9)
-    3. [Manipulating files and directories](#10)
-    4. [Editing and viewing files](#11)
-    5. [Finding files and directories](#12)
-    6. [Managing environment variables](#13)
-    7. [Managing processes](#14)
-    8. [Managing users and groups](#15)
-    9. [File permissions](#16)
+    1. [How to run/pull an image from docker hub](#8)
+    2. [Managing packages](#9)
+    3. [Navigating the file system](#10)
+    4. [Manipulating files and directories](#11)
+    5. [Editing and viewing files](#12)
+    6. [Finding files and directories](#13)
+    7. [Managing environment variables](#14)
+    8. [Managing processes](#15)
+    9. [Managing users and groups](#16)
+    10. [File permissions](#17)
 
-3. [Building Images](#17)
-    1. [Images vs. containes](#18)
+3. [Building Images](#18)
+    1. [Images vs. containes](#19)
     2. 
 10. [Reference](#20)
 
@@ -153,7 +154,33 @@ When you remove a Docker image, the space it occupied on your disk is not automa
 <a name="7"></a>
 ## 2. The Linux Command Line
 
-<a name="8"></b>
+<a name="8"></a>
+### How to run/pull an image from docker hub
+
+Docker is built on basic Linux concepts. 
+
+To run ubuntu image:
+
+        docker run ubuntu (if we have this image locally it'll start with it if not it is pulled from docker hub)
+        
+now:
+
+        docker ps (which gives me back the list of running processes or containers)
+
+I got nothing back, but 
+
+        docker ps -a
+        
+gives me back the stopped containers as well, here I can see the ubuntu container I started above.
+
+to start a container and interact with it we have to:
+
+        docker run -it ubuntu ("it" is short for interactive)
+
+which gives me a shell back in terminal. Shell takes our commands and passes them to the operating system for execution. 
+
+
+<a name="9"></b>
 ### Managing packages
 
         apt update
@@ -161,7 +188,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         apt install nano
         apt remove nano
         
-<a name="9"></b>
+<a name="10"></b>
 ### Navigating the file system
 
         pwd # to print the working directory
@@ -172,7 +199,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         cd .. # to go one level up
         cd ~ # to go to the home directory
 
-<a name="10"></b>
+<a name="11"></b>
 ### Manipulating files and directories
 
         mkdir test # to create the test directory
@@ -182,7 +209,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         rm hello.txt # to remove a file
         rm -r docker # to recursively remove a directory
 
-<a name="11"></b>
+<a name="12"></b>
 ### Editing and viewing files
 
         nano file.txt # to edit file.txt
@@ -193,7 +220,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         tail file.txt # to view the last 10 lines
         tail -n 5 file.txt # to view the last 5 lines
 
-<a name="12"></b>
+<a name="13"></b>
 ### Searching for text
 
         grep hello file.txt # to search for hello in file.txt
@@ -201,7 +228,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         grep -i hello file*.txt # to search in files with a pattern
         grep -i -r hello . # to search in the current directory
 
-<a name="13"></b>
+<a name="14"></b>
 ### Finding files and directories
 
         find # to list all files and directories
@@ -209,7 +236,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         find -type f # to list files only
         find -name “f*” # to filter by name using a pattern
 
-<a name="14"></b>
+<a name="15"></b>
 ### Managing environment variables
 
         printenv # to list all variables and their value
@@ -217,13 +244,13 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         echo $PATH # to view the value of PATH
         export name=bob # to set a variable in the current session
 
-<a name="15"></b>
+<a name="16"></b>
 ### Managing processes
 
         ps # to list the running processes
         kill 37 # to kill the process with ID 37
 
-<a name="16"></b>
+<a name="17"></b>
 ### Managing users and groups
 
         useradd -m john # to create a user with a home directory
@@ -235,7 +262,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         groupmod # to modify a group
         groupdel # to delete a group
 
-<a name="17"></b>
+<a name="18"></b>
 ### File permissions
 
         chmod u+x deploy.sh # give the owning user execute permission
@@ -246,7 +273,7 @@ When you remove a Docker image, the space it occupied on your disk is not automa
         chmod ug-x deploy.sh # to remove the execute permission from
         # the owning user and group
 
-<a name="17"></a>
+<a name="19"></a>
 ## 3. Building Images
 
 Topics will be discussed:
@@ -257,7 +284,7 @@ Topics will be discussed:
 + reducing the image size
 + speeding up builds
 
-<a name="18"></a>
+<a name="20"></a>
 ### Images vs. containes
 
 An image includes everyhting (all the files and configuration settings) an application needs to run like
