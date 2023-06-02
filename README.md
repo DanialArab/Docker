@@ -225,7 +225,7 @@ we can clear the terminal window by pressing ctrl + l.
         mkdir test # to create the test directory
         mv test docker # to rename a directory
         touch file.txt # to create a file in this case file.txt, we can also create multiple files using touch command in one go like touch file1.txt file2.txt
-        a quick point: to remove an entire word in one go ---> **ctrl + w**
+        a quick point: to remove an entire word in one go ---> ctrl + w
         mv file.txt hello.txt # to rename a file
         rm hello.txt # to remove a file
         rm file* # we can use a pattern to remove all files start with file for example 
