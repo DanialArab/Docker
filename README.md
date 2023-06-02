@@ -212,7 +212,7 @@ we can clear the terminal window by pressing ctrl + l.
         ls # to list the files and directories
         ls -l # to print a long list
         cd / # to go to the root directory
-        in from of cd we can have relative or absolute path, a relative path is relative to where we are and in contrast the absolute path always starts with the root directory 
+        a quick point: in front of cd we can have relative or absolute path, a relative path is relative to where we are and in contrast the absolute path always starts with the root directory 
         cd bin # to go to the bin directory
         cd .. # to go one level up
         cd ../.. # to go two levels up
