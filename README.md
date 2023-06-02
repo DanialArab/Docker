@@ -206,15 +206,18 @@ In ubuntu we also have a package manager called **apt** which is short for **adv
 we can clear the terminal window by pressing ctrl + l.
 
 <a name="10"></b>
-### Navigating the file system HERE
+### Navigating the file system 
 
         pwd # to print the working directory
         ls # to list the files and directories
         ls -l # to print a long list
         cd / # to go to the root directory
+        in from of cd we can have relative or absolute path, a relative path is relative to where we are and in contrast the absolute path always starts with the root directory 
         cd bin # to go to the bin directory
         cd .. # to go one level up
+        cd ../.. # to go two levels up
         cd ~ # to go to the home directory
+        ls path  if i want to see the contents of a directory without navigating to it I can specify the path in front of ls, we can have relative or absolute path 
 
 <a name="11"></b>
 ### Manipulating files and directories
