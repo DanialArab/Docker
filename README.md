@@ -224,13 +224,15 @@ we can clear the terminal window by pressing ctrl + l.
 
         mkdir test # to create the test directory
         mv test docker # to rename a directory
-        touch file.txt # to create file.txt
+        touch file.txt # to create a file in this case file.txt, we can also create multiple files using touch command in one go like touch file1.txt file2.txt
+        a quick point: to remove an entire word in one go ---> **ctrl + w**
         mv file.txt hello.txt # to rename a file
         rm hello.txt # to remove a file
-        rm -r docker # to recursively remove a directory
+        rm file* # we can use a pattern to remove all files start with file for example 
+        rm -r docker # to recursively remove a **directory** and all its contents recursively 
 
 <a name="12"></b>
-### Editing and viewing files
+### Editing and viewing files HERE
 
         nano file.txt # to edit file.txt
         cat file.txt # to view file.txt
