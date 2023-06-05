@@ -219,9 +219,9 @@ we can clear the terminal window by pressing ctrl + l.
         cd ~ # to go to the home directory
         ls path  if i want to see the contents of a directory without navigating to it I can specify the path in front of ls, we can have relative or absolute path 
 
-When you use the command cd /, you are changing to the root directory of the file system.By default, the root directory contains various system directories, including a directory called "root." This "root" directory is different from the root directory itself. It is typically used as the **home directory for the root user**, which is the superuser or administrator of the system. Only the root user can access this directoryu. 
+When you use the command cd /, you are changing to the root directory of the file system.By default, the root directory contains various system directories, including a directory called "root." This "root" directory is different from the root directory itself. It is typically used as the **home directory for the root user**, which is the superuser or administrator of the system. Only the root user can access this directory. 
 
-Home is where howe directories for the uisers are stored so at a machine with multiple users each user has a home directory here. 
+Inside the root directory (cd / then ls) we have the home directory, which is where howe directories for the users are stored so at a machine with multiple users each user has a home directory here. 
 
 <a name="11"></b>
 ### Manipulating files and directories
@@ -238,6 +238,16 @@ Home is where howe directories for the uisers are stored so at a machine with mu
 <a name="12"></b>
 ### Editing and viewing files 
 
+To see the contents of a file we have several options:
++ cat file1.txt (cat is short for concatenation) --> good for short files
++ for long files, sometimes we don't want to see all the contents of a file in one go (which is the case with using the cat command) and instead we want to scroll the content ---> use more and less commands: 
+    + more file1.txt (this is supposed to be replaced with less command because you can only scroll down and NOT up) press enter to go down one line at a time and space to go one page. to exit we press **q** 
+    + less file1.txt, up and down arrows let us go up and down, we have the same functionality for space and enter as for more command, and to exit we press **q** 
++ head -n 5 /etc/adduser.conf
++ tail -n 5 /etc/adduser.conf 
+
+Some summary:
+
         nano file.txt # to edit file.txt
         cat file.txt # to view file.txt
         less file.txt # to view with scrolling capabilities
@@ -245,6 +255,8 @@ Home is where howe directories for the uisers are stored so at a machine with mu
         head -n 5 file.txt # to view the first 5 lines
         tail file.txt # to view the last 10 lines
         tail -n 5 file.txt # to view the last 5 lines
+
+side note: to search the content of the terminal in Linux: Press Ctrl + Shift + F to open the search bar at the top of the terminal window.
 
 <a name="13"></b>
 ### Searching for text
