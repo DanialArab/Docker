@@ -264,7 +264,7 @@ side note: to search the content of the terminal in Linux: Press Ctrl + Shift + 
 
 Concept of standard input and output:
 
-The standard input represents the keyword and the standard output represents the screen. But we can always change the source of the input and output, which si called redirection. Some examples:
+The standard input represents the keyword and the standard output represents the screen. But we can always change the source of the input and output, which is called redirection. Some examples:
 
     cat file1.txt (prints the content on the standard output (screen)) but I can redirect to write the content to a new file like
     cat file1.txt > file2.txt 
@@ -287,7 +287,7 @@ to get the long list of the files in the etc directory and write them to a file
 
     ls -l /etc > file.txt
 
-using **>** we can redirect standard output and using **<** to redirect the standard input, which is not that useful!!
+using **> operator** we can redirect standard output and using **< operator** to redirect the standard input, which is not that useful!!
 
 <a name="14"></b>
 ### Searching for text
