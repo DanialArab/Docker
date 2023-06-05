@@ -358,7 +358,7 @@ sometimes when dealing with a long command our command sequence might look hard 
   
 
 <a name="17"></b>
-### Managing environment variables
+### Managing environment variables HERE
 
         printenv # to list all variables and their value
         printenv PATH # to view the value of PATH
