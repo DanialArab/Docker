@@ -18,14 +18,15 @@ This repo documents my understanding of Docker. The structure of my notes from t
     3. [Navigating the file system](#10)
     4. [Manipulating files and directories](#11)
     5. [Editing and viewing files](#12)
-    6. [Finding files and directories](#13)
-    7. [Managing environment variables](#14)
-    8. [Managing processes](#15)
-    9. [Managing users and groups](#16)
-    10. [File permissions](#17)
+    6. [Redirection](#13)
+    7. [Finding files and directories](#14)
+    8. [Managing environment variables](#15)
+    9. [Managing processes](#16)
+    10. [Managing users and groups](#17)
+    11. [File permissions](#18)
 
-3. [Building Images](#18)
-    1. [Images vs. containes](#19)
+3. [Building Images](#19)
+    1. [Images vs. containes](#20)
     2. 
 10. [Reference](#20)
 
@@ -258,7 +259,8 @@ Some summary:
 
 side note: to search the content of the terminal in Linux: Press Ctrl + Shift + F to open the search bar at the top of the terminal window.
 
-#### Redirection 
+<a name="13"></b>
+### Redirection 
 
 Concept of standard input and output:
 
@@ -287,7 +289,7 @@ to get the long list of the files in the etc directory and write them to a file
 
 using **>** we can redirect standard output and using **<** to redirect the standard input, which is not that useful!!
 
-<a name="13"></b>
+<a name="14"></b>
 ### Searching for text
 
         grep hello file.txt # to search for hello in file.txt
@@ -295,7 +297,7 @@ using **>** we can redirect standard output and using **<** to redirect the stan
         grep -i hello file*.txt # to search in files with a pattern
         grep -i -r hello . # to search in the current directory
 
-<a name="14"></b>
+<a name="15"></b>
 ### Finding files and directories
 
         find # to list all files and directories
@@ -303,7 +305,7 @@ using **>** we can redirect standard output and using **<** to redirect the stan
         find -type f # to list files only
         find -name “f*” # to filter by name using a pattern
 
-<a name="15"></b>
+<a name="16"></b>
 ### Managing environment variables
 
         printenv # to list all variables and their value
@@ -311,13 +313,13 @@ using **>** we can redirect standard output and using **<** to redirect the stan
         echo $PATH # to view the value of PATH
         export name=bob # to set a variable in the current session
 
-<a name="16"></b>
+<a name="17"></b>
 ### Managing processes
 
         ps # to list the running processes
         kill 37 # to kill the process with ID 37
 
-<a name="17"></b>
+<a name="18"></b>
 ### Managing users and groups
 
         useradd -m john # to create a user with a home directory
@@ -329,7 +331,7 @@ using **>** we can redirect standard output and using **<** to redirect the stan
         groupmod # to modify a group
         groupdel # to delete a group
 
-<a name="18"></b>
+<a name="19"></b>
 ### File permissions
 
         chmod u+x deploy.sh # give the owning user execute permission
@@ -340,7 +342,7 @@ using **>** we can redirect standard output and using **<** to redirect the stan
         chmod ug-x deploy.sh # to remove the execute permission from
         # the owning user and group
 
-<a name="19"></a>
+<a name="20"></a>
 ## 3. Building Images
 
 Topics will be discussed:
@@ -351,7 +353,7 @@ Topics will be discussed:
 + reducing the image size
 + speeding up builds
 
-<a name="20"></a>
+<a name="21"></a>
 ### Images vs. containes
 
 An image includes everyhting (all the files and configuration settings) an application needs to run like
