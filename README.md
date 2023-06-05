@@ -21,13 +21,14 @@ This repo documents my understanding of Docker. The structure of my notes from t
     6. [Redirection](#13)
     7. [Searching for text (string) in a file using grep command](#14)
     8. [Finding files and directories](#15)
-    9. [Managing environment variables](#16)
-    10. [Managing processes](#17)
-    11. [Managing users and groups](#18)
-    12. [File permissions](#19)
+    9. [Chaining Commands](#16)
+    10. [Managing environment variables](#17)
+    11. [Managing processes](#18)
+    12. [Managing users and groups](#19)
+    13. [File permissions](#20)
 
-3. [Building Images](#19)
-    1. [Images vs. containes](#20)
+3. [Building Images](#21)
+    1. [Images vs. containes](#22)
     2. 
 10. [Reference](#20)
 
@@ -315,6 +316,10 @@ using **> operator** we can redirect standard output (pretty useful) and using *
         find / -type f -name "*.py" > python.txt 
         
 <a name="16"></b>
+### Chaining Commands
+
+
+<a name="17"></b>
 ### Managing environment variables
 
         printenv # to list all variables and their value
@@ -322,13 +327,13 @@ using **> operator** we can redirect standard output (pretty useful) and using *
         echo $PATH # to view the value of PATH
         export name=bob # to set a variable in the current session
 
-<a name="17"></b>
+<a name="18"></b>
 ### Managing processes
 
         ps # to list the running processes
         kill 37 # to kill the process with ID 37
 
-<a name="18"></b>
+<a name="19></b>
 ### Managing users and groups
 
         useradd -m john # to create a user with a home directory
@@ -340,7 +345,7 @@ using **> operator** we can redirect standard output (pretty useful) and using *
         groupmod # to modify a group
         groupdel # to delete a group
 
-<a name="19"></b>
+<a name="20"></b>
 ### File permissions
 
         chmod u+x deploy.sh # give the owning user execute permission
@@ -351,7 +356,7 @@ using **> operator** we can redirect standard output (pretty useful) and using *
         chmod ug-x deploy.sh # to remove the execute permission from
         # the owning user and group
 
-<a name="20"></a>
+<a name="21"></a>
 ## 3. Building Images
 
 Topics will be discussed:
@@ -362,7 +367,7 @@ Topics will be discussed:
 + reducing the image size
 + speeding up builds
 
-<a name="21"></a>
+<a name="22"></a>
 ### Images vs. containes
 
 An image includes everyhting (all the files and configuration settings) an application needs to run like
