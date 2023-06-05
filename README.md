@@ -303,11 +303,17 @@ using **> operator** we can redirect standard output (pretty useful) and using *
 <a name="15"></b>
 ### Finding files and directories
 
-        find # to list all files and directories
-        find -type d # to list directories only (-d is deprecated, use -depth instead)
+        find # to list all files and directories in the current directory recursively 
+        find /etc # to list all the files and directories starting from etc 
+        find -type d # to list directories only
         find -type f # to list files only
         find -name “f*” # to filter by name using a pattern
-
+        find -type f -name "f*" # to find all the files whose names start with f, like everything else in Linux this search is also case sensitive so you got different results if you do: 
+        find -type f -name "F*"
+        to make the search case insensitive:
+            find -type f -iname "F*"
+        find / -type f -name "*.py" > python.txt 
+        
 <a name="16"></b>
 ### Managing environment variables
 
