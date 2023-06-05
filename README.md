@@ -232,7 +232,7 @@ we can clear the terminal window by pressing ctrl + l.
         rm -r docker # to recursively remove a **directory** and all its contents recursively 
 
 <a name="12"></b>
-### Editing and viewing files HERE
+### Editing and viewing files 
 
         nano file.txt # to edit file.txt
         cat file.txt # to view file.txt
