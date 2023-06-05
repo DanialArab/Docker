@@ -336,12 +336,14 @@ we can use and operator (&&):
 
     mkdir test && cd test && echo done
     
+#### using or operator (||):
 we also have or (||) operator:
 
     mkdir test || echo "directory exists"
 
 These techniques are extremely useful when we want to deploy our app in docker!
 
+#### using piping (|):
 Another way to chain commands is piping (|), which is very powerful:
 
     ls /bin | less (we get the content of the bin directory and then we are creaing a pipe like what comes out of the ls /bin command goes into the second command which is less in this example, now less does not need a file name because it gets the input from the first command ls /bin in this case)
