@@ -318,6 +318,42 @@ using **> operator** we can redirect standard output (pretty useful) and using *
 <a name="16"></b>
 ### Chaining Commands
 
+In linux we have different ways for chaining/combining multiple commands:
+
+#### using semicolon:
+
+    mkdir test;cd test;echo done
+    
+after pressing enter all these commands will be executed one after the other. we may add a space around these semicolons to make it more readable, which is of course optional:
+
+    mkdir test ; cd test ; echo done 
+    
+in case one of these commands is not executed, like we already have a directory called test, the rest will be executed. What if we want to stop execution like if one command fails the rest is not executed:
+
+we can use and operator (&&):
+
+#### using and operator (&&):
+
+    mkdir test && cd test && echo done
+    
+we also have or (||) operator:
+
+    mkdir test || echo "directory exists"
+
+These techniques are extremely useful when we want to deploy our app in docker!
+
+Another way to chain commands is piping (|), which is very powerful:
+
+    ls /bin | less (we get the content of the bin directory and then we are creaing a pipe like what comes out of the ls /bin command goes into the second command which is less in this example, now less does not need a file name because it gets the input from the first command ls /bin in this case)
+    ls /bin | head -n 5
+    
+sometimes when dealing with a long command our command sequence might look hard to read and so we split it into multiple lines using backslash (\):
+
+    mkdir test;\
+    cd test;\
+    echo done
+    
+  
 
 <a name="17"></b>
 ### Managing environment variables
