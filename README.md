@@ -287,7 +287,7 @@ to get the long list of the files in the etc directory and write them to a file
 
     ls -l /etc > file.txt
 
-using **> operator** we can redirect standard output and using **< operator** to redirect the standard input, which is not that useful!!
+using **> operator** we can redirect standard output (pretty useful) and using **< operator** we can redirect the standard input, which is not that useful!!
 
 <a name="14"></b>
 ### Searching for text
