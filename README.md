@@ -19,11 +19,12 @@ This repo documents my understanding of Docker. The structure of my notes from t
     4. [Manipulating files and directories](#11)
     5. [Editing and viewing files](#12)
     6. [Redirection](#13)
-    7. [Finding files and directories](#14)
-    8. [Managing environment variables](#15)
-    9. [Managing processes](#16)
-    10. [Managing users and groups](#17)
-    11. [File permissions](#18)
+    7. [Searching for text in a file](#14)
+    8. [Finding files and directories](#14)
+    9. [Managing environment variables](#15)
+    10. [Managing processes](#16)
+    11. [Managing users and groups](#17)
+    12. [File permissions](#18)
 
 3. [Building Images](#19)
     1. [Images vs. containes](#20)
@@ -290,7 +291,7 @@ to get the long list of the files in the etc directory and write them to a file
 using **> operator** we can redirect standard output (pretty useful) and using **< operator** we can redirect the standard input, which is not that useful!!
 
 <a name="14"></b>
-### Searching for text
+### Searching for text in a file
 
         grep hello file.txt # to search for hello in file.txt
         grep -i hello file.txt # case-insensitive search
