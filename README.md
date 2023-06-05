@@ -264,7 +264,7 @@ side note: to search the content of the terminal in Linux: Press Ctrl + Shift + 
 
 Concept of standard input and output:
 
-The standard input represents the keyword and the standard output represents the screen. But we can always change the source of the input and output, which si called redirection. Some examp-les:
+The standard input represents the keyword and the standard output represents the screen. But we can always change the source of the input and output, which si called redirection. Some examples:
 
     cat file1.txt (prints the content on the standard output (screen)) but I can redirect to write the content to a new file like
     cat file1.txt > file2.txt 
