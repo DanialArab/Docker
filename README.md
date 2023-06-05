@@ -219,6 +219,10 @@ we can clear the terminal window by pressing ctrl + l.
         cd ~ # to go to the home directory
         ls path  if i want to see the contents of a directory without navigating to it I can specify the path in front of ls, we can have relative or absolute path 
 
+When you use the command cd /, you are changing to the root directory of the file system.By default, the root directory contains various system directories, including a directory called "root." This "root" directory is different from the root directory itself. It is typically used as the **home directory for the root user**, which is the superuser or administrator of the system. Only the root user can access this directoryu. 
+
+Home is where howe directories for the uisers are stored so at a machine with multiple users each user has a home directory here. 
+
 <a name="11"></b>
 ### Manipulating files and directories
 
