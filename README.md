@@ -258,9 +258,34 @@ Some summary:
 
 side note: to search the content of the terminal in Linux: Press Ctrl + Shift + F to open the search bar at the top of the terminal window.
 
-#### Redirection
+#### Redirection 
 
+Concept of standard input and output:
 
+The standard input represents the keyword and the standard output represents the screen. But we can always change the source of the input and output, which si called redirection. Some examp-les:
+
+    cat file1.txt (prints the content on the standard output (screen)) but I can redirect to write the content to a new file like
+    cat file1.txt > file2.txt 
+    
+we can use cat command to concatenate or combine multiple files:
+
+    cat file1.txt file2.txt (cat reads data from  both files and print them on the terminal)
+    cat file1.txt file2.txt > combined.txt (writes the results to a different file using a redirection operator)
+    
+The redirection operator is not limited to the cat command and we can almost use it everywhere.
+
+    echo hello (we see the result on the terminal)
+    echo hello > hello.txt 
+    
+if we want to write a single line to a file we may use echo instead of using nano
+
+    echo whatever > whateverfile.txt 
+    
+to get the long list of the files in the etc directory and write them to a file
+
+    ls -l /etc > file.txt
+
+using **>** we can redirect standard output and using **<** to redirect the standard input, which is not that useful!!
 
 <a name="13"></b>
 ### Searching for text
