@@ -258,6 +258,10 @@ Some summary:
 
 side note: to search the content of the terminal in Linux: Press Ctrl + Shift + F to open the search bar at the top of the terminal window.
 
+#### Redirection
+
+
+
 <a name="13"></b>
 ### Searching for text
 
