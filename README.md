@@ -19,7 +19,7 @@ This repo documents my understanding of Docker. The structure of my notes from t
     4. [Manipulating files and directories](#11)
     5. [Editing and viewing files](#12)
     6. [Redirection](#13)
-    7. [Searching for text (string) in a file](#14)
+    7. [Searching for text (string) in a file using grep command](#14)
     8. [Finding files and directories](#15)
     9. [Managing environment variables](#16)
     10. [Managing processes](#17)
@@ -291,7 +291,7 @@ to get the long list of the files in the etc directory and write them to a file
 using **> operator** we can redirect standard output (pretty useful) and using **< operator** we can redirect the standard input, which is not that useful!!
 
 <a name="14"></b>
-### Searching for text (string) in a file
+### Searching for text (string) in a file using grep command
 
         grep hello file.txt # to search for hello in file.txt
         grep -i hello file.txt # case-insensitive search
