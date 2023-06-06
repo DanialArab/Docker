@@ -24,11 +24,12 @@ This repo documents my understanding of Docker. The structure of my notes from t
     9. [Chaining Commands](#16)
     10. [Managing environment variables](#17)
     11. [Managing processes](#18)
-    12. [Managing users and groups](#19)
-    13. [File permissions](#20)
+    12. [Managing users](#19)
+    13. [Managing groups](#20)
+    14. [File permissions](#21)
 
-3. [Building Images](#21)
-    1. [Images vs. containes](#22)
+3. [Building Images](#22)
+    1. [Images vs. containes](#23)
     2. 
 10. [Reference](#20)
 
@@ -412,7 +413,7 @@ the TIME shown as in the output is the amount of CPU time each process consumed,
         kill 37 # to kill the process with ID 38
 
 <a name="19"></b>
-### Managing users and groups
+### Managing users
 
 How to create a new user and log in as that user?
 
@@ -470,6 +471,8 @@ We also have another command adduser. What is the difference between useradd and
 
 useradd is the original API that was built but adduser is more interactive and uses useradd under the hood. Using adduser we can set a password and specify additional info about the user like full name, room number, work phone etc. Quite often when using docker for deploying our application we don't want to use adduser because we don't want to interact with this command
 
+<a name="20"></b>
+### Managing groups
 
         adduser john # to add a user interactively
         usermod # to modify a user
@@ -479,10 +482,8 @@ useradd is the original API that was built but adduser is more interactive and u
         groupmod # to modify a group
         groupdel # to delete a group
 
-### Managing groups
 
-
-<a name="20"></b>
+<a name="21"></b>
 ### File permissions
 
         chmod u+x deploy.sh # give the owning user execute permission
@@ -509,7 +510,7 @@ useradd is the original API that was built but adduser is more interactive and u
             
             
             
-<a name="21"></a>
+<a name="22"></a>
 ## 3. Building Images
 
 Topics will be discussed:
@@ -520,7 +521,7 @@ Topics will be discussed:
 + reducing the image size
 + speeding up builds
 
-<a name="22"></a>
+<a name="23"></a>
 ### Images vs. containes
 
 An image includes everyhting (all the files and configuration settings) an application needs to run like
