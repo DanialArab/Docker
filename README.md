@@ -398,7 +398,7 @@ if not in home directory:
 
         source ~/.bashrc 
 
-Point: you should never store sensitive info in the environment variables because at the end of the day these are stored in the plain text files and everyone who access the machine can find them. 
+Point: you should never store sensitive info in the environment variables because at the end of the day these are stored in the plain text files and everyone who has access the machine can find them. 
 
 <a name="18"></b>
 ### Managing processes
