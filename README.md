@@ -403,8 +403,13 @@ Point: you should never store sensitive info in the environment variables becaus
 <a name="18"></b>
 ### Managing processes
 
-        ps # to list the running processes
-        kill 37 # to kill the process with ID 37
+A process is an instance of a running program.
+
+        ps # to list all the running programs/processes
+        
+the TIME shown as in the output is the amount of CPU time each process consumed, in the future if you notice your system gets slow it may be because some processes take so much of CPU time and in that case you may want to kill that process:
+
+        kill 37 # to kill the process with ID 38
 
 <a name="19></b>
 ### Managing users and groups
