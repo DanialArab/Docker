@@ -398,12 +398,12 @@ sometimes when dealing with a long command our command sequence might look hard 
 **Some Exercises:**
 1. Get the long list of files in the etc directory and write the output to a file:
     
-    ls -l /etc > files.txt
+        ls -l /etc > files.txt
             
 2. Find all the python files in this image and write it to a file.txt
     
-    find / -type f -name "*.py" > python.txt
-    find -type f -name "*.py" > python.txt (only looks for the python files in the current directory and if I want to find all the python files in this image I have to specify the path which is the root directory (/) as above.
+        find / -type f -name "*.py" > python.txt
+        find -type f -name "*.py" > python.txt (only looks for the python files in the current directory and if I want to find all the python files in this image I have to specify the path which is the root directory (/) as above.
                              
 3. 
 
