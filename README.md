@@ -411,7 +411,7 @@ the TIME shown as in the output is the amount of CPU time each process consumed,
 
         kill 37 # to kill the process with ID 38
 
-<a name="19></b>
+<a name="19"></b>
 ### Managing users and groups
 
         useradd -m john # to create a user with a home directory
