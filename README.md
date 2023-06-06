@@ -472,11 +472,9 @@ We also have another command adduser. What is the difference between useradd and
 useradd is the original API that was built but adduser is more interactive and uses useradd under the hood. Using adduser we can set a password and specify additional info about the user like full name, room number, work phone etc. Quite often when using docker for deploying our application we don't want to use adduser because we don't want to interact with this command
 
 <a name="20"></b>
-### Managing groups
+### Managing groups HERE
 
-        adduser john # to add a user interactively
-        usermod # to modify a user
-        userdel # to delete a user
+        
         groupadd devs # to create a group
         groups john # to view the groups for john
         groupmod # to modify a group
