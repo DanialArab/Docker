@@ -363,14 +363,42 @@ sometimes when dealing with a long command our command sequence might look hard 
 
 <a name="17"></b>
 ### Managing environment variables 
+
 Just like variables in programming, we have environment variables in Linux which we can set for storing configuration settings for our application. So our application can read the configuration settings from these environment variables. Let's view and set them:
 
-
-
         printenv # to list all environment variables and their value on our machine 
-        printenv PATH # to view the value of PATH
-        echo $PATH # to view the value of PATH
-        export name=bob # to set a variable in the current session
+
+We have a very important environment variable called **PATH**. Sometimes when we run a program from the command line and we get the error of program/command was not found, even though we installed it. It happens quite often because our operating system cannot find that program. To find a program our operating system is not going to our entire hard drive and instead it only looks at specific directories and those directories are specified using the PATH environemnt variable, which is set to a list of directories separated by a colon. To see a value of a particular variable:
+
+        printenv PATH
+or
+
+        echo $PATH (we have to prefix the variable name with $ to specify that the variable is an environment variable) 
+
+to set a variable we use export command:
+
+        export DB_USER=danial 
+        
+This only sets a variable in the **current terminal session** meaning if we start over another session/terminal we lose this variable. To solve this issue and set the variable permanently we have to write it to a special file called **.bashrc** (this file is the user personal start off file meaning everytime the user logs in Linux loads this command from the user's home directory) which is in the home directory. So this is where we need to write permanent environment variables:
+
+        cd ~
+        nano .bashrc
+        DB_USER=danial
+
+another approach is to use redirection of standard output that we learned. But here there is a **very important point**: I do need to use **>>** to make sure I append to the .bashrc, I do NOT have to use only one single > which overwrites the content of .bashrc file:
+
+        echo DB_USER=danial >> .bashrc
+        cat .bashrc
+        
+One last point: the changes we make to the .bashrc file are only effective in the next terminal session. This is because the .bashrc file only loads once when we start a terminal session and so to make the changes effective I have to either terminate the session and start over another terminal session or source the .bashrc file (just remember we need to execute the following command from our home directory where the .bashrc file lives):
+
+        source .bashrc
+        
+if not in home directory:
+
+        source ~/.bashrc 
+
+Point: you should never store sensitive info in the environment variables because at the end of the day these are stored in the plain text files and everyone who access the machine can find them. 
 
 <a name="18"></b>
 ### Managing processes
