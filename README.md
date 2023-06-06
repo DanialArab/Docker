@@ -414,7 +414,63 @@ the TIME shown as in the output is the amount of CPU time each process consumed,
 <a name="19"></b>
 ### Managing users and groups
 
-        useradd -m john # to create a user with a home directory
+How to create a new user and log in as that user?
+
+        useradd -m john # to create a new user with a home directory, the name of user as john
+
+where is this user? in the configuration file in the etc directory. We can use cat to look at that
+
+        cat /etc/passwd # the name passwd is misleading the passwords are not here and here we only have user account information
+
+if I want to have bash instead of sh (which is the old original shell program (bash is the enhanced version of this program)) as the shell program used when this user logs in, I can use usermod to modify this record:
+
+        usermod -s /bin/bash john
+
+where are the passwords? in the file named shadow in the same directory, this is where passwords are stored in an encrypted format. This file is only accessible to the root user:
+
+        cat /etc/shadow
+
+how to login to our container as john?
+
+in a new terminal, first to see the running containers:
+
+        docker ps
+       
+we want to execute a bash session inside the container:
+
+        docker exec -it container_id bash
+        
+ but again we will be logged in as root! But we wanted to login as john:
+ 
+        docker exec -it -u john container_id bash  
+
+here at the end of the shell prompt, I have $ rather than # because john is not the root user but a regular user, in contrast in my other terminal which I logged in as root to my container I have # at the end of the prompt which indicates I am logged in as root user with extra priviledges.
+
+In the terminal logged in as john if :
+
+        cat /etc/shadow
+
+I got the permission denied error!
+
+Also in the terminal logged in as john, if:
+
+        cd ~
+        pwd
+
+I go bask:
+
+        /home/john
+ 
+ in this directory we can keep john's files. when we are done with this user we can delete it using 
+ 
+        userdel john 
+        
+        
+We also have another command adduser. What is the difference between useradd and adduser?
+
+useradd is the original API that was built but adduser is more interactive and uses useradd under the hood. Using adduser we can set a password and specify additional info about the user like full name, room number, work phone etc. Quite often when using docker for deploying our application we don't want to use adduser because we don't want to interact with this command
+
+
         adduser john # to add a user interactively
         usermod # to modify a user
         userdel # to delete a user
@@ -422,6 +478,9 @@ the TIME shown as in the output is the amount of CPU time each process consumed,
         groups john # to view the groups for john
         groupmod # to modify a group
         groupdel # to delete a group
+
+### Managing groups
+
 
 <a name="20"></b>
 ### File permissions
