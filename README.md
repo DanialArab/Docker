@@ -472,7 +472,60 @@ We also have another command adduser. What is the difference between useradd and
 useradd is the original API that was built but adduser is more interactive and uses useradd under the hood. Using adduser we can set a password and specify additional info about the user like full name, room number, work phone etc. Quite often when using docker for deploying our application we don't want to use adduser because we don't want to interact with this command
 
 <a name="20"></b>
-### Managing groups HERE
+### Managing groups 
+
+We used groups to manage permissions like all the users in the same group has the same permission. In the same way as with users, we have three commands:
+
++ groupadd
++ groupmod
++ groupdel
+
+Let's create a new group called developers
+
+        groupadd developers
+
+where is this group:
+
+        cat /etc/group # to see all the groups in our image
+        
+let's add the user john to this group:
+
+we have two tyopes of groups: primary and supplementary: every Linux user has one primary group and zero or more supplementary groups, every file created by a user will be owned by one user with one group (which is the primary group). The primary group is automatically created when we create a new user it is a group with the same name as the new user. 
+        
+to set this group as the supplementary group for john:
+
+        usermod -G developers john 
+
+to see the groups of a user:
+
+        groups name_of_user
+        
+now if i want to create another group and add john to it:
+
+        groupadd artists
+        usermod -G artists john
+        
+then
+
+        groups john
+        
+i got back:
+
+        john : john artists
+        
+point: The usermod -G command in Linux **replaces the existing supplementary groups of a user** with the specified group(s) provided. To keep the previous supplementary groups I need to use -a as append:
+
+        usermod -aG developers john
+        
+now 
+
+        groups john
+        
+I got back
+        
+        john : john artists developers
+
+
 
         
         groupadd devs # to create a group
