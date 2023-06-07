@@ -533,6 +533,60 @@ to delete a group:
 <a name="21"></b>
 ### File permissions
 
+side note: shell scripts are the files with extension .sh and can contain any Linux commands which will be executed one after the other (we can combine the commands we would like to create a deployment script). Let's create a simple shell script file (I logged in as root):
+
+        cd ~
+        echo echo hello > deploy.sh 
+        
+to see the permissions for this file:
+
+        ls -l
+
+some quick notes:
+
++ as a first letter when we have **d** as the first letter it indicates directory and - indicates file (having execute permission for directory means that we can go inside it like doing cd to go inside it)
++ then we have 9 letters grouped as 3 to specify permissions (the first 3 is for user who owns the file, the second for the group who owns the file and the third 3 is for others): in each group we have r --> read w --> write x --> execute
+ 
+        ./deploy.sh
+        
+i got permission denied error even I as a root user created the file. So I need to change permission using change mode command (chmod):
+
+        chmod u+x deploy.sh
+
+now I can 
+
+        ./deploy.sh
+
+I got back
+
+        hello
+        
+now I log in as john like in new terminal
+
+        docker exec -it -u john name_of_container bash 
+        cd /home
+        ls -l
+        
+now
+
+        ./deploy.sh
+ 
+I got the permission denied error. So if I want to give permission to others for this file like others like john to be able to execute it I go back to the terminal where I logged in as root and then:
+
+        chmod o+x deploy.sh 
+
+now if I go back to the other terminal logged in as john I will be able to execute the deploy.sh file
+
+we can remove permission using -. 
+
+        chmod u-x whateverfile.whateverextension
+        
+        OR
+        
+        chmod og+x+w-r *.sh
+        
+some quick summaries:
+
         chmod u+x deploy.sh # give the owning user execute permission
         chmod g+x deploy.sh # give the owning group execute permission
         chmod o+x deploy.sh # give everyone else execute permission
