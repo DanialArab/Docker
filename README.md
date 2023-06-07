@@ -645,7 +645,7 @@ the container gets its file system from the image but each container has its own
 
 Next, we deploy a front end application built with react and start dockerize it.
 
-
+HERE
 
 
 <a name="10"></a>
