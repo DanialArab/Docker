@@ -590,10 +590,8 @@ some quick summaries:
         chmod u+x deploy.sh # give the owning user execute permission
         chmod g+x deploy.sh # give the owning group execute permission
         chmod o+x deploy.sh # give everyone else execute permission
-        chmod ug+x deploy.sh # to give the owning user and group
-        # execute permission
-        chmod ug-x deploy.sh # to remove the execute permission from
-        # the owning user and group
+        chmod ug+x deploy.sh # to give the owning user and group execute permission
+        chmod ug-x deploy.sh # to remove the execute permission from the owning user and group
 
             
 **Some Exercises:**
@@ -605,11 +603,6 @@ some quick summaries:
     
         find / -type f -name "*.py" > python.txt
         find -type f -name "*.py" > python.txt (only looks for the python files in the current directory and if I want to find all the python files in this image I have to specify the path which is the root directory (/) as above.
-                             
-3. 
-
-            
-            
             
 <a name="22"></a>
 ## 3. Building Images
