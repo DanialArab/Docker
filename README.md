@@ -535,7 +535,7 @@ to delete a group:
 
 side note: shell scripts are the files with extension .sh and can contain any Linux commands which will be executed one after the other (we can combine the commands we would like to create a deployment script). Let's create a simple shell script file (I logged in as root):
 
-        cd ~
+        cd /home
         echo echo hello > deploy.sh 
         
 to see the permissions for this file:
