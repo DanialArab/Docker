@@ -607,7 +607,10 @@ some quick summaries:
 <a name="22"></a>
 ## 3. Building Images
 
+The first step to use docker to build and deploy applications is to create images. So solid understanding of images is crucial. 
+
 Topics will be discussed:
+
 + creating docker files
 + versioning images
 + sharing images
