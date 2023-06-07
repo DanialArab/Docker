@@ -643,7 +643,7 @@ how to start a new container from the same image? to start a container from an i
 
 the container gets its file system from the image but each container has its own write layer so what we write in a given container is invisible from other containers, of course there is a way to share data between containers and we will talk about it later in the course. But it is critical to understand that each container is **an isolated environemnt** for executing an application, it is an isolated universe. 
 
-
+Next, we deploy a front end application built with react and start dockerize it.
 
 
 
