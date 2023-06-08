@@ -767,7 +767,8 @@ then
  
  now on the shell we are inside the /app directory because in the Dockerfile we set this directory as the current working directory. 
  
- here when mosh does ls he has a directory called node_modules that I don't have also i don't have package-lock.json!
+## HERE
+here when mosh does ls he has a directory called node_modules that I don't have also i don't have package-lock.json!
  
  what if we want to exclude some files or directories? we see next!
  
