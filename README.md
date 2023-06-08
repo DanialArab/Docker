@@ -670,9 +670,22 @@ The first step to dockerize an application is to add a Dockerfile to it. **A Doc
 <a name="25"></a>
 ### Choosing the Right Base Image
 
+To add a Dockerfile into our app, in the root directory we create a new file name Dockerfile and inside it. **The base image can be an operating system like Linux or windows or the operating system plus the runtime environement like Node.js Runtime Environment or Python Runtime Environment etc.**. 
 
+Some note:
 
++ You can see Dockerfile samples for different technology stacks on docs.docker.com. 
++ Some of the images are not hosted on Docker hub like the microsoft images, which are hosted on microsoft container registry (mcr) in these cases we need to specify the full URL in front of FROM instruction, an image can be in any registry the default registry that Docker users is Docker hub but we can specify different registries using the full URL (don't blindly take the URL and always double check it because the URL and version can change).
 
+        FROM node:14.16.0-alpine:3 (here we specified the specific tag (14.16.0-alpine:3) and did not use 'latest' tag which is the default tag assumed by Docker. Never use latest tag because if you build your application against the latest vesion of node, then next time there is a new version of node and if you rebuild your application image, your application will be built with a different version of node and things can get unpredictable so ALWAYS use a specific version). 
+
+side note: when you pull an image, Docker automatically download the right Docker image for your CPU architecture so we only need to specify tag and not the CPU architecture. 
+
+the to build an image in the terminal:
+
+        docker build -t react-apt . (we tell Docker to find the Dockerfile in the current directory) 
+        
+        
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
