@@ -705,7 +705,7 @@ In this image we only have alpine Linux and node v14.16.0 and we don't have our 
 <a name="26"></a>
 ### Copying Files and Directories
 
-For copying applications'files and directories into the image we have two instructions:
+For copying applications' files and directories into the image we have two instructions:
 
 + COPY
 + ADD 
@@ -723,11 +723,11 @@ we can also use patterns:
 
         COPY package*.json /app/ 
 
-to copy everything int he current directory into the app directory:
+to copy everything in the current directory into the app directory:
 
         COPY . /app/
  
- so far we used an absolute path for the destination (/app) because our path starts with a forward slash we can also use a relative path if we set the working directory first: using the WORKDIR instruction we can set the working directory and so all the instrctions come after will be executed inside this working directory and so we can replace the absolute path with the relative path:
+ so far we used an absolute path for the destination (/app) (because our path starts with a forward slash), we can also use a relative path if we set the working directory first: using the WORKDIR instruction we can set the working directory and so all the instrctions come after will be executed inside this working directory and so we can replace the absolute path with the relative path:
  
         FROM node:14.16.0-alpine:3
         WORKDIR /app
@@ -737,10 +737,10 @@ what if we want to copy a file that has a space in it? let's say a file called *
 
         COPY ["hello word.txt", "."] # will not be used that often but be aware of it
 
- As discussed we also have ADD which has the exact same syntax as COPY but with additional following features:
+ As discussed we also have ADD which has the exact same syntax as COPY but with additional 2 features:
  
  + with ADD we can add a file from a URL
- + 
+ 
         ADD http://.../file.json .
       
  + we can pass a compressed file and ADD automatically uncompress the file into the directory 
@@ -751,7 +751,22 @@ So the best practice is to use COPY, which has no magic around it and it is more
         
 side note: all the files from the **current directory**, which is the root directory of our app, will be copied/added, since Docker engine does not have access to any files or directories outside the current directory. 
 
+let's rebuild our image:
 
+        docker build -t react-app . 
+
+then
+
+        docker run -it react-app sh
+ 
+ now on the shell we are inside the /app directory because in the Dockerfile we set this directory as the current working directory. 
+ 
+ here when mosh does ls he has a directory called node_modules that I don't have also i don't have package-lock.json!
+ 
+ what if we want to exclude some files or directories? we see next!
+ 
+ 
+        
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
