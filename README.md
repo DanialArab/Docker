@@ -631,7 +631,7 @@ An image includes **everyhting (all the files and configuration settings) an app
 
 To build an image:
         
-        docker build -t name_of_image 
+        docker build -t desired_name_of_image . 
 
 **Once we have an image we can start a container from it.** A container is kind of like a virtual machine in a sense that:
 
