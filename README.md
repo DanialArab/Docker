@@ -30,7 +30,8 @@ This repo documents my understanding of Docker. The structure of my notes from t
 
 3. [Building Images](#22)
     1. [Images vs. containes](#23)
-    2. 
+    2. [Dockerfile Instructions](#24)
+    3. [Choosing the Right Base Image](#25)
 10. [Reference](#20)
 
 <a name="1"></a>
@@ -665,6 +666,11 @@ The first step to dockerize an application is to add a Dockerfile to it. **A Doc
 + USER to specify the user that should run the application, typically we want to run our application using a user with limited priviledges
 + CMD to specify the commands that should be executed when we start a container
 + ENTRYPOINT to specify the commands that should be executed when we start a container
+
+<a name="25"></a>
+### Choosing the Right Base Image
+
+
 
 
 <a name="10"></a>
