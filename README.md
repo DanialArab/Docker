@@ -632,11 +632,8 @@ To build an image:
         
         docker build -t name_of_image 
 
-**Once we have an image we can start a container from it.** :
+**Once we have an image we can start a container from it.** A container is kind of like a virtual machine in a sense that:
 
-        docker run -it image_name (if image is in local it uses it if not pulled it from docker hub)
-
-A container is kind of like a virtual machine in a sense that:
 + it provides an isolated environment for executing an application
 + can be stopped & restarted like VMs
 + a container is technically an operating system process, a special process because it has its own file system provided by the image
@@ -647,9 +644,9 @@ to see the running processes or containes:
         
 how to start a new container from the same image? to start a container from an image:
 
-        docker run -it name_of_the_image
+        docker run -it name_of_the_image (if image is in local it uses it if not pulls it from docker hub)
 
-the container gets its file system from the image but each container has its own write layer so what we write in a given container is invisible from other containers, of course there is a way to share data between containers and we will talk about it later in the course. But it is critical to understand that each container is **an isolated environemnt** for executing an application, it is an isolated universe. 
+the container gets its file system from the image but each container has its own write layer so what we write in a given container is invisible from other containers, of course there is a way to share data between containers and we will talk about it later in the course. But it is critical to understand that each container is **an isolated environemnt** for executing an application, it is an **isolated universe.**
 
 Next, we deploy a front end application built with react and start dockerize it.
 
