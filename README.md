@@ -544,7 +544,7 @@ to see the permissions for this file:
 
 some quick notes:
 
-+ as a first letter when we have **d** as the first letter it indicates directory and - indicates file (having execute permission for directory means that we can go inside it like doing cd to go inside it)
++ as a first letter when we have **d** it indicates directory and - indicates file (having execute permission for directory means that we can go inside it like doing cd to go inside it)
 + then we have 9 letters grouped as 3 to specify permissions (the first 3 is for user who owns the file, the second for the group who owns the file and the third 3 is for others): in each group we have r --> read w --> write x --> execute
  
         ./deploy.sh
