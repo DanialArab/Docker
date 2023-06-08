@@ -607,7 +607,7 @@ some quick summaries:
 <a name="22"></a>
 ## 3. Building Images
 
-The first step to use docker to build and deploy applications is to create images. So solid understanding of images is crucial. 
+**The first step to use docker to build and deploy applications is to create images.** So solid understanding of images is crucial. 
 
 Topics will be discussed:
 
@@ -621,14 +621,14 @@ Topics will be discussed:
 <a name="23"></a>
 ### Images vs. containes
 
-An image includes everyhting (all the files and configuration settings) an application needs to run like
+An image includes **everyhting (all the files and configuration settings) an application needs to run** like
 + a cut-down OS
 + application files
 + third-party libraries
 + environment variables
 +  ...
 
-Once we have an image we can start a container from it. A container is kind of like a virtual machine in a sense that:
+**Once we have an image we can start a container from it.** A container is kind of like a virtual machine in a sense that:
 + it provides an isolated environment for executing an application
 + can be stopped & restarted like VMs
 + a container is technically an operating system process, a special process because it has its own file system provided by the image
