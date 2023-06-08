@@ -492,7 +492,7 @@ let's add the user john to this group:
 
 we have two tyopes of groups: primary and supplementary: every Linux user has one primary group and zero or more supplementary groups, every file created by a user will be owned by one user with one group (which is the primary group). The primary group is automatically created when we create a new user it is a group with the same name as the new user. 
         
-to set this group as the supplementary group for john:
+to set a group as the supplementary group for john:
 
         usermod -G developers john 
 
