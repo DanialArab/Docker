@@ -672,7 +672,7 @@ The first step to dockerize an application is to add a Dockerfile to it. **A Doc
 
 To add a Dockerfile into our app, in the root directory we create a new file name Dockerfile and inside it. **The base image can be an operating system like Linux or windows or the operating system plus the runtime environement like Node.js Runtime Environment or Python Runtime Environment etc.**. 
 
-Some note:
+Some notes:
 
 + You can see Dockerfile samples for different technology stacks on docs.docker.com. 
 + Some of the images are not hosted on Docker hub like the microsoft images, which are hosted on microsoft container registry (mcr) in these cases we need to specify the full URL in front of FROM instruction, an image can be in any registry the default registry that Docker users is Docker hub but we can specify different registries using the full URL (don't blindly take the URL and always double check it because the URL and version can change).
@@ -681,11 +681,26 @@ Some note:
 
 side note: when you pull an image, Docker automatically download the right Docker image for your CPU architecture so we only need to specify tag and not the CPU architecture. 
 
-to build an image in the terminal:
+to build an image, in the terminal:
 
         docker build -t react-apt . (we tell Docker to find the Dockerfile in the current directory) 
         
-now         
+now to start a container with our image:  
+
+        docker run -it react-app 
+        
+which gives me a node environment where we can write Java Script code, which is not what I wanted I wanted to run bash to be able to look at file system. So:
+
+        docker run -it react-app bash (at the end we can specify the command to be run at the start of the container where we specified bash) 
+        
+which gives me error since alpine Linux does not come with bash and alpine only has original shell program, so:
+
+        docker run -it react-app sh
+        
+Now I got the shell.
+
+In this image we only have alpine Linux and node v14.16.0 and we don't have our application files, next we will copy our application files into this image. 
+
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
