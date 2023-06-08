@@ -474,7 +474,7 @@ useradd is the original API that was built but adduser is more interactive and u
 <a name="20"></b>
 ### Managing groups 
 
-We use groups to manage permissions like all the users in the same group has the same permission. In the same way as with users, we have three commands:
+We use groups to manage permissions like all the users in the same group have the same permission. In the same way as with users, we have three commands:
 
 + groupadd
 + groupmod
