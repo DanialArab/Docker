@@ -681,11 +681,11 @@ Some note:
 
 side note: when you pull an image, Docker automatically download the right Docker image for your CPU architecture so we only need to specify tag and not the CPU architecture. 
 
-the to build an image in the terminal:
+to build an image in the terminal:
 
         docker build -t react-apt . (we tell Docker to find the Dockerfile in the current directory) 
         
-        
+now         
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
