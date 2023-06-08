@@ -751,6 +751,12 @@ So the best practice is to use COPY, which has no magic around it and it is more
         
 side note: all the files from the **current directory**, which is the root directory of our app, will be copied/added, since Docker engine does not have access to any files or directories outside the current directory. 
 
+so my updated Dockerfile is:
+
+        FROM node:14.16.0-alpine:3
+        WORKDIR /app
+        COPY . .  
+        
 let's rebuild our image:
 
         docker build -t react-app . 
