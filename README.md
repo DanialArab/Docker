@@ -648,9 +648,23 @@ how to start a new container from the same image? to start a container from an i
 
 the container gets its file system from the image but each container has its own write layer so what we write in a given container is invisible from other containers, of course there is a way to share data between containers and we will talk about it later in the course. But it is critical to understand that each container is **an isolated environemnt** for executing an application, it is an **isolated universe.**
 
-Next, we deploy a front end application built with react and start dockerize it.
+Next, we dockerize a front end application, built with react, and package it into an image once we have that image we can deploy the application virtually anywhere. Let's see how!
 
-HERE
+<a name="24"></a>
+### Dockerfile Instructions
+
+The first step to dockerize an application is to add a Dockerfile to it. **A Dockerfile contains instructions for building an image**. The following is a complete list of those instructions:
+
++ FROM to specify the base image 
++ WORKDIR to specify the working directory
++ COPY for copying files and directories
++ ADD for copying files and directories
++ RUN for executing operating system commands (we can execute all the Linux commands using RUN, if we are on windows we can execute windowns commands using RUN as well) 
++ ENV for setting environment variables
++ EXPOSE to tell docker our container starts at a given port 
++ USER to specify the user that should run the application, typically we want to run our application using a user with limited priviledges
++ CMD to specify the commands that should be executed when we start a container
++ ENTRYPOINT to specify the commands that should be executed when we start a container
 
 
 <a name="10"></a>
