@@ -628,7 +628,15 @@ An image includes **everyhting (all the files and configuration settings) an app
 + environment variables
 +  ...
 
-**Once we have an image we can start a container from it.** A container is kind of like a virtual machine in a sense that:
+To build an image:
+        
+        docker build -t name_of_image 
+
+**Once we have an image we can start a container from it.** :
+
+        docker run -it image_name (if image is in local it uses it if not pulled it from docker hub)
+
+A container is kind of like a virtual machine in a sense that:
 + it provides an isolated environment for executing an application
 + can be stopped & restarted like VMs
 + a container is technically an operating system process, a special process because it has its own file system provided by the image
