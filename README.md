@@ -36,6 +36,7 @@ This repo documents my understanding of Docker. The structure of my notes from t
     5. [Excluding Files and Directories](#27)
     6. [Running Commands](#28)
     7. [Setting Environment Variables](#29)
+    8. [Exposing Ports](#30)
  
  
 10. [Reference](#20)
@@ -829,13 +830,16 @@ then start a new container form it:
         
 then I can
 
-        prinvtenv
+        prinvtenv # to see all the environment variables
         or
         printenv API_URL
         or
         echo $API_URL 
         
-I see all the environment variables. **So whenever we start this container this environemnt varuiable is automatically set for us.**
+ **So whenever we start this container this environemnt varuiable is automatically set for us.**
+
+<a name="30"></a>
+### Exposing Ports
 
  
 <a name="10"></a>
