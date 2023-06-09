@@ -811,8 +811,31 @@ now if I do ls I do have node_modules directory and package-lock.json file in my
 <a name="29"></a>
 ### Setting Environment Variables
 
+Sometimes we need tos et environemnt variables for example let's say our front-end application needs to talk to a backend or an API. Quite often we set the URL of an API using an environment variable. To do so we use ENV instruction. Our updated Dockerfile will be:
 
+        FROM node:14.16.0-alpine:3
+        WORKDIR /app
+        COPY . . 
+        RUN npm install
+        ENV API_URL=http://api.myapp.com/ 
+        
+rebuild our image:
 
+        docker build -t react-app .
+        
+then start a new container form it:
+
+        docker run -it react-app sh
+        
+then I can
+
+        prinvtenv
+        or
+        printenv API_URL
+        or
+        echo $API_URL 
+        
+I see all the environment variables. **So whenever we start this container this environemnt varuiable is automatically set for us.**
 
  
 <a name="10"></a>
