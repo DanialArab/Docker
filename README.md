@@ -668,9 +668,9 @@ There are a number of steps we need to follow to run our app on a brand new mach
 + install dependencies of the application using npm install (which looks into the package.json file to find the required dependencies and automatically download and store all the thrid party libraries for our project). After that we will have a new directory called node_modules where we have all the dependencies, also we will have a new file package-lock.json 
 + npm start (to start a project)
 
-we will have the same steps as above for other development stacks whether to use csharp, java, python, etc. we have some tolls to manage the dependencies of our application and then we have a way to start our application. 
+we will have the same steps as above for other development stacks whether to use csharp, java, python, etc. we have some tools to manage the dependencies of our application and then we have a way to start our application. 
 
-This starts at development server listening to the port 3000, if we go to port 3000 at localhost (localhost:3000) we can see our react application. So we saw how to run our app in a new machine, we will see how to use Docker so we don't have to repeat all these steps everutime we want to deploy our app on a new machine. So next we will dockerize our application and package it into an image. Once we have that image we can deploy our application virtually anywhere. 
+This starts at development server listening to the port 3000, if we go to port 3000 at localhost (localhost:3000) we can see our react application. So we saw how to run our app in a new machine, we will see how to use Docker so we don't have to repeat all these steps everytime we want to deploy our app on a new machine. So next we will dockerize our application and package it into an image. Once we have that image we can deploy our application virtually anywhere. 
 
 <a name="25"></a>
 ### Dockerfile Instructions
@@ -787,7 +787,7 @@ then
  
  now on the shell we are inside the /app directory because in the Dockerfile we set this directory as the current working directory. What if we want to exclude some files or directories? we see next!
 
-when mosh does ls he has a directory called node_modules that I don't have also i don't have package-lock.json! This should be because I did not initially run the app locally on my machine! The package-lock.json file is created after running the npm install command in a Node.js application.
+when mosh does ls he has a directory called node_modules that I don't have also i don't have package-lock.json! This should be because I did not initially run the app locally on my machine! The package-lock.json file is created after running the npm install command in a Node.js application. I went back and repeat steps in "Running an application on a brand new machine" and now I also have node_modules directory and package-lock.json file.
 
 
  
