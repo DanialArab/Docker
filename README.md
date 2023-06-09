@@ -670,7 +670,7 @@ There are a number of steps we need to follow to run our app on a brand new mach
 
 we will have the same steps as above for other development stacks whether to use csharp, java, python, etc. we have some tolls to manage the dependencies of our application and then we have a way to start our application. 
 
-This starts at development server listening to the port 3000, if we go to port 3000 at localhost (localhost:3000) we can see our react application. 
+This starts at development server listening to the port 3000, if we go to port 3000 at localhost (localhost:3000) we can see our react application. So we saw how to run our app in a new machine, we will see how to use Docker so we don't have to repeat all these steps everutime we want to deploy our app on a new machine. So next we will dockerize our application and package it into an image. Once we have that image we can deploy our application virtually anywhere. 
 
 <a name="25"></a>
 ### Dockerfile Instructions
