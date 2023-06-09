@@ -33,6 +33,10 @@ This repo documents my understanding of Docker. The structure of my notes from t
     2. [Dockerfile Instructions](#24)
     3. [Choosing the Right Base Image](#25)
     4. [Copying Files and Directories](#26)
+    5. [Excluding Files and Directories](#27)
+    6. [Running Commands](#28)
+ 
+ 
 10. [Reference](#20)
 
 <a name="1"></a>
@@ -772,9 +776,18 @@ when mosh does ls he has a directory called node_modules that I don't have also 
 <a name="27"></a>
 ### Excluding Files and Directories
 
-As we saw when we build our application, docker client takes everything in our app root directory, which is called the build context or build context directory, and send it to docker engine or docker daemon. For this simple application the size was aropund 150 MB which is mainly because of the node_module directory. As our application gets more complex and we have more third party libraries this node_module directory gets larger and larger. Also later when we want to deploy our app  our docker client will talk to a docker engine on a different machine which means whatever we have in the build context has to be transfered over the network. So if we have a large build context with a million files in it all these files have to be sent to the docker engine on the remote machine. We don't want that, we don't really need to transfer this node_module directory because all these dependencies are defined in package.json. So we can simply exclude this directory and copy everything else and then restore these dependencies 
+As we saw when we build our application, docker client takes everything in our app root directory, which is called the build context or build context directory, and send it to docker engine or docker daemon. For this simple application the size was aropund 150 MB which is mainly because of the node_module directory. As our application gets more complex and we have more third party libraries this node_module directory gets larger and larger. Also later when we want to deploy our app  our docker client will talk to a docker engine on a different machine which means whatever we have in the build context has to be transfered over the network. So if we have a large build context with a million files in it all these files have to be sent to the docker engine on the remote machine. We don't want that, we don't really need to transfer this node_module directory because all these dependencies are defined in package.json. So we can simply exclude this directory and copy everything else and then restore these dependencies on the target image. This has 2 benefits:
++ our build context is smaller so we transfer less data over the network 
++ our build will be faster and we don't have to wait for all these files to be transfered to docker engine
+
+How to do that?
+
+in the root directory of our app we create a file named **.dockerignore**, everything in lower case, (like .gitignore by whcih we exclude some files and directories from Git) inside it we list the files and directories we want to exclude in this case node_modules/. Doing so and then starting a new container from our image our container does not have node_modules directory in the file system of the container because we excluded. So we will do npm install to install all the dependencises, as shown next:
+
+<a name="28"></a>
+### Running Commands
  
-        
+ 
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
