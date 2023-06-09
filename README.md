@@ -38,6 +38,7 @@ This repo documents my understanding of Docker. The structure of my notes from t
     7. [Running Commands](#29)
     8. [Setting Environment Variables](#30)
     9. [Exposing Ports](#31)
+    10. [Setting the User](#32)
  
  
 10. [Reference](#20)
@@ -873,6 +874,11 @@ If we want to start our app outside docker, we go to the project directory and t
 
 with EXPOSE command we specify what port this container will be listening on. It is important to understand that the EXPOSE command does not automatically publish the port on the host and it is just a form of documentation to tell us this container will eventually listen on port 3000 so later when we properly run this application inside a docker container we know that we should map a port on the host to port 3000 on the container, which we will do next.
  
+ <a name="32"></a>
+### Setting the User
+
+
+
  
 <a name="10"></a>
 ## 10. Reference
