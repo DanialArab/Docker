@@ -35,6 +35,7 @@ This repo documents my understanding of Docker. The structure of my notes from t
     4. [Copying Files and Directories](#26)
     5. [Excluding Files and Directories](#27)
     6. [Running Commands](#28)
+    7. [Setting Environment Variables](#29)
  
  
 10. [Reference](#20)
@@ -787,6 +788,30 @@ in the root directory of our app we create a file named **.dockerignore**, every
 <a name="28"></a>
 ### Running Commands
  
+So the next step is to provide instructions in our image to install our project dependencies using npm. To do so, we use RUN in our Dockerfile. With RUN command we can execute any command that we normally execute in a terminal session. So our updated Dockerfile will be:
+
+        FROM node:14.16.0-alpine:3
+        WORKDIR /app
+        COPY . . 
+        RUN npm install #(it finds the required dependencies from package.json file) 
+ 
+ if for example we want to install Python on this image as well we will add RUN apt install python in the Dockerfile (side note is that alpine Linux does not have apt as package manager and so this will not work we have to instead use apk as package manager, be aware of these details). 
+ 
+ after building an image:
+ 
+        docker build -t react-app .
+        
+then
+
+        docker run -it react-app sh
+        
+now if I do ls I do have node_modules directory and package-lock.json file. Perfect, next we will set the environemt variable!
+
+<a name="29"></a>
+### Setting Environment Variables
+
+
+
  
 <a name="10"></a>
 ## 10. Reference
