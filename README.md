@@ -672,6 +672,11 @@ we will have the same steps as above for other development stacks whether to use
 
 This starts at development server listening to the port 3000, if we go to port 3000 at localhost (localhost:3000) we can see our react application. So we saw how to run our app in a new machine, we will see how to use Docker so we don't have to repeat all these steps everytime we want to deploy our app on a new machine. So next we will dockerize our application and package it into an image. Once we have that image we can deploy our application virtually anywhere. 
 
+some quick notes:
++ When you start a React app using npm start, it typically runs a development server that hosts your application locally on your computer. By default, the development server uses the address localhost and port 3000.
++ localhost: localhost is a hostname that refers to the current device you're using. It's commonly used to access services running on the same device. When you access localhost in your browser, you're essentially referring to your own computer.
++ Port 3000: Ports are used to identify specific processes or services running on a computer. Port 3000 is a commonly used port for local development servers. So when you start your React app and it runs on localhost:3000, it means the development server is listening on port 3000 of your local machine.
+
 <a name="25"></a>
 ### Dockerfile Instructions
 
