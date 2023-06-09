@@ -777,27 +777,28 @@ when mosh does ls he has a directory called node_modules that I don't have also 
 <a name="27"></a>
 ### Excluding Files and Directories
 
-As we saw when we build our application, docker client takes everything in our app root directory, which is called the build context or build context directory, and send it to docker engine or docker daemon. For this simple application the size was aropund 150 MB which is mainly because of the node_module directory. As our application gets more complex and we have more third party libraries this node_module directory gets larger and larger. Also later when we want to deploy our app  our docker client will talk to a docker engine on a different machine which means whatever we have in the build context has to be transfered over the network. So if we have a large build context with a million files in it all these files have to be sent to the docker engine on the remote machine. We don't want that, we don't really need to transfer this node_module directory because all these dependencies are defined in package.json. So we can simply exclude this directory and copy everything else and then restore these dependencies on the target image. This has 2 benefits:
+As we saw when we build our application, docker client takes everything in our app root directory, which is called the build context or build context directory, and send it to docker engine or docker daemon. For this simple application the size was aropund 150 MB which is mainly because of the node_modules directory. As our application gets more complex and we have more third party libraries this node_modules directory gets larger and larger. Also later when we want to deploy our app  our docker client will talk to a docker engine on a different machine which means whatever we have in the build context has to be transfered over the network. So if we have a large build context with a million files in it all these files have to be sent to the docker engine on the remote machine. We don't want that, we don't really need to transfer this node_modules directory because all these dependencies are defined in package.json file. So we can simply exclude this directory and copy everything else and then restore these dependencies on the target image. This has 2 benefits:
+
 + our build context is smaller so we transfer less data over the network 
 + our build will be faster and we don't have to wait for all these files to be transfered to docker engine
 
 How to do that?
 
-in the root directory of our app we create a file named **.dockerignore**, everything in lower case, (like .gitignore by whcih we exclude some files and directories from Git) inside it we list the files and directories we want to exclude in this case node_modules/. Doing so and then starting a new container from our image our container does not have node_modules directory in the file system of the container because we excluded. So we will do npm install to install all the dependencises, as shown next:
+in the root directory of our app we create a file named **.dockerignore**, everything in lower case, (like .gitignore by whcih we exclude some files and directories from Git) inside it we list the files and directories we want to exclude in this case node_modules/. Doing so, then building an image, and then starting a new container from our image our container does not have node_modules directory in the file system of the container because we excluded it. So we will do npm install to install all the dependencises, as shown next:
 
 <a name="28"></a>
 ### Running Commands
  
-So the next step is to provide instructions in our image to install our project dependencies using npm. To do so, we use RUN in our Dockerfile. With RUN command we can execute any command that we normally execute in a terminal session. So our updated Dockerfile will be:
+So the next step is to provide instructions in our Dockerfile to install our project dependencies using npm. To do so, we use RUN in our Dockerfile. With RUN command we can execute any command that we normally execute in a terminal session. So our updated Dockerfile will be:
 
         FROM node:14.16.0-alpine:3
         WORKDIR /app
         COPY . . 
         RUN npm install #(it finds the required dependencies from package.json file) 
  
- if for example we want to install Python on this image as well we will add RUN apt install python in the Dockerfile (side note is that alpine Linux does not have apt as package manager and so this will not work we have to instead use apk as package manager, be aware of these details). 
+ if for example we want to install Python on this image as well we will add RUN apt install python in the Dockerfile (side note is that alpine Linux does not have apt as the package manager and so this will not work we have to instead use apk as package manager, be aware of these details). 
  
- after building an image:
+rebuild an image:
  
         docker build -t react-app .
         
@@ -805,10 +806,11 @@ then
 
         docker run -it react-app sh
         
-now if I do ls I do have node_modules directory and package-lock.json file. Perfect, next we will set the environemt variable!
+now if I do ls I do have node_modules directory and package-lock.json file in my file system. Perfect, next we will set the environemt variable!
 
 <a name="29"></a>
 ### Setting Environment Variables
+
 
 
 
