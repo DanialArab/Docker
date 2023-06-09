@@ -664,7 +664,7 @@ Next, we dockerize a front end application, built with react, and package it int
 
 There are a number of steps we need to follow to run our app on a brand new machine:
 
-+ install node
++ install node (sudo apt install nodejs)
 + install dependencies of the application using npm install (which looks into the package.json file to find the required dependencies and automatically download and store all the thrid party libraries for our project). After that we will have a new directory called node_modules where we have all the dependencies, also we will have a new file package-lock.json 
 + npm start (to start a project)
 
