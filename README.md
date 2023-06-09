@@ -662,6 +662,15 @@ Next, we dockerize a front end application, built with react, and package it int
 <a name="24"></a>
 ### Running an application on a brand new machine
 
+There are a number of steps we need to follow to run our app on a brand new machine:
+
++ install node
++ install dependencies of the application using npm install (which looks into the package.json file to find the required dependencies and automatically download and store all the thrid party libraries for our project). After that we will have a new directory called node_modules where we have all the dependencies, also we will have a new file package-lock.json 
++ npm start (to start a project)
+
+we will have the same steps as above for other development stacks whether to use csharp, java, python, etc. we have some tolls to manage the dependencies of our application and then we have a way to start our application. 
+
+This starts at development server listening to the port 3000, if we go to port 3000 at localhost (localhost:3000) we can see our react application. 
 
 <a name="25"></a>
 ### Dockerfile Instructions
