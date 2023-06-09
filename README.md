@@ -765,13 +765,14 @@ then
 
         docker run -it react-app sh
  
- now on the shell we are inside the /app directory because in the Dockerfile we set this directory as the current working directory. 
+ now on the shell we are inside the /app directory because in the Dockerfile we set this directory as the current working directory. What if we want to exclude some files or directories? we see next!
+
+when mosh does ls he has a directory called node_modules that I don't have also i don't have package-lock.json! This should be because I did not initially run the app locally on my machine! will double check. 
  
-## HERE
-here when mosh does ls he has a directory called node_modules that I don't have also i don't have package-lock.json!
- 
- what if we want to exclude some files or directories? we see next!
- 
+<a name="27"></a>
+### Excluding Files and Directories
+
+As we saw when we build our application, docker client takes everything in our app root directory, which is called the build context or build context directory, and send it to docker engine or docker daemon. For this simple application the size was aropund 150 MB which is mainly because of the node_module directory. As our application gets more complex and we have more third party libraries this node_module directory gets larger and larger. Also later when we want to deploy our app  our docker client will talk to a docker engine on a different machine which means whatever we have in the build context has to be transfered over the network. So if we have a large build context with a million files in it all these files have to be sent to the docker engine on the remote machine. We don't want that, we don't really need to transfer this node_module directory because all these dependencies are defined in package.json. So we can simply exclude this directory and copy everything else and then restore these dependencies 
  
         
 <a name="10"></a>
