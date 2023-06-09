@@ -666,7 +666,7 @@ There are a number of steps we need to follow to run our app on a brand new mach
 
 + install node (sudo apt install nodejs)
 + install dependencies of the application using npm install (which looks into the package.json file to find the required dependencies and automatically download and store all the thrid party libraries for our project). After that we will have a new directory called node_modules where we have all the dependencies, also we will have a new file package-lock.json 
-+ npm start (to start a project)
++ from the project directory: npm start (to start a project)
 
 we will have the same steps as above for other development stacks whether to use csharp, java, python, etc. we have some tools to manage the dependencies of our application and then we have a way to start our application. 
 
@@ -862,7 +862,17 @@ then I can
 <a name="31"></a>
 ### Exposing Ports
 
+If we want to start our app outside docker, we go to the project directory and then npm start, which starts the development server on port 3000 and so if we go to localhost:3000 we can access our application. In the future when we run this application inside a Docker container this port 3000 will be open on the **container NOT on the host**. Understanding of this is important. So on the same machine we can have multiple containers running the same image all these containers will be listening to port 3000 but the port 3000 on the host is not going to be automatically mapped to these containers. So next we will see how to map a port on the host to a port on these containers. But for now, let's go back to the Dockerfile and modify it as follows:
 
+        FROM node:14.16.0-alpine:3
+        WORKDIR /app
+        COPY . . 
+        RUN npm install
+        ENV API_URL=http://api.myapp.com/
+        EXPOSE 3000 
+
+with EXPOSE command we specify what port this container will be listening on. It is important to understand that the EXPOSE command does not automatically publish the port on the host and it is just a form of documentation to tell us this container will eventually listen on port 3000 so later when we properly run this application inside a docker container we know that we should map a port on the host to port 3000 on the container, which we will do next.
+ 
  
 <a name="10"></a>
 ## 10. Reference
