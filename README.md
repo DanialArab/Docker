@@ -39,6 +39,8 @@ This repo documents my understanding of Docker. The structure of my notes from t
     8. [Setting Environment Variables](#30)
     9. [Exposing Ports](#31)
     10. [Setting the User](#32)
+    11. [Defining Entrypoints](#33)
+    12. 
  
  
 10. [Reference](#20)
@@ -877,9 +879,46 @@ with EXPOSE command we specify what port this container will be listening on. It
  <a name="32"></a>
 ### Setting the User
 
+By default, Docker runs our application with root user, which can open up secutiry holes in our system. So to run this application we should create a regular user with limited previlidges. 
+
+A side note: in alpine Linux which is the base of my image, specified below in the Docker file, we don't have groupadd and useradd command and instead we have addgroup and adduser.
+
+        FROM node:14.16.0-alpine:3
+        WORKDIR /app
+        COPY . . 
+        RUN npm install
+        ENV API_URL=http://api.myapp.com/
+        EXPOSE 3000
+        RUN addgroup app && adduser -S -G app app 
+        USER app 
+
+some notes on above:
+with -S we specify the user is system user for running our app and not a real user and with -G we set the primary group of the user, also keep in mind before creating a user we need to create a group to be able to add the user to it which we did with addgroup command. The last app is the name of the user and the one before that is the name of the group the user belongs to, the best practice in Linux is to have the same name for the user and its primary group. After creating the group and the user, we can use USER sommand to set the user, meaning all the follwoing commands will be executed using the set user. So after saving the Docker file let's rebiuild the image:
+
+        docker build -t react-app . 
+
+let's start a new container from this image and make sure the current user is the app user:
+
+        docker run -it react-app sh
+
+then to print the name of the user:
+
+        whoami
+        
+which prints 
+
+        app
+        
+when we do 
+
+        ls -l
+        
+we see that the current user, which is app, cannot write to any file in our application and just can read files and execute some of them which is good in terms of security. 
+
+ <a name="33"></a>
+### Defining Entrypoints
 
 
- 
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
