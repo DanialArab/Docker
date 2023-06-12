@@ -877,7 +877,7 @@ with EXPOSE command we specify what port this container will be listening on. It
  <a name="32"></a>
 ### Setting the User
 
-HERE
+
 
  
 <a name="10"></a>
