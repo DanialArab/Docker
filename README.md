@@ -903,7 +903,8 @@ let's start a new container from this image and make sure the current user is th
 
 then to print the name of the user:
 
-        whoami
+        whoamidocker images
+        
         
 which prints 
 
@@ -917,6 +918,35 @@ we see that the current user, which is app, cannot write to any file in our appl
 
  <a name="33"></a>
 ### Defining Entrypoints
+
+As we saw earlier, to start our application, in the project directory, we do npm start (which starts our application outside docker). So this is the command we should execute when starting a container. 
+
+        docker run react-app npm start # I did not use -it because I did not want to interact with this container (did not want to run a shell session), we just want to start the application
+
+Doing so we get permission error, because in our Docker file we set the user at the end, we executed all these previous instructions as the root user then  we switched to regular user with limited privilidges so we should revise Docker file as follows:
+
+        FROM node:14.16.0-alpine:3
+        RUN addgroup app && adduser -S -G app app 
+        USER app 
+        WORKDIR /app
+        COPY . . 
+        RUN npm install
+        ENV API_URL=http://api.myapp.com/
+        EXPOSE 3000
+        
+now let's rebuild the image:
+
+        docker build -t react-app . 
+        
+Unlike Mosh, I got the permission denied error because the /app directory has incorrect permission/ownership so I revised the Docker file as follows:
+
+
+
+
+now let's start a new container from  our image:
+
+        docker run react-app npm start 
+        
 
 
 
