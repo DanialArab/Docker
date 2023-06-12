@@ -938,8 +938,7 @@ now let's rebuild the image:
 
         docker build -t react-app . 
         
-Unlike Mosh, I got the permission denied error because the /app directory has incorrect permission/ownership so I revised the Docker file as follows:
-
+Unlike Mosh, I got the permission denied error because the /app directory has incorrect permission/ownership so I think I need to revise the Docker file! Will figure it out!
 
 
 
