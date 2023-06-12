@@ -919,6 +919,7 @@ we see that the current user, which is app, cannot write to any file in our appl
 ### Defining Entrypoints
 
 
+
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
