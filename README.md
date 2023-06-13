@@ -893,7 +893,7 @@ A side note: in alpine Linux which is the base of my image, specified below in t
         USER app 
 
 some notes on above:
-with -S we specify the user is system user for running our app and not a real user and with -G we set the primary group of the user, also keep in mind before creating a user we need to create a group to be able to add the user to it which we did with addgroup command. The last app is the name of the user and the one before that is the name of the group the user belongs to, the best practice in Linux is to have the same name for the user and its primary group. After creating the group and the user, we can use USER sommand to set the user, meaning all the follwoing commands will be executed using the set user. So after saving the Docker file let's rebiuild the image:
+with -S we specify the user is system user for running our app and not a real user and with -G we set the primary group of the user, also keep in mind before creating a user we need to create a group to be able to add the user to it which we did with addgroup command. The last app is the name of the user and the one before that is the name of the group the user belongs to, the best practice in Linux is to have the same name for the user and its primary group. After creating the group and the user, we can use USER command to set the user, meaning all the follwoing commands will be executed using the set user. So after saving the Docker file let's rebiuild the image:
 
         docker build -t react-app . 
 
