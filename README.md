@@ -903,8 +903,7 @@ let's start a new container from this image and make sure the current user is th
 
 then to print the name of the user:
 
-        whoamidocker images
-        
+        whoami         
         
 which prints 
 
@@ -921,9 +920,11 @@ we see that the current user, which is app, cannot write to any file in our appl
 
 As we saw earlier, to start our application, in the project directory, we do npm start (which starts our application outside docker). So this is the command we should execute when starting a container. 
 
-        docker run react-app npm start # I did not use -it because I did not want to interact with this container (did not want to run a shell session), we just want to start the application
+        docker run react-app npm start 
+        
+Above, I did not use -it because I did not want to interact with this container (did not want to run a shell session), we just want to start the application
 
-Doing so we get permission error, because in our Docker file we set the user at the end, we executed all these previous instructions as the root user then  we switched to regular user with limited privilidges so we should revise Docker file as follows:
+Doing so we get permission error, because in our Docker file we set the user at the end, we executed all these previous instructions as the root user then  we switched to a regular user with limited privilidges so we should revise Docker file as follows:
 
         FROM node:14.16.0-alpine:3
         RUN addgroup app && adduser -S -G app app 
@@ -938,14 +939,47 @@ now let's rebuild the image:
 
         docker build -t react-app . 
         
-Unlike Mosh, I got the permission denied error because the /app directory has incorrect permission/ownership so I think I need to revise the Docker file! Will figure it out!
+Unlike Mosh, I got the permission denied error because the /app directory has incorrect permission/ownership so I needed to revise the Docker file as follows:
 
-
-
-now let's start a new container from  our image:
-
-        docker run react-app npm start 
+        FROM node:14.16.0-alpine:3
+        RUN addgroup app && adduser -S -G app app
+        WORKDIR /app
+        COPY . .
+        RUN chown -R app:app /app
+        RUN chmod -R 755 /app
+        USER app
+        RUN npm install 
+        ENV API_URL=http://api.myapp.com/
+        EXPOSE 3000
         
+Doing so solves the permission error issue, then to rebuild the image:
+
+        docker build -t react-app . 
+
+now let's start a new container from  our image: 
+
+        docker run react-app npm start
+        
+now I got the message successfully compiled and our web server started on port 3000, but as mentioned before this is **port 3000 of the container not the local host** so if we go to this address http://localhost:3000 we won't access the application. Next we see **how to map a port from the host to a port on the container.**
+
+We don't want to specify the command npm start in 'docker run react-app npm start' everytime we start a container, this is where we use the command instructions (CMD) so:
+
+        FROM node:14.16.0-alpine:3
+        RUN addgroup app && adduser -S -G app app
+        WORKDIR /app
+        COPY . .
+        RUN chown -R app:app /app
+        RUN chmod -R 755 /app
+        USER app
+        RUN npm install 
+        ENV API_URL=http://api.myapp.com/
+        EXPOSE 3000
+        CMD npm strat 
+
+using **the CMD instructuon we specify the default command to be executed**.  Now after rebuilding the image we can start a container from it using docker run react-app (no need for npm sgtart anymore).
+
+remember because the CMD insteuction is for supplying the default command it does not make sense to have multiple command instructions in the docker file, if we have multiple command instructions only the last one will take effect. 
+
 
 
 
