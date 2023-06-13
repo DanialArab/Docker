@@ -1028,10 +1028,13 @@ this echo hello command overwrites the default command which is CMD ['npm', 'sta
 
 in practical terms we often want to use ENTRYPOINT when we know for sure this is the command that should be executed whenever we start a container with no exception, in contrast with the CMD instruction we have a bit more flexibility we can always overwrite it. So choosing between CMD and ENTRYPOINT is a matter of personal preference.
 
-So far our Docker file is in a good shape but it is sloww we will optimize it next:
+So far our Docker file is in a good shape but it is slow we will optimize it next:
 
  <a name="34"></a>
 ### Speeding Up Builds
+
+HERE
+
 
 <a name="10"></a>
 ## 10. Reference
