@@ -974,11 +974,11 @@ We don't want to specify the command npm start in 'docker run react-app npm star
         RUN npm install 
         ENV API_URL=http://api.myapp.com/
         EXPOSE 3000
-        CMD npm strat 
+        CMD npm start 
 
 using **the CMD instructuon we specify the default command to be executed**.  Now after rebuilding the image we can start a container from it using 'docker run react-app' (no need for npm start anymore).
 
-remember because the CMD insteuction is for supplying the **default command** it does not make sense to have multiple command instructions in the docker file, if we have multiple command instructions only the last one will take effect. 
+remember because the CMD instruction is for supplying the **default command** it does not make sense to have multiple command instructions in the docker file, if we have multiple command instructions only the last one will take effect. 
 
 Difference between CMD and RUN instructios:
 
@@ -986,12 +986,16 @@ using both we can execute commands. The RUN instruction is a **build-time instru
 
 the CMD instruction has two forms:
 
-        # the shell form, which is executed by the docker inside a separate shell that is why it is called the shell form, on Linux that shell is /bin/sh (the original shell program) and on Windows is cmd (command prompt) 
+        # the shell form
         CMD npm start
-        
-        # the execute form, with which we can execute the command directly with no need to spin up another shell process also it makes easier to faster to clean up the resources when you stop containers so always use this form as the best practice.
+
+this form is executed by the docker inside a separate shell that is why it is called the shell form, on Linux that shell is /bin/sh (the original shell program) and on Windows is cmd (command prompt) 
+
+        # the execute form
         CMD ['npm', 'start'] 
 
+with this form we can execute the command directly with no need to spin up another shell process also it makes easier to faster to clean up the resources when you stop containers so always use this form as the best practice. So:
+ 
         FROM node:14.16.0-alpine:3
         RUN addgroup app && adduser -S -G app app
         WORKDIR /app
