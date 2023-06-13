@@ -994,7 +994,7 @@ this form is executed by the docker inside a separate shell that is why it is ca
         # the execute form
         CMD ['npm', 'start'] 
 
-with this form we can execute the command directly with no need to spin up another shell process also it makes easier to faster to clean up the resources when you stop containers so always use this form as the best practice. So:
+with this form we can execute the command directly with no need to spin up another shell process also it makes it easier and faster to clean up the resources when you stop containers so always use this form as the best practice. So:
  
         FROM node:14.16.0-alpine:3
         RUN addgroup app && adduser -S -G app app
