@@ -1013,6 +1013,7 @@ We also have another instruction called ENTRYPOINT which is pretty similar to CM
         ENTRYPOINT npm start
         
 or 
+
         ENTRYPOINT ["npm", "start"] 
         
 Difference between ENTRYPOINT and CMD instructions:
