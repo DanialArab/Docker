@@ -40,7 +40,7 @@ This repo documents my understanding of Docker. The structure of my notes from t
     9. [Exposing Ports](#31)
     10. [Setting the User](#32)
     11. [Defining Entrypoints](#33)
-    12. 
+    12. [Speeding Up Builds](#34)
  
  
 10. [Reference](#20)
@@ -976,12 +976,57 @@ We don't want to specify the command npm start in 'docker run react-app npm star
         EXPOSE 3000
         CMD npm strat 
 
-using **the CMD instructuon we specify the default command to be executed**.  Now after rebuilding the image we can start a container from it using docker run react-app (no need for npm sgtart anymore).
+using **the CMD instructuon we specify the default command to be executed**.  Now after rebuilding the image we can start a container from it using 'docker run react-app' (no need for npm start anymore).
 
-remember because the CMD insteuction is for supplying the default command it does not make sense to have multiple command instructions in the docker file, if we have multiple command instructions only the last one will take effect. 
+remember because the CMD insteuction is for supplying the **default command** it does not make sense to have multiple command instructions in the docker file, if we have multiple command instructions only the last one will take effect. 
 
+Difference between CMD and RUN instructios:
 
+using both we can execute commands. The RUN instruction is a **build-time instruction meaning it is executed at the time of building the image**, in contrast the **CMD instruction is a run-time instruction meaning it is executed when we start a container.**
 
+the CMD instruction has two forms:
+
+        # the shell form, which is executed by the docker inside a separate shell that is why it is called the shell form, on Linux that shell is /bin/sh (the original shell program) and on Windows is cmd (command prompt) 
+        CMD npm start
+        
+        # the execute form, with which we can execute the command directly with no need to spin up another shell process also it makes easier to faster to clean up the resources when you stop containers so always use this form as the best practice.
+        CMD ['npm', 'start'] 
+
+        FROM node:14.16.0-alpine:3
+        RUN addgroup app && adduser -S -G app app
+        WORKDIR /app
+        COPY . .
+        RUN chown -R app:app /app
+        RUN chmod -R 755 /app
+        USER app
+        RUN npm install 
+        ENV API_URL=http://api.myapp.com/
+        EXPOSE 3000
+        CMD ['npm', 'start'] 
+
+We also have another instruction called ENTRYPOINT which is pretty similar to CMD and likewise it has two forms: the shell and the execute forms.
+
+        ENTRYPOINT npm start
+        
+or 
+        ENTRYPOINT ["npm", "start"] 
+        
+Difference between ENTRYPOINT and CMD instructions:
+
+We can always overwrite the default command when starting a container like:
+
+        docker run react-app echo hello 
+
+this echo hello command overwrites the default command which is CMD ['npm', 'start'] in my Docker file. In contrast we cannot easily overwrite the ENTRYPOINT instruction when running the container like if you want to overwrite the ENTRYPOINT instruction we have to use --entrypoint option like the following, which is harder to overwrite the ENTRYPOINT instruction:
+
+        docker run react-app --entrypoint echo hello 
+
+in practical terms we often want to use ENTRYPOINT when we know for sure this is the command that should be executed whenever we start a container with no exception, in contrast with the CMD instruction we have a bit more flexibility we can always overwrite it. So choosing between CMD and ENTRYPOINT is a matter of personal preference.
+
+So far our Docker file is in a good shape but it is sloww we will optimize it next:
+
+ <a name="34"></a>
+### Speeding Up Builds
 
 <a name="10"></a>
 ## 10. Reference
