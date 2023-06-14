@@ -1150,7 +1150,7 @@ we use the tag command:
 
         docker image tag react-app:latest react-app:1 
 
-takeaway: the latest tag does not necessarily points to the latest images we have to explicitly apply to the latest image:
+takeaway: the latest tag does not necessarily point to the latest image we have to explicitly apply it to the latest image:
 
         docker image tag react-app:2 react-app:latest 
 
