@@ -43,6 +43,7 @@ This repo documents my understanding of Docker. The structure of my notes from t
     12. [Speeding Up Builds](#34)
     13. [Removing Images](#35)
     14. [Tagging Images](#36)
+    15. [Sharing Images](#37)
 
  
  
@@ -1123,8 +1124,41 @@ which, provides me with all the sub-commands available. A side note: all image m
 <a name="36"></a>
 ### Tagging Images
 
+Whenever we build an image or pulled it from Docker hub by default Docker uses the **latest** tag. This latest tag is JUST a label there is nothing special about it: it does not necessarily mean this is the latest version of your image. If you don't tag your images properly latest can point to an older image. Keep in mind that **latest** is totally fine for development but you should NOT use it in production you don't want to put an image with the latest tag in production or staging server because if something goes wrong you cannot easily troubleshoot issues because you don't know what version you are really running in production if you want to do a rollback or an upgrade how can you tell what version you are running in production if it is always latest! So we should always use explicit tags to identify what version you are running on each environment: in your test environment, staging or production. For development, latest tag is totally fine. 
+
+let's tag our image properly:
+
+ we have two ways to tag an image:
+
+1. to tag an image while building it:
+
+        docker build -t react-app:1 .
+
+different groups have different preferences to choose the tagging style. some prefer semantic versioning like 3.1.2, which is common among the teams that do not release that often. Teams that release frequently prefer build numbers like 77. 
+
+        docker images
+
+we see that an image can have multiple tags. what if we made a mistake and want to remove the tag:
+
+        docker image remove react-app:1 
+
+the tag will be gone.
+
+2. tag an image after it is already built:
+
+we use the tag command:
+
+        docker image tag react-app:latest react-app:1 
+
+takeaway: the latest tag does not necessarily points to the latest images we have to explicitly apply to the latest image:
+
+        docker image tag react-app:2 react-app:latest 
 
 
+<a name="37"></a>
+### Sharing Images
+
+ HERE
  
 <a name="10"></a>
 ## 10. Reference
