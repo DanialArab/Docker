@@ -41,6 +41,8 @@ This repo documents my understanding of Docker. The structure of my notes from t
     10. [Setting the User](#32)
     11. [Defining Entrypoints](#33)
     12. [Speeding Up Builds](#34)
+    13. [Removing Images](#35) 
+
  
  
 10. [Reference](#20)
@@ -1077,6 +1079,11 @@ with this new setup if we have not changed any of the application dependencies D
 
 With this new setup our build was super fast. Here is a takeaway: **to optimize your build, you should organize your Dockerfile in such a way that the instructions that do not change frequently (stable instructions) should be on the top and the changing instructions should be down the bottom.**
 
+ <a name="35"></a>
+### Removing Images
+
+HERE
+ 
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
