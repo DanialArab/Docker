@@ -1075,6 +1075,8 @@ then Docker has to rebuild this layer.
 
 with this new setup if we have not changed any of the application dependencies Docker is going to reuse this layer (COPY package*.json .) from its cache because package*.json is not modified. Similarly, Docker is not going to reinstall all npm dependencies because this instruction is  not changed. If we changed it to npm update then yes Docker had to rebuild this layer. The we have **COPY . .** and of course this layer should always be rebuilt and that is totally fine. 
 
+With this new setup our build was super fast. Here is a takeaway: **to optimize your build, you should organize your Dockerfile in such a way that the instructions that do not change frequently (stable instructions) should be on the top and the changing instructions should be down the bottom.**
+
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
