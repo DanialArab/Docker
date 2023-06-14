@@ -1082,6 +1082,8 @@ With this new setup our build was super fast. Here is a takeaway: **to optimize 
  <a name="35"></a>
 ### Removing Images
 
+We may want to remove **dangling images** or **proper images**:
+
 when we run
 
         docker images
