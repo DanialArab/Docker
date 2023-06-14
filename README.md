@@ -1008,7 +1008,7 @@ with this form we can execute the command directly with no need to spin up anoth
         EXPOSE 3000
         CMD ['npm', 'start'] 
 
-We also have another instruction called ENTRYPOINT which is pretty similar to CMD and likewise it has two forms: the shell and the execute forms.
+We also have another instruction called ENTRYPOINT which is pretty similar to CMD and likewise, it has two forms: the shell and the execute forms.
 
         ENTRYPOINT npm start
         
@@ -1022,19 +1022,58 @@ We can always overwrite the default command when starting a container like:
 
         docker run react-app echo hello 
 
-this echo hello command overwrites the default command which is CMD ['npm', 'start'] in my Docker file. In contrast we cannot easily overwrite the ENTRYPOINT instruction when running the container like if you want to overwrite the ENTRYPOINT instruction we have to use --entrypoint option like the following, which is harder to overwrite the ENTRYPOINT instruction:
+this echo hello command overwrites the default command which is CMD ['npm', 'start'] in my Docker file. In contrast, we cannot easily overwrite the ENTRYPOINT instruction when running the container like if you want to overwrite the ENTRYPOINT instruction we have to use --entrypoint option like the following, which is harder to overwrite the ENTRYPOINT instruction:
 
         docker run react-app --entrypoint echo hello 
 
-in practical terms we often want to use ENTRYPOINT when we know for sure this is the command that should be executed whenever we start a container with no exception, in contrast with the CMD instruction we have a bit more flexibility we can always overwrite it. So choosing between CMD and ENTRYPOINT is a matter of personal preference.
+in practical terms, we often want to use ENTRYPOINT when we know for sure this is the command that should be executed whenever we start a container with no exception, in contrast with the CMD instruction we have a bit more flexibility we can always overwrite it. So choosing between CMD and ENTRYPOINT is a matter of personal preference.
 
-So far our Docker file is in a good shape but it is slow we will optimize it next:
+So far our Docker file is in good shape but it is slow we will optimize it next:
 
  <a name="34"></a>
 ### Speeding Up Builds
 
-HERE
+So far our builds are fairly slow. Every time we make a small change and we have to rebuild and wait almost half a minute. Let's optimize our build. The first thing to understand is the **concept of layers** in Docker. A n image is essentially a collection of layers you can think of a layer as a small file system that only includes modified files. When Docker tries to build an image it executes each of the instructions in the Dockerfile and creates a new layer. That layer only includes the files that were modified as a result of that instruction. So for the first instruction, Docker takes the node image and put it in a layer (more accurately the node image itself is a couple of layers but for now don't worry about that). Similarly, for every instruction in the Dockerfile, Docker creates a new layer. To have a quick look at these layers:
 
+        docker history react-app # react-app is the name_of_image
+
+Now we can see all the layers and we have to read this list from bottom to up. An image is essentially a collection of these layers. 
+
+Docker has an optimization mechanism built into it. Next time we ask Docker to build this image it looks at the first instruction and see if the instruction changed or not. If not it is not going to rebuild this layer and instead it is going to reuse it from its cache. That is the optimization. Then Docker looks at the second instruction and again if there is no change Docker reuses it from its cache and is not going to rebuild it. In contrast, if we make a tiny change in one instruction let's say 
+
+        RUN addgroup app2 && adduser -S -G app app 
+
+then Docker has to rebuild this layer.
+
+        FROM node:14.16.0-alpine:3
+        RUN addgroup app && adduser -S -G app app
+        WORKDIR /app
+        COPY . .
+        RUN chown -R app:app /app
+        RUN chmod -R 755 /app
+        USER app
+        RUN npm install 
+        ENV API_URL=http://api.myapp.com/
+        EXPOSE 3000
+        CMD ['npm', 'start'] 
+        
+**COPY . .** is a special instruction. Because with this instruction Docker cannot tell if anything has changed or not. And it has to look at the content of files as well. And that means if we make a tiny change in our application Docker cannot use this layer from its cache and it has to rebuild it. And this is where the problem happens: once the layer is rebuilt all the following layers have to rebuild as well. So Docker cannot reuse the following layers e.g., RUN npm install from its cache and it has to reinstall all the npm dependencies. And this is exactly where we have a bottleneck. We have to wait half a minute for all these dependencies to be installed. So to optimize our build we have to separate the installation of the third-party dependencies from copying our application files:
+
+
+        FROM node:14.16.0-alpine:3
+        RUN addgroup app && adduser -S -G app app
+        WORKDIR /app
+        COPY package*.json . 
+        RUN chown -R app:app /app
+        RUN chmod -R 755 /app
+        USER app
+        RUN npm install 
+        COPY . .
+        ENV API_URL=http://api.myapp.com/
+        EXPOSE 3000
+        CMD ['npm', 'start'] 
+
+with this new setup if we have not changed any of the application dependencies Docker is going to reuse this layer (COPY package*.json .) from its cache because package*.json is not modified. Similarly, Docker is not going to reinstall all npm dependencies because this instruction is  not changed. If we changed it to npm update then yes Docker had to rebuild this layer. The we have **COPY . .** and of course this layer should always be rebuilt and that is totally fine. 
 
 <a name="10"></a>
 ## 10. Reference
