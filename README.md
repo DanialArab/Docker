@@ -1082,7 +1082,44 @@ With this new setup our build was super fast. Here is a takeaway: **to optimize 
  <a name="35"></a>
 ### Removing Images
 
-HERE
+when we run
+
+        docker images
+
+we found out that we have a bunch of images that have no name and no tag. These are dangling images meaning loose images: these are layers that have no relationship with a tagged image. As we are changing Dockerfile and rebuilding our image Docker was creating these layers and at some point, these layers lost their relationship with our react-app image, as we work with Docker we see all these dangling images popping up all the time. To get rid of the m we have to use prune command:
+
+        docker image prune 
+
+but we may have a stopped container running on the older react-apt image, which needs to be removed first:
+
+        docker ps -a
+
+so we want to get rid of these stopped containers:
+
+        docker container prune
+
+now I don't have any stopped containers then:
+
+        docker image prune 
+
+will delete all of my dangling images.
+
+        docker images
+
+returns me back all the proper images. 
+
+Now let's say I want to delete a proper image (not the dangling one):
+
+        docker image
+
+provides me with all the sub-commands available.
+
+        docker image rm image_name # or image_id, to remove multiple images we can separate their names or ids by a space 
+
+side note: all image management operations start with **docker image**. 
+
+
+
  
 <a name="10"></a>
 ## 10. Reference
