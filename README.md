@@ -47,6 +47,8 @@ This repo documents my understanding of Docker. The structure of my notes from t
     16. [Saving and loading Images](#38)
 
  4. [Working with Containers](#39)
+    1. [Introduction](#40)
+    2. 
  
 10. [Reference](#20)
 
@@ -1370,7 +1372,22 @@ so here the loaded image has the same image ID that we had earlier.
 <a name="39"></a>
 ## 4. Working with Containers
 
-HERE
+<a name="40"></a>
+## Introduction
+
+Topics to be discussed:
+
++ starting and stopping containers
++ publishing ports
++ viewing container logs
++ executing commands in running containers
++ removing containers
++ persisting data using volumes
++ sharing source code with containers so we don't have to rebuild our image every time we make a change in our code
+
+  
+
+
 
 <a name="10"></a>
 ## 10. Reference
