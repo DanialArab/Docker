@@ -1164,7 +1164,7 @@ takeaway: the latest tag does not necessarily point to the latest image we have 
 
 To share our images with others we can push them to the **hub.docker.come**. In there, we can create a repository, similar to the GitHub repository. We can have a repository and in this repository, we can have multiple images with different tags. When creating a repository I chose the name "react-app" for my repository. doing so the name of our repo would be our username/image_name in my case: danialarab/react-app. To push our image to this repo we have to give it this tag i.e., danialarab/react-app. 
 
-a side note: optionally we can connect our account to the GitHub account and so every time we do a push to GitHub DockerHUb automatically pulls the latest code and builds a new image. 
+a side note: optionally we can connect our account to the GitHub account and so every time we do a push to GitHub DockerHub automatically pulls the latest code and builds a new image. 
  
 back to the terminal:
 
@@ -1205,7 +1205,7 @@ After providing username and password to successfully login,
 
         docker push danialarab/react-app:2 
 
-now Docker is pushing each of the layers on our image. The first time takes a little while because the layer that includes all the npm dependencies is fairly large, once we pushed this image our future push would be faster assuming we don't change our application dependencies though. Now If I go back to my docker hub profile and refresh I see the pushed image there. 
+now Docker is pushing each of the layers on my image. The first time takes a little while because the layer that includes all the npm dependencies is fairly large, once we pushed this image our future push would be faster assuming we don't change our application dependencies though. Now If I go back to my docker hub profile and refresh I see the pushed image there. 
 
 Let's make a small change in the project like adding a ! in the readme file, then rebuild the image:
 
@@ -1250,10 +1250,124 @@ so
 
         docker push danialarab/react-app:3 
  
-so this time because some of these layers already exist our push is super fast. now back to my repo on docker hub I do have two tags! Now that our image is on docker hub we can pull it on any machine that runs docker just like pulling any other image on the docker hub.
+so this time because some of these layers already exist my push is super fast. now back to my repo on docker hub I do have two tags! Now that my image is on docker hub I can pull it on any machine that runs docker just like pulling any other image on the docker hub.
 
 <a name="38"></a>
 ### Saving and loading Images
+
+What if I want to share my image with a colleague without going it through the docker hub? I can save it as a compressed file and then load it on another machine.
+
+        docker image save --help
+
+its help:
+
+        docker image save --help
+        
+        Usage:  docker save [OPTIONS] IMAGE [IMAGE...]
+        
+        Save one or more images to a tar archive (streamed to STDOUT by default)
+        
+        Options:
+          -o, --output string   Write to a file, instead of STDOUT
+
+so
+
+        docker image save -o react-app.tar react-app:3 # saves my image react-app:3 to a compressed file named react-app.tar in the durrent directory
+
+after extracting the content of the compressed file we have several folders each of which represents a layer of our image, each folder/layer contains three files: a layer.tar, json, and VERSION file. In each filder, the file layer.tar contains all the files in the layer for example the layer for our app, for Linux, for node, and so on.
+
+We also have load command:
+
+        docker image load --help
+
+its help:
+
+        Usage:  docker image load [OPTIONS]
+        
+        Load an image from a tar archive or STDIN
+        
+        Options:
+          -i, --input string   Read from tar archive file, instead of STDIN
+          -q, --quiet          Suppress the load output
+
+to demonstrate this let's remove the image with a tag 3 from my machine then load it:
+
+        docker images
+
+gives me:
+
+        REPOSITORY             TAG                  IMAGE ID       CREATED          SIZE
+        danialarab/react-app   3                    b2ec5490256a   36 minutes ago   301MB
+        react-app              3                    b2ec5490256a   36 minutes ago   301MB
+        danialarab/react-app   2                    bf832e81e05d   2 days ago       301MB
+        react-app              2                    bf832e81e05d   2 days ago       301MB
+        react-app              latest               bf832e81e05d   2 days ago       301MB
+        alpine                 latest               5e2b554c1c45   5 weeks ago      7.33MB
+        ubuntu                 latest               3b418d7b466a   7 weeks ago      77.8MB
+        node                   14.16.0-alpine3.13   50bfd284aa0d   2 years ago      117MB
+
+
+so
+
+        docker image rm react-app:3 
+
+then
+
+        docker images
+
+gives me:
+
+        REPOSITORY             TAG                  IMAGE ID       CREATED          SIZE
+        danialarab/react-app   3                    b2ec5490256a   37 minutes ago   301MB
+        react-app              2                    bf832e81e05d   2 days ago       301MB
+        react-app              latest               bf832e81e05d   2 days ago       301MB
+        danialarab/react-app   2                    bf832e81e05d   2 days ago       301MB
+        alpine                 latest               5e2b554c1c45   5 weeks ago      7.33MB
+        ubuntu                 latest               3b418d7b466a   7 weeks ago      77.8MB
+        node                   14.16.0-alpine3.13   50bfd284aa0d   2 years ago      117MB
+
+we still have this image with another tag so, let's also remove the danialarab/react-app image whichj also points to the image b2ec5490256a:
+
+        docker image rm danialarab/react-app:3
+
+        or using image ID which is easier
+
+        docker image rm b2
+
+then
+
+        docker images
+
+so:
+       
+        REPOSITORY             TAG                  IMAGE ID       CREATED       SIZE
+        danialarab/react-app   2                    bf832e81e05d   2 days ago    301MB
+        react-app              2                    bf832e81e05d   2 days ago    301MB
+        react-app              latest               bf832e81e05d   2 days ago    301MB
+        alpine                 latest               5e2b554c1c45   5 weeks ago   7.33MB
+        ubuntu                 latest               3b418d7b466a   7 weeks ago   77.8MB
+        node                   14.16.0-alpine3.13   50bfd284aa0d   2 years ago   117MB
+
+so that image is gone from my machine let's load it:
+
+        docker image load -i react-app.tar 
+
+now
+
+        docker images
+
+so
+
+        REPOSITORY             TAG                  IMAGE ID       CREATED          SIZE
+        react-app              3                    b2ec5490256a   45 minutes ago   301MB
+        danialarab/react-app   2                    bf832e81e05d   2 days ago       301MB
+        react-app              2                    bf832e81e05d   2 days ago       301MB
+        react-app              latest               bf832e81e05d   2 days ago       301MB
+        alpine                 latest               5e2b554c1c45   5 weeks ago      7.33MB
+        ubuntu                 latest               3b418d7b466a   7 weeks ago      77.8MB
+        node                   14.16.0-alpine3.13   50bfd284aa0d   2 years ago      117MB
+
+so here the loaded image has the same image ID that we had earlier.
 
 
 <a name="10"></a>
