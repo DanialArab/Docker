@@ -1385,7 +1385,10 @@ Topics to be discussed:
 + persisting data using volumes
 + sharing source code with containers so we don't have to rebuild our image every time we make a change in our code
 
-  
+ <a name="41"></a>
+## Starting containers
+
+
 
 
 
