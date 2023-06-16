@@ -48,7 +48,8 @@ This repo documents my understanding of Docker. The structure of my notes from t
 
  4. [Working with Containers](#39)
     1. [Introduction](#40)
-    2. 
+    2. [Starting containers](#41)
+    3. 
  
 10. [Reference](#20)
 
