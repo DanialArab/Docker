@@ -1161,9 +1161,25 @@ takeaway: the latest tag does not necessarily point to the latest image we have 
 <a name="37"></a>
 ### Sharing Images
 
-To share our images with others by pushing our images to the hub.docker.come. 
+To share our images with others we can push them to the **hub.docker.come**. In there, we can create a repository, similar to the GitHub repository. We can have a repository and in this repository, we can have multiple images with different tags. When creating a repository I chose the name "react-app" for my repository. doing so the name of our repo would be our username/image_name in my case: danialarab/react-app. To push our image to this repo we have to give it this tag i.e., danialarab/react-app. 
+
+a side note: optionally we can connect our account to the GitHub account and so every time we do a push to GitHub DockerHUb automatically pulls the latest code and builds a new image. 
  
- 
+back to the terminal:
+
+        docker image ls
+
+gives me back:
+
+        REPOSITORY   TAG                  IMAGE ID       CREATED       SIZE
+        react-app    1                    bf832e81e05d   2 days ago    301MB
+        react-app    2                    bf832e81e05d   2 days ago    301MB
+        react-app    latest               bf832e81e05d   2 days ago    301MB
+        alpine       latest               5e2b554c1c45   5 weeks ago   7.33MB
+        ubuntu       latest               3b418d7b466a   7 weeks ago   77.8MB
+        node         14.16.0-alpine3.13   50bfd284aa0d   2 years ago   117MB
+
+
 <a name="10"></a>
 ## 10. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
