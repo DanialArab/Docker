@@ -1158,7 +1158,8 @@ takeaway: the latest tag does not necessarily point to the latest image we have 
 <a name="37"></a>
 ### Sharing Images
 
- HERE
+To share our images with others by pushing our images to the hub.docker.come. 
+ 
  
 <a name="10"></a>
 ## 10. Reference
