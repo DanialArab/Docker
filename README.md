@@ -1261,9 +1261,7 @@ What if I want to share my image with a colleague without going it through the d
 
 its help:
 
-        docker image save --help
-        
-        Usage:  docker save [OPTIONS] IMAGE [IMAGE...]
+        Usage:  docker image save [OPTIONS] IMAGE [IMAGE...]
         
         Save one or more images to a tar archive (streamed to STDOUT by default)
         
