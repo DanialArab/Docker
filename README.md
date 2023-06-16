@@ -58,7 +58,23 @@ This repo documents my understanding of Docker. The structure of my notes from t
     9. [Persisting Data using Volumes](#48)
     10. [Copying Files between the Host and Containers](#49)
     11. [Sharing the Source Code with a Container](#50)
- 
+
+ 5. [Running Multi-container Applications](#51)
+    1. [Introduction](#52)
+    2. [Installing Docker Compose](#53)
+    3. [Cleaning Up our Workspace](#54)
+    4. [The Sample Web Application](#55)
+    5. [JSON and YAML Formats](#56)
+    6. [Creating a Compose File](#57)
+    7. [Building Images](#58)
+    8. [Starting and Stopping the Application](#59)
+    9. [Docker Networking](#60)
+    10. [Viewing Logs](#61)
+    11. [Publishing Changes](#62)
+    12. [Migrating the Database](#63)
+    13. [Running Tests](#64)
+   
+
 10. [Reference](#20)
 
 <a name="1"></a>
@@ -1426,7 +1442,29 @@ Topics to be discussed:
 <a name="50"></a>
 ### Sharing the Source Code with a Container
 
+<a name="51"></a>
+## 6. Running Multi-container Applications](#51)
 
+
+<a name="40"></a>
+### Introduction
+
+
+Introduction](#52)
+Installing Docker Compose](#53)
+Cleaning Up our Workspace](#54)
+The Sample Web Application](#55)
+JSON and YAML Formats](#56)
+Creating a Compose File](#57)
+Building Images](#58)
+Starting and Stopping the Application](#59)
+Docker Networking](#60)
+Viewing Logs](#61)
+Publishing Changes](#62)
+Migrating the Database](#63)
+Running Tests](#64)
+
+    
 
 <a name="10"></a>
 ## 10. Reference
