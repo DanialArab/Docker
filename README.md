@@ -1120,6 +1120,9 @@ which, provides me with all the sub-commands available. A side note: all image m
 
         docker image rm image_name # or image_id, to remove multiple images we can separate their names or ids by a space 
 
+a side note: docker rmi vs. docker image rm 
+
+Both docker rmi and docker image rm commands are used to remove Docker images. 
 
 <a name="36"></a>
 ### Tagging Images
