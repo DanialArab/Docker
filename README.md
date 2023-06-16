@@ -44,6 +44,7 @@ This repo documents my understanding of Docker. The structure of my notes from t
     13. [Removing Images](#35)
     14. [Tagging Images](#36)
     15. [Sharing Images](#37)
+    16. [Saving and loading Images](#38)
 
  
  
@@ -1172,12 +1173,87 @@ back to the terminal:
 gives me back:
 
         REPOSITORY   TAG                  IMAGE ID       CREATED       SIZE
-        react-app    1                    bf832e81e05d   2 days ago    301MB
         react-app    2                    bf832e81e05d   2 days ago    301MB
         react-app    latest               bf832e81e05d   2 days ago    301MB
         alpine       latest               5e2b554c1c45   5 weeks ago   7.33MB
         ubuntu       latest               3b418d7b466a   7 weeks ago   77.8MB
         node         14.16.0-alpine3.13   50bfd284aa0d   2 years ago   117MB
+
+let's say I want to publish the latest version of image with ID bf832e81e05d, so I need to first:
+
+        docker image tag bf danialarab/react-app:2
+
+then
+
+        docker images
+
+gives me back:
+
+        REPOSITORY             TAG                  IMAGE ID       CREATED       SIZE
+        danialarab/react-app   2                    bf832e81e05d   2 days ago    301MB
+        react-app              2                    bf832e81e05d   2 days ago    301MB
+        react-app              latest               bf832e81e05d   2 days ago    301MB
+        alpine                 latest               5e2b554c1c45   5 weeks ago   7.33MB
+        ubuntu                 latest               3b418d7b466a   7 weeks ago   77.8MB
+        node                   14.16.0-alpine3.13   50bfd284aa0d   2 years ago   117MB
+
+now the image with ID bf832e81e05d has three tags. All these tags point to the same image on my machine. Now we are ready to push this image to DockerHub. First, we have to login so in terminal:
+
+        docker login
+
+After providing username and password to successfully login,
+
+        docker push danialarab/react-app:2 
+
+now Docker is pushing each of the layers on our image. The first time takes a little while because the layer that includes all the npm dependencies is fairly large, once we pushed this image our future push would be faster assuming we don't change our application dependencies though. Now If I go back to my docker hub profile and refresh I see the pushed image there. 
+
+Let's make a small change in the project like adding a ! in the readme file, then rebuild the image:
+
+        docker build -t react-app:3 .
+
+then 
+
+        docker images
+
+gives me:
+
+        REPOSITORY             TAG                  IMAGE ID       CREATED              SIZE
+        react-app              3                    b2ec5490256a   About a minute ago   301MB
+        danialarab/react-app   2                    bf832e81e05d   2 days ago           301MB
+        react-app              2                    bf832e81e05d   2 days ago           301MB
+        react-app              latest               bf832e81e05d   2 days ago           301MB
+        alpine                 latest               5e2b554c1c45   5 weeks ago          7.33MB
+        ubuntu                 latest               3b418d7b466a   7 weeks ago          77.8MB
+        node                   14.16.0-alpine3.13   50bfd284aa0d   2 years ago          117MB
+
+then again to be able to push it to docker hub i need to give my image an appropriate tag that starts with my username: danialarab/react-app:
+
+        docker image tag react-app:3 danialarab/react-app:3
+
+now
+
+        docker images
+
+gives me back:
+
+        REPOSITORY             TAG                  IMAGE ID       CREATED         SIZE
+        react-app              3                    b2ec5490256a   4 minutes ago   301MB
+        danialarab/react-app   3                    b2ec5490256a   4 minutes ago   301MB
+        danialarab/react-app   2                    bf832e81e05d   2 days ago      301MB
+        react-app              2                    bf832e81e05d   2 days ago      301MB
+        react-app              latest               bf832e81e05d   2 days ago      301MB
+        alpine                 latest               5e2b554c1c45   5 weeks ago     7.33MB
+        ubuntu                 latest               3b418d7b466a   7 weeks ago     77.8MB
+        node                   14.16.0-alpine3.13   50bfd284aa0d   2 years ago     117MB
+
+so
+
+        docker push danialarab/react-app:3 
+ 
+so this time because some of these layers already exist our push is super fast. now back to my repo on docker hub I do have two tags! Now that our image is on docker hub we can pull it on any machine that runs docker just like pulling any other image on the docker hub.
+
+<a name="38"></a>
+### Saving and loading Images
 
 
 <a name="10"></a>
