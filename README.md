@@ -1272,7 +1272,7 @@ so
 
         docker image save -o react-app.tar react-app:3 # saves my image react-app:3 to a compressed file named react-app.tar in the durrent directory
 
-after extracting the content of the compressed file we have several folders each of which represents a layer of our image, each folder/layer contains three files: a layer.tar, json, and VERSION file. In each filder, the file layer.tar contains all the files in the layer for example the layer for our app, for Linux, for node, and so on.
+after extracting the content of the compressed file we have several folders each of which represents a layer of our image, each folder/layer contains three files: a layer.tar, json, and VERSION file. In each folder, the file layer.tar contains all the files of that layer for example the layer for our app, for Linux, for node, and so on.
 
 We also have load command:
 
@@ -1324,11 +1324,11 @@ gives me:
         ubuntu                 latest               3b418d7b466a   7 weeks ago      77.8MB
         node                   14.16.0-alpine3.13   50bfd284aa0d   2 years ago      117MB
 
-we still have this image with another tag so, let's also remove the danialarab/react-app image whichj also points to the image b2ec5490256a:
+we still have this image in danialarab/react-app, let's also remove it which also points to the image with ID b2ec5490256a:
 
         docker image rm danialarab/react-app:3
 
-        or using image ID which is easier
+or using the image ID which is easier
 
         docker image rm b2
 
