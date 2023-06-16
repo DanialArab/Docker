@@ -49,7 +49,15 @@ This repo documents my understanding of Docker. The structure of my notes from t
  4. [Working with Containers](#39)
     1. [Introduction](#40)
     2. [Starting containers](#41)
-    3. 
+    3. [Viewing the Logs](#42)
+    4. [Publishing Ports](#43)
+    5. [Executing Commands in Running Containers](#44)
+    6. [Stopping and Starting Containers](#45)
+    7. [Removing Containers](#46)
+    8. [Containers File System](#47)
+    9. [Persisting Data using Volumes](#48)
+    10. [Copying Files between the Host and Containers](#49)
+    11. [Sharing the Source Code with a Container](#50)
  
 10. [Reference](#20)
 
@@ -1374,7 +1382,7 @@ so here the loaded image has the same image ID that we had earlier.
 ## 4. Working with Containers
 
 <a name="40"></a>
-## Introduction
+### Introduction
 
 Topics to be discussed:
 
@@ -1386,10 +1394,37 @@ Topics to be discussed:
 + persisting data using volumes
 + sharing source code with containers so we don't have to rebuild our image every time we make a change in our code
 
- <a name="41"></a>
-## Starting containers
+<a name="41"></a>
+### Starting containers
 
 
+<a name="42"></a>
+### Viewing the Logs
+
+
+<a name="43"></a>
+### Publishing Ports
+
+<a name="44"></a>
+### Executing Commands in Running Containers
+
+<a name="45"></a>
+### Stopping and Starting Containers
+
+<a name="46"></a>
+### Removing Containers
+
+<a name="47"></a>
+### Containers File System
+
+<a name="48"></a>
+### Persisting Data using Volumes
+
+<a name="49"></a>
+### Copying Files between the Host and Containers
+
+<a name="50"></a>
+### Sharing the Source Code with a Container
 
 
 
