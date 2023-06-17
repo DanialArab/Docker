@@ -1425,6 +1425,7 @@ Topics to be discussed:
 <a name="41"></a>
 ### Starting containers
 
+HERE
 
 <a name="42"></a>
 ### Viewing the Logs
@@ -1505,9 +1506,52 @@ Topics to be discussed:
 <a name="64"></a>
 ### Running Tests
 
+
+
+
+
+
+<a name="65"></a>
+## 6. Deploying Applications
+
+<a name="66"></a>
+### Introduction
+
+<a name="67"></a>
+### Deployment Options
+
+<a name="68"></a>
+### Getting a Virtual Private Server
+
+<a name="69"></a>
+### Installing Docker Machine
+
+<a name="70"></a>
+### Provisioning a Host
+
+<a name="71"></a>
+### Connecting to the Host
+
+<a name="72"></a>
+### Defining the Production Configuration
+
+<a name="73"></a>
+### Reducing the Image Size
+
+<a name="74"></a>
+### Deploying the Application
+
+
+<a name="75"></a>
+### Troubleshooting Deployment Issues
+
+<a name="76"></a>
+### Publishing Changes
+
+
     
 
-<a name="10"></a>
-## 10. Reference
+<a name="77"></a>
+## 7. Reference
 Course: "The Ultimate Docker", instructor: Mosh Hamedani
 
