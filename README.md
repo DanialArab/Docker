@@ -1442,27 +1442,56 @@ Topics to be discussed:
 <a name="50"></a>
 ### Sharing the Source Code with a Container
 
+
+
+
+
+
+
 <a name="51"></a>
-## 6. Running Multi-container Applications](#51)
+## 5. Running Multi-container Applications
 
-
-<a name="40"></a>
+<a name="52"></a>
 ### Introduction
 
 
-Introduction](#52)
-Installing Docker Compose](#53)
-Cleaning Up our Workspace](#54)
-The Sample Web Application](#55)
-JSON and YAML Formats](#56)
-Creating a Compose File](#57)
-Building Images](#58)
-Starting and Stopping the Application](#59)
-Docker Networking](#60)
-Viewing Logs](#61)
-Publishing Changes](#62)
-Migrating the Database](#63)
-Running Tests](#64)
+<a name="53"></a>
+### Installing Docker Compose
+
+<a name="54"></a>
+### Cleaning Up our Workspace
+
+<a name="55"></a>
+### The Sample Web Application
+
+<a name="56"></a>
+### JSON and YAML Formats](#56)
+
+<a name="57"></a>
+### Creating a Compose File
+
+<a name="58"></a>
+### Building Images
+
+<a name="59"></a>
+### Starting and Stopping the Application
+
+<a name="60"></a>
+### Docker Networking
+
+
+<a name="61"></a>
+### Viewing Logs
+
+<a name="62"></a>
+### Publishing Changes
+
+
+<a name="63"></a>
+### Migrating the Database
+
+<a name="64"></a>
+### Running Tests
 
     
 
