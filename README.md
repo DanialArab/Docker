@@ -1553,5 +1553,5 @@ HERE
 
 <a name="77"></a>
 ## 7. Reference
-Course: "The Ultimate Docker", instructor: Mosh Hamedani
+Course: "The Ultimate Docker", instructor: Mosh Hamedani (https://codewithmosh.com/p/the-ultimate-docker-course)
 
