@@ -74,8 +74,20 @@ This repo documents my understanding of Docker. The structure of my notes from t
     12. [Migrating the Database](#63)
     13. [Running Tests](#64)
    
-
-10. [Reference](#20)
+6. [Deploying Applications](#65)
+    1. [Introduction](#66)
+    2. [ Deployment Options](#67)
+    3. [Getting a Virtual Private Server](#68)
+    4. [Installing Docker Machine](#69)
+    5. [Provisioning a Host](#70)
+    6. [Connecting to the Host](#71)
+    7. [Defining the Production Configuration](#72)
+    8. [Reducing the Image Size](#73)
+    9. [Deploying the Application](#74)
+    10. [Troubleshooting Deployment Issues](#75)
+    11. [Publishing Changes](#76)
+    
+7. [Reference](#77)
 
 <a name="1"></a>
 ## 1. Introduction
