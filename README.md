@@ -1425,7 +1425,74 @@ Topics to be discussed:
 <a name="41"></a>
 ### Starting containers
 
+        docker images
 
+        REPOSITORY   TAG                  IMAGE ID       CREATED       SIZE
+        react-app    latest               bf832e81e05d   4 days ago    301MB
+        alpine       latest               5e2b554c1c45   5 weeks ago   7.33MB
+        ubuntu       latest               3b418d7b466a   7 weeks ago   77.8MB
+        node         14.16.0-alpine3.13   50bfd284aa0d   2 years ago   117MB
+
+        docker ps 
+
+        CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+so there is no running container, let's run a new container:
+
+        docker run react-app
+
+which gives me back:
+
+        > react-app@0.1.0 start /app
+        > react-scripts start
+        
+        ℹ ｢wds｣: Project is running at http://172.17.0.2/
+        ℹ ｢wds｣: webpack output is served from 
+        ℹ ｢wds｣: Content not from webpack is served from /app/public
+        ℹ ｢wds｣: 404s will fallback to /
+        Starting the development server...
+        
+        Browserslist: caniuse-lite is outdated. Please run:
+        npx browserslist@latest --update-db
+        
+        Why you should do it regularly:
+        https://github.com/browserslist/browserslist#browsers-data-updating
+        Compiled successfully!
+        
+        You can now view react-app in the browser.
+        
+          Local:            http://localhost:3000
+          On Your Network:  http://172.17.0.2:3000
+
+        Note that the development build is not optimized.
+        To create a production build, use yarn build.
+
+but here there is a problem: I cannot type any additionbal command on the terminal window. If I press ctrl + C to get out of this my container stopes! So to deal with this we can run the container in a dettached mode menaing in the background:
+
+        docker run -d react-app
+
+now my container is run in the background and my terminal window is free and I can do whatever I want. Of course, it takes a bit for the container to start because that is the time for the web server to start. 
+
+when I do 
+
+        docker ps
+
+I get back:
+
+        CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS      NAMES
+        3dcfa5499ca0   react-app   "docker-entrypoint.s…"   5 seconds ago   Up 4 seconds   3000/tcp   reverent_leakey
+
+the last column which is NAMES is the names that docker automatically associates each container with a random name and so we can reference a container using its ID or name. I also can give my container a name when starting it:
+
+        docker run -d --name blue-sky react-app
+
+now let's look at the running containers:
+
+        docker ps
+
+        CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS      NAMES
+        c8432f36a87e   react-app   "docker-entrypoint.s…"   5 seconds ago   Up 4 seconds   3000/tcp   blue-sky
+        3dcfa5499ca0   react-app   "docker-entrypoint.s…"   5 minutes ago   Up 5 minutes   3000/tcp   reverent_leakey
 
 <a name="42"></a>
 ### Viewing the Logs
