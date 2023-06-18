@@ -1467,7 +1467,7 @@ which gives me back:
         Note that the development build is not optimized.
         To create a production build, use yarn build.
 
-but here there is a problem: I cannot type any additionbal command on the terminal window. If I press ctrl + C to get out of this my container stopes! So to deal with this we can run the container in a dettached mode menaing in the background:
+but here there is a problem: I cannot type any additionbal command on the terminal window. If I press ctrl + C to get out of this my container stops! So to deal with this we can run the container in a dettached mode menaing in the background:
 
         docker run -d react-app
 
@@ -1477,7 +1477,7 @@ when I do
 
         docker ps
 
-I get back:
+I got back:
 
         CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS      NAMES
         3dcfa5499ca0   react-app   "docker-entrypoint.s…"   5 seconds ago   Up 4 seconds   3000/tcp   reverent_leakey
@@ -1497,9 +1497,120 @@ now let's look at the running containers:
 <a name="42"></a>
 ### Viewing the Logs
 
+now that I have the two containers running in the background as:
+
+        CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS      NAMES
+        c8432f36a87e   react-app   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   3000/tcp   blue-sky
+        3dcfa5499ca0   react-app   "docker-entrypoint.s…"   9 minutes ago   Up 9 minutes   3000/tcp   reverent_leakey
+
+here there is a problem: I do not know what is going on inside these containers! what if something goes wrong? what is the server generates an error? that is where I need to ujse the **logs** command:
+
+let's take a look at the logs for the congtainer with ID c8432f36a87e:
+
+        docker logs container_id
+        docker logs c8
+
+gives me back:
+
+        > react-app@0.1.0 start /app
+        > react-scripts start
+        
+        ℹ ｢wds｣: Project is running at http://172.17.0.3/
+        ℹ ｢wds｣: webpack output is served from 
+        ℹ ｢wds｣: Content not from webpack is served from /app/public
+        ℹ ｢wds｣: 404s will fallback to /
+        Starting the development server...
+        
+        Browserslist: caniuse-lite is outdated. Please run:
+        npx browserslist@latest --update-db
+        
+        Why you should do it regularly:
+        https://github.com/browserslist/browserslist#browsers-data-updating
+        Compiled successfully!
+        
+        You can now view react-app in the browser.
+        
+          Local:            http://localhost:3000
+          On Your Network:  http://172.17.0.3:3000
+        
+        Note that the development build is not optimized.
+        To create a production build, use yarn build.
+
+which is the output of my web server, which is exactly the same output as what we saw when we started the container in the foreground. this logs command has additional oprions and like any other docker commands always use --help to learn about various options:
+
+        docker logs --help 
+
+which gives me back:
+
+        Usage:  docker logs [OPTIONS] CONTAINER
+        
+        Fetch the logs of a container
+        
+        Options:
+              --details        Show extra details provided to logs
+          -f, --follow         Follow log output
+              --since string   Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative
+                               (e.g. 42m for 42 minutes)
+          -n, --tail string    Number of lines to show from the end of the logs (default "all")
+          -t, --timestamps     Show timestamps
+              --until string   Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or
+                               relative (e.g. 42m for 42 minutes)
+
+the option -f or --follow is useful if your container is continuously producing output. and instead of running docker logs container_id multiple times i can do docker logs -f container_id then whatever it is written to the log you can see it in real time on the terminal of course I have to press ctrl + C to get out of that. 
+
+another option is -n or --tail with which we can specify the number of lines to show. like
+
+        docker logs -n 5 c8
+
+so
+
+          On Your Network:  http://172.17.0.3:3000
+        
+        Note that the development build is not optimized.
+        To create a production build, use yarn build.
+
+this is useful if we have a really long log. 
+
+we can use -t to see the timestamps:
+
+        docker logs -t c8
+
+which gives me back
+
+        2023-06-18T22:25:17.507519341Z 
+        2023-06-18T22:25:17.507551456Z > react-app@0.1.0 start /app
+        2023-06-18T22:25:17.507554516Z > react-scripts start
+        2023-06-18T22:25:17.507556272Z 
+        2023-06-18T22:25:20.328568863Z ℹ ｢wds｣: Project is running at http://172.17.0.3/
+        2023-06-18T22:25:20.328594128Z ℹ ｢wds｣: webpack output is served from 
+        2023-06-18T22:25:20.328597077Z ℹ ｢wds｣: Content not from webpack is served from /app/public
+        2023-06-18T22:25:20.328598853Z ℹ ｢wds｣: 404s will fallback to /
+        2023-06-18T22:25:20.328965984Z Starting the development server...
+        2023-06-18T22:25:20.328973663Z 
+        2023-06-18T22:25:20.546970785Z Browserslist: caniuse-lite is outdated. Please run:
+        2023-06-18T22:25:20.546987271Z npx browserslist@latest --update-db
+        2023-06-18T22:25:20.546989341Z 
+        2023-06-18T22:25:20.546990832Z Why you should do it regularly:
+        2023-06-18T22:25:20.546992399Z https://github.com/browserslist/browserslist#browsers-data-updating
+        2023-06-18T22:25:38.350132519Z Compiled successfully!
+        2023-06-18T22:25:38.350159374Z 
+        2023-06-18T22:25:38.350162950Z You can now view react-app in the browser.
+        2023-06-18T22:25:38.350165726Z 
+        2023-06-18T22:25:38.350168086Z   Local:            http://localhost:3000
+        2023-06-18T22:25:38.350170613Z   On Your Network:  http://172.17.0.3:3000
+        2023-06-18T22:25:38.351164308Z 
+        2023-06-18T22:25:38.351179220Z Note that the development build is not optimized.
+        2023-06-18T22:25:38.351182796Z To create a production build, use yarn build.
+        2023-06-18T22:25:38.351185506Z 
+
+where we see the timestamps in front of each message.
+
+so if you encounter any issues when running an applciation inside docker, the first thing you need to look at is **LOGS**.
 
 <a name="43"></a>
 ### Publishing Ports
+
+HERE
 
 <a name="44"></a>
 ### Executing Commands in Running Containers
