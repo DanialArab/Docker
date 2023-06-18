@@ -1610,7 +1610,7 @@ so if you encounter any issues when running an applciation inside docker, the fi
 <a name="43"></a>
 ### Publishing Ports
 
-currently, I have two containers running react-app application, if I go to localhost port 3000, localhost:3000, I cannot access the applicatiuon. This is because port 3000 is published ont he container not on the host so on the same machine we have multiple containers each of which are listening to port 3000 but the host itself is NOT listening to port 3000. So this port is currently closed and there is no way to send traffic into local host at this prot. This is where we need to publish a port. If we take a look at the running containers:
+Currently, I have two containers running react-app application, if I go to localhost port 3000, localhost:3000, I cannot access the applicatiuon. This is because port 3000 is published on the container not on the host so on the same machine we have multiple containers each of which are listening to port 3000 but the host itself is NOT listening to port 3000. So this port is currently closed and there is no way to send traffic into local host at this prot. This is where we need to publish a port. If we take a look at the running containers:
 
         docker ps
 
