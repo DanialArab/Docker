@@ -1503,7 +1503,7 @@ now that I have the two containers running in the background as:
         c8432f36a87e   react-app   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   3000/tcp   blue-sky
         3dcfa5499ca0   react-app   "docker-entrypoint.s…"   9 minutes ago   Up 9 minutes   3000/tcp   reverent_leakey
 
-here there is a problem: I do not know what is going on inside these containers! what if something goes wrong? what is the server generates an error? that is where I need to ujse the **logs** command:
+here there is a problem: I do not know what is going on inside these containers! what if something goes wrong? what if the server generates an error? that is where I need to use the **logs** command:
 
 let's take a look at the logs for the congtainer with ID c8432f36a87e:
 
@@ -1610,7 +1610,40 @@ so if you encounter any issues when running an applciation inside docker, the fi
 <a name="43"></a>
 ### Publishing Ports
 
-HERE
+currently, I have two containers running react-app application, if I go to localhost port 3000, localhost:3000, I cannot access the applicatiuon. This is because port 3000 is published ont he container not on the host so on the same machine we have multiple containers each of which are listening to port 3000 but the host itself is NOT listening to port 3000. So this port is currently closed and there is no way to send traffic into local host at this prot. This is where we need to publish a port. If we take a look at the running containers:
+
+        docker ps
+
+I have
+
+        CONTAINER ID   IMAGE       COMMAND                  CREATED             STATUS             PORTS      NAMES
+        c8432f36a87e   react-app   "docker-entrypoint.s…"   55 minutes ago      Up 55 minutes      3000/tcp   blue-sky
+        3dcfa5499ca0   react-app   "docker-entrypoint.s…"   About an hour ago   Up About an hour   3000/tcp   reverent_leakey
+
+I have a column named PORTS where we can see the ports and their mapping, here both of my containers are listening to port 3000. Now let's start a new container and publish a port at the same time:
+
+        docker run -d -p 80:3000 --name c1 react-app # here I publish a port on the host, port 80, to port 3000 of the container 
+
+now if I go to loclhost port 80, localhost:80, I can see my react app running. Let's look at the running containers one more time:
+
+        docker ps
+
+so
+
+        CONTAINER ID   IMAGE       COMMAND                  CREATED              STATUS              PORTS                                   NAMES
+        4599ef42b129   react-app   "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:80->3000/tcp, :::80->3000/tcp   c1
+        c8432f36a87e   react-app   "docker-entrypoint.s…"   About an hour ago    Up About an hour    3000/tcp                                blue-sky
+        3dcfa5499ca0   react-app   "docker-entrypoint.s…"   About an hour ago    Up About an hour    3000/tcp                                reverent_leakey
+
+
+here for my c1 container I have the following port mapping
+
+        0.0.0.0:80->3000/tcp, :::80->3000/tcp
+
+here I can see that the port 80 of the host is mapped to port 3000 of the container. We don't have this notation for other containers. 
+
+
+
 
 <a name="44"></a>
 ### Executing Commands in Running Containers
