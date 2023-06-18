@@ -1425,7 +1425,7 @@ Topics to be discussed:
 <a name="41"></a>
 ### Starting containers
 
-HERE
+
 
 <a name="42"></a>
 ### Viewing the Logs
