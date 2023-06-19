@@ -1642,14 +1642,75 @@ here for my c1 container I have the following port mapping
 
 here I can see that the port 80 of the host is mapped to port 3000 of the container. We don't have this notation for other containers. 
 
-
-
-
 <a name="44"></a>
 ### Executing Commands in Running Containers
 
+I learned that when I start a container it executes the default command specified using CMD instruction in the docker file, whcih is:
+
+        FROM node:14.16.0-alpine3.13
+        RUN addgroup app && adduser -S -G app app
+        WORKDIR /app
+        COPY package*.json ./ 
+        RUN chown -R app:app /app
+        RUN chmod -R 755 /app
+        USER app  
+        RUN npm install 
+        COPY . .
+        ENV API_URL=http://api.myapp.com/ 
+        EXPOSE 3000
+        CMD ["npm", "start"] 
+
+but what if we want to execute a command in a running container later on? let's say we want to troubleshoot something and we want to look at the file system of that container? we can use **docker exec** to execute a command in a running container. 
+
+**Difference between docker exec and docker run:**
+
+with docker run we start a new container and run a command but with docker exec we execute a command in a running container, we do not start a new container. 
+
+we can do
+
+        docker exec c1 here_we_can_run_any_operating_ssytem_command
+
+let's do
+
+        docker exec c1 ls
+
+i got back:
+
+        Dockerfile
+        README.md
+        node_modules
+        package-lock.json
+        package.json
+        public
+        src
+        yarn.lock
+
+which is the content of my app directory and this is becasue in the Docker file I set the working directory to the app directory through **WORKDIR /app** instruction and so when I run ls I see the content of this directory. 
+
+using the same command we can open up a shell session in an interactive mode:
+
+        docker exec -it c1 sh
+
+which gives me back a shell session inside my c1 container:
+
+        /app $ 
+
+where I can do anything I want. **When I am done I can type exit and this does not impact the state of my container and my container is still running**. 
+
+        docker ps
+
+        CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                                   NAMES
+        4599ef42b129   react-app   "docker-entrypoint.s…"   30 minutes ago   Up 30 minutes   0.0.0.0:80->3000/tcp, :::80->3000/tcp   c1
+        c8432f36a87e   react-app   "docker-entrypoint.s…"   2 hours ago      Up 2 hours      3000/tcp                                blue-sky
+        3dcfa5499ca0   react-app   "docker-entrypoint.s…"   2 hours ago      Up 2 hours      3000/tcp                                reverent_leakey
+
+
+So using the **exec** command we can run any command in a runnign container. 
+
 <a name="45"></a>
 ### Stopping and Starting Containers
+
+HERE
 
 <a name="46"></a>
 ### Removing Containers
