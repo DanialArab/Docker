@@ -1983,7 +1983,7 @@ now i want to copy the log.txt file to my host:
 
         docker cp b9:/app/log.txt . # i used . to reference the current directory in the host which I cd Desktop 
 
-in the docker cp command we need to specify the source and the destination. In my case the source is the container, after the container id and after the colon I need to specift the full path to the file or directory.
+in the docker cp command we need to specify the source and the destination. In my case the source is the container, after the container id and after the colon I need to specify the full path to the file or directory.
 
 So this way we can copy the log.txt file in the application directory of my container with id b9 to the host. 
 
