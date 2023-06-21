@@ -1830,15 +1830,15 @@ which gives me back:
             }
         ]
 
-here we have a bunch of properties we can see when the volume was created, we can see the Driver which is local by default, which means that this is a directory on the host. We also have Drivers for creating volumes in the cloud (for a specific cloud platform I need to find the specific Driver for creating volume in that cloud platform). We have Mountpoint which is where that directory is created on the host 
+here we have a bunch of properties we can see when the volume was created, we can see the Driver which is local by default, which means that this is a directory on the host. We also have Driver for creating volumes in the cloud (for a specific cloud platform I need to find the specific Driver for creating volume in that cloud platform). We have Mountpoint which is where that directory is created on the host 
 
 let's see how we can start a container and use the volume we just created for persisting data:
 
         docker run -d -p 5000:3000 -v app-data:/app/data --name new_c react-app
         
-with **-v aapp-data:/app/data** we want to map the volume app-data to a directory in the file system of the container (so after the colon I type the absolute path in the file system of the container)
+with **-v app-data:/app/data** we want to map the volume app-data to a directory in the file system of the container (so after the colon I type the absolute path in the file system of the container)
 
-point: before running the above command we don't have to explicitly create the volume app-data, because docker automatically creates it. The same is true for the data directory, currently, we don't have the data directory in the app directory and so docker automatically creates it for us BUT there is a problem here this data directory will be owned by the root user and so because in our Dockerfile we set the user to the regular user and so after running t
+point: before running the above command we don't have to explicitly create the volume app-data, because docker can also automatically create it. The same is true for the data directory, currently, we don't have the data directory in the app directory and so docker automatically creates it for us BUT there is a problem here this data directory will be owned by the root user and so because in our Dockerfile we set the user to the regular user we cannot write in this directory:
 
         docker exec -it new_c sh
 
@@ -1869,7 +1869,7 @@ which gives me back:
         drwxr-xr-x    2 root     root          4096 Mar  9  2021 src
         -rw-r--r--    1 root     root        514422 Jun  9 17:19 yarn.lock
 
-as shown above the owner of the data directory is the root user and as shown above only the owner user has the write permission so the app user which is considered as others for the data directory does not have write permission. The reason we face this issue is because we let docker to automatically create this data directory for us. So, to prevent this from happening we have to modify our docker file as follows:
+as shown above, the owner of the data directory is the root user and as shown above only the owner user has the write permission so the app user which is considered as others for the data directory does not have the write permission. The reason we face this issue is that we let docker automatically create this data directory for us. So, to prevent this from happening we have to modify our docker file as follows:
 
         FROM node:14.16.0-alpine3.13
         RUN addgroup app && adduser -S -G app app
@@ -1889,10 +1889,60 @@ in the modified docker file, we want to create this data directory using the app
 
 now let's rebuild the image and start a new container with the new image:
 
+        docker build -t react-app . 
 
+now let's start a new container with this new image:
 
+        docker run -d -p 7000:3000 -v app-data:/app/data --name my_blue_sky react-app
+        
+But this time the data directory already exists in the file system of the container and the app user owns it:
 
+        docker exec -it my_blue_sky sh
 
+        ls -l
+        
+gives me back:
+
+        total 2044
+        -rw-rw-r--    1 root     root           278 Jun 21 20:42 Dockerfile
+        -rw-r--r--    1 root     root          3364 Jun 16 16:43 README.md
+        drwxr-xr-x    2 app      app           4096 Jun 21 20:42 data
+        drwxr-xr-x    1 app      app           4096 Jun 21 20:51 node_modules
+        -rw-rw-r--    1 root     root       1546851 Jun  9 17:19 package-lock.json
+        -rw-r--r--    1 root     root           813 Mar  5  2021 package.json
+        drwxr-xr-x    2 root     root          4096 Mar  9  2021 public
+        drwxr-xr-x    2 root     root          4096 Mar  9  2021 src
+        -rw-r--r--    1 root     root        514422 Jun  9 17:19 yarn.lock
+
+as shown the data directory is owned by the app user! so
+
+        cd data
+        echo data > data.txt
+
+perfect!
+
+Here is the beauty of volumes, if I delete this container this file data.txt will still exist because this directory is stored outside of this container it is actually a directory on the host. Let's prove it, first, let's remove this container:
+
+        docker rm -f my_blue_sky
+
+now let's start a new container with the same volume mapping:
+
+        docker run -d -p 2500:3000 -v app-data:/app/data --name new_cont react-app 
+
+this is a brand-new container, let's run a shell session inside it:
+
+        docker exec -it new_cont sh
+
+then
+
+        cd data
+        ls
+
+which gives me back:
+
+        data.txt
+
+so volumes are the right way to persist data in the dockerized applications because they have different life cycles from the containers: if we delete a container the associated volume is not deleted. Also, we can share a volume across multiple containers.       
 
 <a name="49"></a>
 ### Copying Files between the Host and Containers
