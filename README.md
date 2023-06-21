@@ -1610,7 +1610,7 @@ so if you encounter any issues when running an applciation inside docker, the fi
 <a name="43"></a>
 ### Publishing Ports
 
-Currently, I have two containers running react-app application, if I go to localhost port 3000, localhost:3000, I cannot access the applicatiuon. This is because port 3000 is published on the container not on the host so on the same machine we have multiple containers each of which are listening to port 3000 but the host itself is NOT listening to port 3000. So this port is currently closed and there is no way to send traffic into local host at this prot. This is where we need to publish a port. If we take a look at the running containers:
+Currently, I have two containers running react-app application, if I go to localhost port 3000, localhost:3000, I cannot access the application. This is because port 3000 is published on the container not on the host so on the same machine we have multiple containers each of which is listening to port 3000 but the host itself is NOT listening to port 3000. So this port is currently closed and there is no way to send traffic into local host at this port. This is where we need to publish a port. If we take a look at the running containers:
 
         docker ps
 
@@ -1624,7 +1624,7 @@ I have a column named PORTS where we can see the ports and their mapping, here b
 
         docker run -d -p 80:3000 --name c1 react-app # here I publish a port on the host, port 80, to port 3000 of the container 
 
-now if I go to loclhost port 80, localhost:80, I can see my react app running. Let's look at the running containers one more time:
+now if I go to localhost port 80, localhost:80, I can see my react app running. Let's look at the running containers one more time:
 
         docker ps
 
@@ -1636,16 +1636,16 @@ so
         3dcfa5499ca0   react-app   "docker-entrypoint.s…"   About an hour ago    Up About an hour    3000/tcp                                reverent_leakey
 
 
-here for my c1 container I have the following port mapping
+here for my c1 container, I have the following port mapping
 
         0.0.0.0:80->3000/tcp, :::80->3000/tcp
 
-here I can see that the port 80 of the host is mapped to port 3000 of the container. We don't have this notation for other containers. 
+here I can see that port 80 of the host is mapped to port 3000 of the container. We don't have this notation for other containers. 
 
 <a name="44"></a>
 ### Executing Commands in Running Containers
 
-I learned that when I start a container it executes the default command specified using CMD instruction in the docker file, whcih is:
+I learned that when I start a container it executes the default command specified using CMD instruction in the docker file, which is:
 
         FROM node:14.16.0-alpine3.13
         RUN addgroup app && adduser -S -G app app
