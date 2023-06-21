@@ -1751,7 +1751,7 @@ a cool trick to search for a specific container using piping:
 
 to delete all the stoped containers in one go: 
 
-        docker prune container 
+        docker container prune 
 
         
 <a name="47"></a>
