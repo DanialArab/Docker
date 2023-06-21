@@ -1786,7 +1786,7 @@ now let's see if the file1.txt file is in the app directory of the container blu
 
 which gives nothing back to me. 
 
-So each container has its own file system, that is invisible to other containers. That means if we delete a container its file system is also gone with it and we lose our data. So we should never store our data in a container's file system. Instead, we use volumes.
+**So each container has its own file system, that is invisible to other containers. That means if we delete a container its file system is also gone with it and we lose our data. So we should never store our data in a container's file system. Instead, we use volumes.**
 
 <a name="48"></a>
 ### Persisting Data using Volumes
