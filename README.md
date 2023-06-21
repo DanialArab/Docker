@@ -1791,6 +1791,109 @@ which gives nothing back to me.
 <a name="48"></a>
 ### Persisting Data using Volumes
 
+A volume is a storage outside of a container. It can be a directory on the host or somewhere in the cloud. 
+
+        docker volume --help
+
+        Usage:  docker volume COMMAND
+        
+        Manage volumes
+        
+        Commands:
+          create      Create a volume
+          inspect     Display detailed information on one or more volumes
+          ls          List volumes
+          prune       Remove all unused local volumes
+          rm          Remove one or more volumes
+
+        Run 'docker volume COMMAND --help' for more information on a command.
+
+let's create a new volume called app-data:
+
+        docker volume create app-data
+
+let's inspect it:
+
+        docker volume inspect app-data
+
+which gives me back:
+
+        [
+            {
+                "CreatedAt": "2023-06-21T10:41:25-07:00",
+                "Driver": "local",
+                "Labels": {},
+                "Mountpoint": "/var/lib/docker/volumes/app-data/_data",
+                "Name": "app-data",
+                "Options": {},
+                "Scope": "local"
+            }
+        ]
+
+here we have a bunch of properties we can see when the volume was created, we can see the Driver which is local by default, which means that this is a directory on the host. We also have Drivers for creating volumes in the cloud (for a specific cloud platform I need to find the specific Driver for creating volume in that cloud platform). We have Mountpoint which is where that directory is created on the host 
+
+let's see how we can start a container and use the volume we just created for persisting data:
+
+        docker run -d -p 5000:3000 -v app-data:/app/data --name new_c react-app
+        
+with **-v aapp-data:/app/data** we want to map the volume app-data to a directory in the file system of the container (so after the colon I type the absolute path in the file system of the container)
+
+point: before running the above command we don't have to explicitly create the volume app-data, because docker automatically creates it. The same is true for the data directory, currently, we don't have the data directory in the app directory and so docker automatically creates it for us BUT there is a problem here this data directory will be owned by the root user and so because in our Dockerfile we set the user to the regular user and so after running t
+
+        docker exec -it new_c sh
+
+then
+
+        cd data
+        echo data > data.txt 
+
+I got the error
+
+        sh: can't create data.txt: Permission denied
+
+let's see why:
+
+        cd ..
+        ls -l 
+
+which gives me back:
+
+        total 2044
+        -rw-rw-r--    1 root     root           262 Jun 14 05:36 Dockerfile
+        -rw-r--r--    1 root     root          3362 Jun 14 16:17 README.md
+        drwxr-xr-x    2 root     root          4096 Jun 21 17:41 data
+        drwxr-xr-x    1 app      app           4096 Jun 21 18:16 node_modules
+        -rw-rw-r--    1 root     root       1546851 Jun  9 17:19 package-lock.json
+        -rw-r--r--    1 root     root           813 Mar  5  2021 package.json
+        drwxr-xr-x    2 root     root          4096 Mar  9  2021 public
+        drwxr-xr-x    2 root     root          4096 Mar  9  2021 src
+        -rw-r--r--    1 root     root        514422 Jun  9 17:19 yarn.lock
+
+as shown above the owner of the data directory is the root user and as shown above only the owner user has the write permission so the app user which is considered as others for the data directory does not have write permission. The reason we face this issue is because we let docker to automatically create this data directory for us. So, to prevent this from happening we have to modify our docker file as follows:
+
+        FROM node:14.16.0-alpine3.13
+        RUN addgroup app && adduser -S -G app app
+        WORKDIR /app
+        COPY package*.json ./ 
+        RUN chown -R app:app /app
+        RUN chmod -R 755 /app
+        USER app  
+        RUN mkdir data 
+        RUN npm install 
+        COPY . .
+        ENV API_URL=http://api.myapp.com/ 
+        EXPOSE 3000
+        CMD ["npm", "start"] 
+
+in the modified docker file, we want to create this data directory using the app user so the data directory will be owned by the app user and automatically will have the write permission and will not face the issue above:
+
+now let's rebuild the image and start a new container with the new image:
+
+
+
+
+
+
 <a name="49"></a>
 ### Copying Files between the Host and Containers
 
