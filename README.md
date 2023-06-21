@@ -1710,10 +1710,24 @@ So using the **exec** command we can run any command in a runnign container.
 <a name="45"></a>
 ### Stopping and Starting Containers
 
-HERE
+As we discussed containers are like lightweight virtual machines, which can be stopped and restarted. To stop a running container:
+
+        docker stop name_of_container
+
+Now if I go to the localhost where my app was running and refresh it, my app is not available. Because the container that was serving the application is no longer running and it stopped and we need to bring it back up.
+
+to start a stopped container:
+
+        docker start name_of_container
+
+Difference between docker run and docker start:
+
+with docker start we start a stopped container but with docker run we start a new container. 
+
 
 <a name="46"></a>
 ### Removing Containers
+
 
 <a name="47"></a>
 ### Containers File System
