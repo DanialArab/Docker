@@ -1467,7 +1467,7 @@ which gives me back:
         Note that the development build is not optimized.
         To create a production build, use yarn build.
 
-but here there is a problem: I cannot type any additionbal command on the terminal window. If I press ctrl + C to get out of this my container stops! So to deal with this we can run the container in a dettached mode menaing in the background:
+but here there is a problem: I cannot type any additional command on the terminal window. If I press ctrl + C to get out of this my container stops! So to deal with this we can run the container in a detached mode meaning in the background:
 
         docker run -d react-app
 
@@ -1668,7 +1668,7 @@ with docker run we start a new container and run a command but with docker exec 
 
 we can do
 
-        docker exec c1 here_we_can_run_any_operating_ssytem_command
+        docker exec c1 here_we_can_run_any_operating_system_command
 
 let's do
 
