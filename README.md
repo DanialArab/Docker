@@ -1728,7 +1728,32 @@ with docker start we start a stopped container but with docker run we start a ne
 <a name="46"></a>
 ### Removing Containers
 
+There are 2 ways to remove a container: 
 
+        docker container rm container_name
+
+or
+
+        docker rm container_name
+
+but if the container is running we cannot remove it via the above commands and we have two options: 
+
+1. first stop the container then use the above commands
+2. or force remove it using force option
+
+        docker rm -f container_name
+
+now if we do docker ps -a we don't see the container that we removed.
+
+a cool trick to search for a specific container using piping:
+
+        docker ps -a | grep container_name
+
+to delete all the stoped containers in one go: 
+
+        docker prune container 
+
+        
 <a name="47"></a>
 ### Containers File System
 
