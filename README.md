@@ -1757,6 +1757,38 @@ to delete all the stoped containers in one go:
 <a name="47"></a>
 ### Containers File System
 
+        docker ps 
+        
+        CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS      NAMES
+        479ec4c7b2b5   react-app   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   3000/tcp   c1
+        ed3528ca9d50   react-app   "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes   3000/tcp   blue_sky
+
+now let's start a shell session in one container:
+
+        docker exec -it c1 sh
+
+then let's create a file in the app directory:
+
+        echo hello > file1.txt
+
+        ls
+
+        Dockerfile         file1.txt          package-lock.json  public             yarn.lock
+        README.md          node_modules       package.json       src
+
+now let's start a sell session in another container:
+
+        docker exec -it blue_sky sh
+
+now let's see if the file1.txt file is in the app directory of the container blue_sky.
+
+        ls
+
+which gives me back:
+
+        Dockerfile         README.md          node_modules       package-lock.json  package.json       public             src                yarn.lock
+
+
 <a name="48"></a>
 ### Persisting Data using Volumes
 
