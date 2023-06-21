@@ -1979,7 +1979,7 @@ then exit the container with
 
         exit
 
-now i want to copy the log.txt file in my host:
+now i want to copy the log.txt file to my host:
 
         docker cp b9:/app/log.txt . # i used . to reference the current directory in the host which I cd Desktop 
 
