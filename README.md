@@ -1947,12 +1947,80 @@ so volumes are the right way to persist data in the dockerized applications beca
 <a name="49"></a>
 ### Copying Files between the Host and Containers
 
-HERE
+I use docker cp command:
+
+        docker cp --help
+
+        Usage:  docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-
+        	docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
+        
+        Copy files/folders between a container and the local filesystem
+        
+        Use '-' as the source to read a tar archive from stdin
+        and extract it to a directory destination in a container.
+        Use '-' as the destination to stream a tar archive of a
+        container source to stdout.
+        
+        Options:
+          -a, --archive       Archive mode (copy all uid/gid information)
+          -L, --follow-link   Always follow symbol link in SRC_PATH
+
+
+        docker ps
+
+        CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+        b9d1b266bd24   react-app   "docker-entrypoint.s…"   7 minutes ago   Up 7 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   blue_sky
+
+        docker exec -it b9 sh
+
+        echo hello > log.txt 
+
+then exit the container with 
+
+        exit
+
+now i want to copy the log.txt file in my host:
+
+        docker cp b9:/app/log.txt . # i used . to reference the current directory in the host which I cd Desktop 
+
+in the docker cp command we need to specify the source and the destination. In my case the source is the container, after the container id and after the colon I need to specift the full path to the file or directory.
+
+So this way we can copy the log.txt file in the application directory of my container with id b9 to the host. 
+
+Now if I want to copy a file from the host to the container I can do the following. First, let's create a file called secret.txt on the desktop
+
+        cd Desktop
+        echo hello > secret.txt
+
+        docker cp secret.txt b9:/app
+
+this time the source is local and since I am in the Desktop directory I can specify it like above. 
+
+        docker exec -it b9 sh
+
+        ls -1
+
+which gives me back:
+
+        Dockerfile
+        README.md
+        data
+        log.txt
+        node_modules
+        package-lock.json
+        package.json
+        public
+        secret.txt
+        src
+        yarn.lock
+
+the file secret.txt is copied in the app directory of my container.
+
 
 <a name="50"></a>
 ### Sharing the Source Code with a Container
 
-
+HERE
 
 
 
