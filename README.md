@@ -1776,18 +1776,17 @@ then let's create a file in the app directory:
         Dockerfile         file1.txt          package-lock.json  public             yarn.lock
         README.md          node_modules       package.json       src
 
-now let's start a sell session in another container:
+now let's start a new shell session in another container:
 
         docker exec -it blue_sky sh
 
 now let's see if the file1.txt file is in the app directory of the container blue_sky.
 
-        ls
+        ls | grep file1
 
-which gives me back:
+which gives nothing back to me. 
 
-        Dockerfile         README.md          node_modules       package-lock.json  package.json       public             src                yarn.lock
-
+So each container has its own file system, that is invisible to other containers. That means if we delete a container its file system is also gone with it and we lose our data. So we should never store our data in a container's file system. Instead, we use volumes.
 
 <a name="48"></a>
 ### Persisting Data using Volumes
