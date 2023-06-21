@@ -1558,7 +1558,7 @@ which gives me back:
 
 the option -f or --follow is useful if your container is continuously producing output. and instead of running docker logs container_id multiple times i can do docker logs -f container_id then whatever it is written to the log you can see it in real time on the terminal of course I have to press ctrl + C to get out of that. 
 
-another option is -n or --tail with which we can specify the number of lines to show. like
+another option is -n or --tail with which we can specify the number of lines, from the bottom, to show. like
 
         docker logs -n 5 c8
 
