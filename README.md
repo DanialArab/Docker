@@ -2485,6 +2485,70 @@ We have to do the same for the frontend.
 <a name="63"></a>
 ### Migrating the Database
 
+When we release our applciation,  we want our database to be in a particular shape with some data, this is called database migration. In the backend project we use a database migration tool called migrate-mongo, which is specified in the package.json file under the devDependencies:
+
+        {
+          "name": "vidly-backend",
+          "version": "1.0.0",
+          "description": "",
+          "main": "index.js",
+          "scripts": {
+            "db:up": "migrate-mongo up",
+            "start": "nodemon --ignore './tests' index.js",
+            "test": "jest --watchAll --colors"
+          },
+          "keywords": [],
+          "author": "",
+          "license": "ISC",
+          "dependencies": {
+            "cors": "^2.8.5",
+            "express": "^4.17.1",
+            "mongoose": "^5.11.13"
+          },
+          "devDependencies": {
+            "jest": "^26.6.3",
+            "migrate-mongo": "^8.1.4",
+            "nodemon": "^2.0.7",
+            "supertest": "^6.1.3"
+          },
+          "jest": {
+            "testEnvironment": "node",
+            "testPathIgnorePatterns": [
+              "config"
+            ]
+          }
+        }
+
+we have the similar tools in other development stack. Using these database migration tools we can create database migration scripts. In this project our migration script is stored in migrations directory inside the backend directory and as follows:
+
+        module.exports = {
+          async up(db, client) {
+            await db
+              .collection("movies")
+              .insertMany([
+                { title: "Avatar" },
+                { title: "Star Wars" },
+                { title: "Terminator" },
+                { title: "Titanic" },
+              ]);
+          },
+        
+          async down(db, client) {
+            await db.collection("movies").deleteMany({
+              title: {
+                $in: ["Avatar", "Star Wars", "Terminator", "Titanic"],
+              },
+            });
+          },
+        };
+
+
+usign a tool like migrate-mongo we can go to the terminal and do:
+
+        migrate-mongo up
+
+this looks at the migrations folder and executes all the migration scripts.
+
 <a name="64"></a>
 ### Running Tests
 
