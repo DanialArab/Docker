@@ -2175,7 +2175,7 @@ HERE
 ### The Sample Web Application
 
 <a name="56"></a>
-### JSON and YAML Formats](#56)
+### JSON and YAML Formats
 
 <a name="57"></a>
 ### Creating a Compose File
