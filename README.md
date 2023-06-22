@@ -2227,12 +2227,106 @@ Quite often we use YAML files for configuration files and JSON for exchanging da
 <a name="57"></a>
 ### Creating a Compose File
 
-HERE 
+In the project directory we create a file named "docker-compose.yml" with this exact spelling otherwise docker compose will not recognize it. 
+
+We do not need to start a container manually and do port mapping, volume mapping etc. as before, and instead, all these values can be defined in the compose-file and docker compose takes cares of starting a container under the hood. 
+
+        version: "3.8"
+        
+        services:
+          frontend:
+            depends_on: 
+              - backend
+            build: ./frontend
+            ports:
+              - 3000:3000
+        
+          backend: 
+            depends_on: 
+              - db
+            build: ./backend
+            ports: 
+              - 3001:3001
+            environment: 
+              DB_URL: mongodb://db/vidly
+            command: ./docker-entrypoint.sh
+        
+          db:
+            image: mongo:4.0-xenial
+            ports:
+              - 27017:27017
+            volumes:
+              - vidly:/data/db
+        
+        volumes:
+          vidly:
+
+
 <a name="58"></a>
 ### Building Images
 
+Docker compose is built on top of Docker engine and so everything we have doen with Docker engine like building images, listing them, starting containers and so on are also available using Docker compose. look:
+
+        docker-compose 
+        
+        Usage:  docker compose [OPTIONS] COMMAND
+        
+        Define and run multi-container applications with Docker.
+        
+        Options:
+              --ansi string                Control when to print ANSI control characters ("never"|"always"|"auto") (default "auto")
+              --compatibility              Run compose in backward compatibility mode
+              --dry-run                    Execute command in dry run mode
+              --env-file stringArray       Specify an alternate environment file.
+          -f, --file stringArray           Compose configuration files
+              --parallel int               Control max parallelism, -1 for unlimited (default -1)
+              --profile stringArray        Specify a profile to enable
+              --project-directory string   Specify an alternate working directory
+                                           (default: the path of the, first specified, Compose file)
+          -p, --project-name string        Project name
+        
+        Commands:
+          build       Build or rebuild services
+          config      Parse, resolve and render compose file in canonical format
+          cp          Copy files/folders between a service container and the local filesystem
+          create      Creates containers for a service.
+          down        Stop and remove containers, networks
+          events      Receive real time events from containers.
+          exec        Execute a command in a running container.
+          images      List images used by the created containers
+          kill        Force stop service containers.
+          logs        View output from containers
+          ls          List running compose projects
+          pause       Pause services
+          port        Print the public port for a port binding.
+          ps          List containers
+          pull        Pull service images
+          push        Push service images
+          restart     Restart service containers
+          rm          Removes stopped service containers
+          run         Run a one-off command on a service.
+          start       Start services
+          stop        Stop services
+          top         Display the running processes
+          unpause     Unpause services
+          up          Create and start containers
+          version     Show the Docker Compose version information
+        
+        Run 'docker compose COMMAND --help' for more information on a command.
+
+The differencs is that any of these commands are applied to our application as a whole so most of these commands will impact multiple services or multiple containers in our application. 
+
+so let's build the image using docker-compose, while I am in the directory of the project called vidly:
+
+        docker-compose build
+
+to force a full build:
+
+        docker-compose build --no-cache 
+
 <a name="59"></a>
 ### Starting and Stopping the Application
+
 
 <a name="60"></a>
 ### Docker Networking
