@@ -2552,16 +2552,15 @@ this looks at the migrations folder and executes all the migration scripts.
 <a name="64"></a>
 ### Running Tests
 
-
-
-
-
+We can also run the test inside the docker container, which is very slow though.  
 
 <a name="65"></a>
 ## 6. Deploying Applications
 
 <a name="66"></a>
 ### Introduction
+
+HERE
 
 <a name="67"></a>
 ### Deployment Options
