@@ -2030,14 +2030,14 @@ Now, I have my react app running on port localhost:3000. Let's see how we can pu
 
 1. For production machine: we should always build a new image, tag it properly, then deploy it by starting a new container from it. We talk about it later in the deployment section.
    
-2. For development machines: we do NOT want to rebuild the image every time we make a tiny change in our code, that is just too time-consuming. Also copying files is not good either, because we do not want manually copy files from our development machine into a container every time we change our code. So what is the solution for the development machines?
+2. For development machines: we do NOT want to rebuild the image every time we make a tiny change in our code, that is just too time-consuming. Also copying files is not good either, because we do not want to manually copy files from our development machine into a container every time we change our code. So what is the solution for the development machines?
 
 
-We can create a mapping or binding between a directory on the host and a directory inside a container this way any changes we make to any files in this directory are immediately visible inside the container. So let's start a new container:
+We can create a **mapping or binding between a directory on the host and a directory inside a container**, this way any changes we make to any files in this directory are immediately visible inside the container. So let's start a new container:
 
         docker run -d -p 3001:3000 -v $(pwd):/app react-app 
 
-of course, I have to be in my application directory to assure that the current directory is what I will be mapping through the above code. As a side note, we need to have $() in $(pwd) because otherwise Docker thinks it is a named volume, and we do not want that we want a full path and so we need to use $(). We want to map this directory to the app directory inside the container.
+of course, I have to be in my application directory to assure that the current directory is what I will be mapping through the above code. As a side note, we need to have $() in $(pwd) because otherwise Docker thinks it is a named volume, and we do not want that, we want a full path and so we need to use $(). We want to map this directory to the app directory inside the container.
 
 **here we used the same syntax as volume mapping to map a directory on the host to a directory inside the container.** 
 
