@@ -2037,7 +2037,7 @@ We can create a **mapping or binding between a directory on the host and a direc
 
         docker run -d -p 3001:3000 -v $(pwd):/app react-app 
 
-of course, I have to be in my application directory to assure that the current directory is what I will be mapping through the above code. As a side note, we need to have $() in $(pwd) because otherwise Docker thinks it is a named volume, and we do not want that, we want a full path and so we need to use $(). We want to map this directory to the app directory inside the container.
+of course, I have to be in my application directory to assure that the current directory is what I will be mapping through the above code. As a side note, we need to have **$()** in **$(pwd)** because otherwise Docker thinks it is a named volume, and we do not want that, we want a full path and so we need to use $(). We want to map this directory to the app directory inside the container.
 
 **here we used the same syntax as volume mapping to map a directory on the host to a directory inside the container.** 
 
