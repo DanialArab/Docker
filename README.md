@@ -2020,7 +2020,40 @@ the file secret.txt is copied in the app directory of my container.
 <a name="50"></a>
 ### Sharing the Source Code with a Container
 
-HERE
+I have 
+
+        docker ps
+        CONTAINER ID   IMAGE       COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+        b9d1b266bd24   react-app   "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   blue_sky
+
+Now, I have my react app runing on port localhost:3000. Let's see how we can publish our application changes. Let's change the title of the app, the title that we see in the browser window, by going to the file index.html in the public directory of my react-app directory and change the title to "Dockerized React App". After saving the changes in VS code and refresh the browser, http://localhost:3000/, the title is not changed! We still see the old title "React App". What should we do:
+
+1. For production machine: we should always build a new image, tag it properly, then deploy it with starting a new container from it. We talk about it later in the deployment section.
+   
+2. For development machines: we do NOT want to rebuil the image everythime we make a tiny change in our code, that is just too time-consuming. Also copying files is not good either, because we do not want manually copy files from our development machine into a container everytime we change our code. So what is the solution for the development machines?
+
+
+We can create a mapping or binding between a directory on the host and a directory inside a container this way any changes we make to any files in this directory are immediately visible inside the container. So let's start a new container:
+
+        docker run -d -p 3001:3000 -v $(pwd):/app react-app 
+
+of cource I have to be in my application directory to assure than the current directory is what I will be mapping through the above code. A side note, we ened to have $() in $(pwd) because otherwise Docker thinks it is a named volume, and we do not want that we want a full path and so we need to use $(). The we want to map this directory to the app directory inside the container.
+
+**here we used the same syntax as volume mapping to map a directory on the host to a directory inside the container.** 
+
+what about a named volume? if we need a named volume, we can still add another option and use the named volume like below (but for our app because it does not store anything on the disk it does not have a database, it is just a basic front-end app we don't need a named volume here):
+
+        docker run -d -p 3001:3000 -v $(pwd):/app -v app-data:/app/data react-app 
+
+then 
+
+        c834d6a94da11ed04a766339c7ad859782e60f9c88716f41a0b7826365068267
+
+which is the id of the container I just started from the image. Let's look at the logs with follow options to see the changes as they come up 
+
+
+        docker logs -f c8
+
 
 
 
