@@ -2160,14 +2160,30 @@ Question: Running an application with Docker is not painful? We have to remember
 <a name="51"></a>
 ## 5. Running Multi-container Applications
 
-HERE
 <a name="52"></a>
 ### Introduction
 
+Topics:
+
++ Docker compose for building and running multi-container applications
++ Docker networking
++ Database migration
++ Running automated tests 
 
 <a name="53"></a>
 ### Installing Docker Compose
 
+From the MLOPS course:
+
+        mkdir soft
+        cd soft
+        wget https://github.com/docker/compose/releases/download/v2.18.0/docker-compose-linux-x86_64
+        mv docker-compose-linux-x86_64 docker-compose
+        chmod +x docker-compose (to make it executable)
+        nano .bashrc (to be able to access the soft folder, which contains the docker-compose, from anywhere I need to modify my PATH variable:)
+            export PATH="${HOME}/soft:${PATH}"
+        source .bashrc
+        
 <a name="54"></a>
 ### Cleaning Up our Workspace
 
