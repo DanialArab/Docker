@@ -2148,8 +2148,11 @@ i did not get that error:
         Note that the development build is not optimized.
         To create a production build, use yarn build.
 
-and now the change of the title is immediately reflected int he browser, without even refreshing, due to react feature called **hot reloading**. 
+and now the change of the title is immediately reflected int he browser, without even refreshing, due to react feature called **hot reloading**, which updates our application in the browser automatically whenever our application code changes. 
 
+So to share our source code with a container, we sue the volume option to map the project directory to a directory in a container's file system.
+
+Question: Running an application with Docker is not painful? We have to remember all these options and type them every time we want to run an application!!! No we don't have to, next we learn how to use docker compose to easily bring up an application with multiple componentns, we covered all the commands and options to know exactly how docker compose works under the hood. 
 
 
 
