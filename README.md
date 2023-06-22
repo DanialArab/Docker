@@ -2053,7 +2053,7 @@ which is the id of the container I just started from the image. Let's look at th
 
         docker logs -f c8
 
-Now, unlike Mosh, I got permission 
+Now, unlike Mosh, I got permission error: 
 
         > react-app@0.1.0 start /app
         > react-scripts start
@@ -2099,12 +2099,15 @@ gives me back
 
         app
 
-and so I also cannot write anything in the data directory. It seems that the ownership is changed when trying to map the directory, if I try:
+I also cannot write anything in the data directory. It seems that the ownership is changed when trying to map the directory, if I try:
 
         docker run -d -p 3005:3000 -v $(pwd):/app --user 1000:1000 react-app # 1000:1000 is my user ID:group ID as danial 
+        
+which gives me back
+
         8afc9cdbf9ec47d296ff95dda390fade3cea04747c3d6d7727dcdebf8d1e4956
 
-        docker exec -it a8 sh
+        docker exec -it 8a sh
         ls -l
 
         total 2080
@@ -2148,17 +2151,16 @@ i did not get that error:
         Note that the development build is not optimized.
         To create a production build, use yarn build.
 
-and now the change of the title is immediately reflected int he browser, without even refreshing, due to react feature called **hot reloading**, which updates our application in the browser automatically whenever our application code changes. 
+and now the change of the title is automatically reflected in the browser, without even refreshing, due to react feature called **hot reloading**, which updates our application in the browser automatically whenever our application code changes. 
 
-So to share our source code with a container, we sue the volume option to map the project directory to a directory in a container's file system.
+So **to share our source code with a container, we use the volume option to map the project directory to a directory in a container's file system**.
 
-Question: Running an application with Docker is not painful? We have to remember all these options and type them every time we want to run an application!!! No we don't have to, next we learn how to use docker compose to easily bring up an application with multiple componentns, we covered all the commands and options to know exactly how docker compose works under the hood. 
-
-
+Question: Running an application with Docker is not painful? We have to remember all these commands and options and type them every time we want to run an application!!! No we don't have to, next we learn how to use docker compose to easily bring up an application with multiple componentns, we covered all the commands and options to know exactly how docker compose works under the hood. 
 
 <a name="51"></a>
 ## 5. Running Multi-container Applications
 
+HERE
 <a name="52"></a>
 ### Introduction
 
