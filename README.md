@@ -1622,7 +1622,7 @@ I have
 
 I have a column named PORTS where we can see the ports and their mapping, here both of my containers are listening to port 3000. Now let's start a new container and publish a port at the same time:
 
-        docker run -d -p 80:3000 --name c1 react-app # here I publish a port on the host, port 80, to port 3000 of the container 
+        docker run -d -p 80:3000 --name c1 react-app # here I publish a port on the host, port 80, to port 3000 of the container, HOST:CONTAINER
 
 now if I go to localhost port 80, localhost:80, I can see my react app running. Let's look at the running containers one more time:
 
