@@ -2485,7 +2485,7 @@ We have to do the same for the frontend.
 <a name="63"></a>
 ### Migrating the Database
 
-When we release our applciation,  we want our database to be in a particular shape with some data, this is called database migration. In the backend project we use a database migration tool called migrate-mongo, which is specified in the package.json file under the devDependencies:
+When we release our application,  we want our database to be in a particular shape with some data, this is called database migration. In the backend project we use a database migration tool called migrate-mongo, which is specified in the package.json file under the devDependencies:
 
         {
           "name": "vidly-backend",
@@ -2519,7 +2519,7 @@ When we release our applciation,  we want our database to be in a particular sha
           }
         }
 
-we have the similar tools in other development stack. Using these database migration tools we can create database migration scripts. In this project our migration script is stored in migrations directory inside the backend directory and as follows:
+we have similar tools in other development stacks. Using these database migration tools we can create database migration scripts. In this project our migration script is stored in the migrations directory inside the backend directory and is as follows:
 
         module.exports = {
           async up(db, client) {
@@ -2543,7 +2543,7 @@ we have the similar tools in other development stack. Using these database migra
         };
 
 
-usign a tool like migrate-mongo we can go to the terminal and do:
+using a tool like migrate-mongo we can go to the terminal and do:
 
         migrate-mongo up
 
