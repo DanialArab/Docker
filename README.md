@@ -2173,7 +2173,7 @@ Topics:
 <a name="53"></a>
 ### Installing Docker Compose
 
-From the MLOPS course:
+I already installed docker-compose through the following from the MLOPS course:
 
         mkdir soft
         cd soft
@@ -2187,6 +2187,29 @@ From the MLOPS course:
 <a name="54"></a>
 ### Cleaning Up our Workspace
 
+        docker images -q # from docker images -- help: -q, --quiet           Only show image IDs
+
+gives me back only the images ID:
+
+        19f952e8b01b
+        5e2b554c1c45
+        3b418d7b466a
+        50bfd284aa0d
+
+so I can pass this as an argument to the docker image rm to get rid of all the images in one go. I do need to have a $(): 
+
+        docker image rm $(docker images -q)
+
+running that gives me error because some of these images are stopped or running containers. So we should always remove containers first:  
+
+        docker container rm -f $(docker container ls -a -q)
+
+now let's remove the images:
+
+        docker image rm -f $(docker image ls -q)
+
+ now we don't have any images and running/stopped containers.
+ 
 <a name="55"></a>
 ### The Sample Web Application
 
