@@ -2051,11 +2051,9 @@ then
 
 which is the id of the container I just started from the image. Let's look at the logs with follow options to see the changes as they come up 
 
-
         docker logs -f c8
 
-
-HEER
+Now, unlike Mosh, I got permission 
 
 
 
