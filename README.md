@@ -1983,7 +1983,7 @@ now i want to copy the log.txt file to my host:
 
         docker cp b9:/app/log.txt . # i used . to reference the current directory in the host which I cd Desktop 
 
-in the docker cp command we need to specify the source and the destination. In my case the source is the container, after the container id and after the colon I need to specify the full path to the file or directory.
+in the docker cp command we need to specify the source and the destination. In my case the source is the container, after the container id and after the colon, I need to specify the full path to the file or directory.
 
 So this way we can copy the log.txt file in the application directory of my container with id b9 to the host. 
 
@@ -2026,18 +2026,18 @@ I have
         CONTAINER ID   IMAGE       COMMAND                  CREATED             STATUS             PORTS                                       NAMES
         b9d1b266bd24   react-app   "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   blue_sky
 
-Now, I have my react app runing on port localhost:3000. Let's see how we can publish our application changes. Let's change the title of the app, the title that we see in the browser window, by going to the file index.html in the public directory of my react-app directory and change the title to "Dockerized React App". After saving the changes in VS code and refresh the browser, http://localhost:3000/, the title is not changed! We still see the old title "React App". What should we do:
+Now, I have my react app running on port localhost:3000. Let's see how we can publish our application changes. Let's change the title of the app, the title that we see in the browser window, by going to the file index.html in the public directory of my react-app directory and changing the title to "Dockerized React App". After saving the changes in VS code and refreshing the browser, http://localhost:3000/, the title is not changed! We still see the old title "React App". What should we do:
 
-1. For production machine: we should always build a new image, tag it properly, then deploy it with starting a new container from it. We talk about it later in the deployment section.
+1. For production machine: we should always build a new image, tag it properly, then deploy it by starting a new container from it. We talk about it later in the deployment section.
    
-2. For development machines: we do NOT want to rebuil the image everythime we make a tiny change in our code, that is just too time-consuming. Also copying files is not good either, because we do not want manually copy files from our development machine into a container everytime we change our code. So what is the solution for the development machines?
+2. For development machines: we do NOT want to rebuild the image every time we make a tiny change in our code, that is just too time-consuming. Also copying files is not good either, because we do not want manually copy files from our development machine into a container every time we change our code. So what is the solution for the development machines?
 
 
 We can create a mapping or binding between a directory on the host and a directory inside a container this way any changes we make to any files in this directory are immediately visible inside the container. So let's start a new container:
 
         docker run -d -p 3001:3000 -v $(pwd):/app react-app 
 
-of cource I have to be in my application directory to assure than the current directory is what I will be mapping through the above code. A side note, we ened to have $() in $(pwd) because otherwise Docker thinks it is a named volume, and we do not want that we want a full path and so we need to use $(). The we want to map this directory to the app directory inside the container.
+of course, I have to be in my application directory to assure that the current directory is what I will be mapping through the above code. As a side note, we need to have $() in $(pwd) because otherwise Docker thinks it is a named volume, and we do not want that we want a full path and so we need to use $(). We want to map this directory to the app directory inside the container.
 
 **here we used the same syntax as volume mapping to map a directory on the host to a directory inside the container.** 
 
@@ -2055,7 +2055,7 @@ which is the id of the container I just started from the image. Let's look at th
         docker logs -f c8
 
 
-
+HEER
 
 
 
