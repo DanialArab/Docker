@@ -2327,17 +2327,145 @@ to force a full build:
 <a name="59"></a>
 ### Starting and Stopping the Application
 
+to start an application
 
+        docker-compose up
+
+if the images are ready docker-compose run them inside the containers otherwise it builds the images automatically. 
+
+the available options are:
+
+        docker-compose up --help
+
+        Usage:  docker compose up [OPTIONS] [SERVICE...]
+        
+        Create and start containers
+        
+        Options:
+              --abort-on-container-exit   Stops all containers if any container was stopped. Incompatible with -d
+              --always-recreate-deps      Recreate dependent containers. Incompatible with --no-recreate.
+              --attach stringArray        Attach to service output.
+              --attach-dependencies       Attach to dependent containers.
+              --build                     Build images before starting containers.
+          -d, --detach                    Detached mode: Run containers in the background
+              --dry-run                   Execute command in dry run mode
+              --exit-code-from string     Return the exit code of the selected service container. Implies --abort-on-container-exit
+              --force-recreate            Recreate containers even if their configuration and image haven't changed.
+              --no-attach stringArray     Don't attach to specified service.
+              --no-build                  Don't build an image, even if it's missing.
+              --no-color                  Produce monochrome output.
+              --no-deps                   Don't start linked services.
+              --no-log-prefix             Don't print prefix in logs.
+              --no-recreate               If containers already exist, don't recreate them. Incompatible with --force-recreate.
+              --no-start                  Don't start the services after creating them.
+              --pull string               Pull image before running ("always"|"missing"|"never") (default "missing")
+              --quiet-pull                Pull without printing progress information.
+              --remove-orphans            Remove containers for services not defined in the Compose file.
+          -V, --renew-anon-volumes        Recreate anonymous volumes instead of retrieving data from the previous containers.
+              --scale scale               Scale SERVICE to NUM instances. Overrides the scale setting in the Compose file if present.
+          -t, --timeout int               Use this timeout in seconds for container shutdown when attached or when containers are
+                                          already running. (default 10)
+              --timestamps                Show timestamps.
+              --wait                      Wait for services to be running|healthy. Implies detached mode.
+              --wait-timeout int          timeout waiting for application to be running|healthy.
+
+let's say we are done with our application and need to free up our resources:
+
+        docker-compose down
+        
 <a name="60"></a>
 ### Docker Networking
 
+When we run our application with docker-compose, docker-compose automatically cretaes a network and adds our containers on that network so that these containers can talk to each other. 
 
+after starting my app through
+
+        docker-compose up -d
+
+and then 
+
+        docker network ls
+
+i got
+
+        NETWORK ID     NAME            DRIVER    SCOPE
+        f16e97d8097a   bridge          bridge    local
+        fdf706a1f57a   host            host      local
+        92048af28bce   none            null      local
+        2d2662900f9a   vidly_default   bridge    local
+
+which are all the networks on my machine. It seems that every docker installation has three networks: bridge, host, and none. What matters here is that we have a network called vidly_default. The driver for this network is bridge on Linux. This network contains three hosts or three containers: frontend, backend, and db (i.e., the three services in the compose file). So these hosts or containers can talk to each other using their name. 
+        
 <a name="61"></a>
 ### Viewing Logs
+
+I can view the logs across all containers of my application in one place:
+
+        docker-compose logs
+
+to see the available options: 
+
+        docker-compose logs --help
+
+        Usage:  docker compose logs [OPTIONS] [SERVICE...]
+
+        View output from containers
+        
+        Options:
+              --dry-run         Execute command in dry run mode
+          -f, --follow          Follow log output.
+              --no-color        Produce monochrome output.
+              --no-log-prefix   Don't print prefix in logs.
+              --since string    Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m
+                                for 42 minutes)
+          -n, --tail string     Number of lines to show from the end of the logs for each container.
+                                (default "all")
+          -t, --timestamps      Show timestamps.
+              --until string    Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g.
+                                42m for 42 minutes)
+
+what if we don't want to see the logs for all the containers in one place? 
+
+        docker ps
+
+        CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS                                           NAMES
+        fe32949168a1   vidly-frontend     "docker-entrypoint.s…"   19 minutes ago   Up 19 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp       vidly-frontend-1
+        c982c55d416e   mongo:4.0-xenial   "docker-entrypoint.s…"   19 minutes ago   Up 19 minutes   0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   vidly-db-1
+
+now
+
+        docker logs fe32949168a1 -f
+
+which gives me back the logs for this container:
+
+         vidly-frontend@0.1.0 start /app
+        > react-scripts start
+        
+        ℹ ｢wds｣: Project is running at http://172.18.0.4/
+        ℹ ｢wds｣: webpack output is served from 
+        ℹ ｢wds｣: Content not from webpack is served from /app/public
+        ℹ ｢wds｣: 404s will fallback to /
+        Starting the development server...
+        
+        Browserslist: caniuse-lite is outdated. Please run:
+        npx browserslist@latest --update-db
+        
+        Why you should do it regularly:
+        https://github.com/browserslist/browserslist#browsers-data-updating
+        Compiled successfully!
+        
+        You can now view vidly-frontend in the browser.
+        
+          Local:            http://localhost:3000
+          On Your Network:  http://172.18.0.4:3000
+        
+        Note that the development build is not optimized.
+        To create a production build, use npm run build.
 
 <a name="62"></a>
 ### Publishing Changes
 
+HERE
 
 <a name="63"></a>
 ### Migrating the Database
