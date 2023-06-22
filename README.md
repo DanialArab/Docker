@@ -2200,7 +2200,7 @@ so I can pass this as an argument to the docker image rm to get rid of all the i
 
         docker image rm $(docker images -q)
 
-running that gives me error because some of these images are stopped or running containers. So we should always remove containers first:  
+running that gives me error because some of these images are in stopped or running containers. So we should always remove containers first:  
 
         docker container rm -f $(docker container ls -a -q)
 
@@ -2213,12 +2213,21 @@ now let's remove the images:
 <a name="55"></a>
 ### The Sample Web Application
 
+        docker-compose up
+        
 <a name="56"></a>
 ### JSON and YAML Formats
+
+JSON is a human-readable language for representing data. YAML is another language for representing data but it has less clutter than JSON and it is easier to read, and its extension can be yml or yaml.
+
+YAML is easier to read and understand but its parsing is a little bit slower than JSON, because the parser cannot distinguish between a string an a number so it has to read everything as a string and then try to evaluate it. In contrast, strings are represented in quotes and so the parser knows that this is a string and it should not evaluatre oit 
+
+Quite often we use YAML files for configuration files and JSON for exchanging data between multiple computers like a client and server. 
 
 <a name="57"></a>
 ### Creating a Compose File
 
+HERE 
 <a name="58"></a>
 ### Building Images
 
