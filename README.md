@@ -2047,13 +2047,109 @@ what about a named volume? if we need a named volume, we can still add another o
 
 then 
 
-        c834d6a94da11ed04a766339c7ad859782e60f9c88716f41a0b7826365068267
+        ac3daa42f9ed13d6fd32bfa5ab16e7a48fcaa36b3607a5d400e6d63b58be2d5c
 
 which is the id of the container I just started from the image. Let's look at the logs with follow options to see the changes as they come up 
 
         docker logs -f c8
 
 Now, unlike Mosh, I got permission 
+
+        > react-app@0.1.0 start /app
+        > react-scripts start
+        
+        ℹ ｢wds｣: Project is running at http://172.17.0.5/
+        ℹ ｢wds｣: webpack output is served from 
+        ℹ ｢wds｣: Content not from webpack is served from /app/public
+        ℹ ｢wds｣: 404s will fallback to /
+        Starting the development server...
+        
+        Browserslist: caniuse-lite is outdated. Please run:
+        npx browserslist@latest --update-db
+        
+        Why you should do it regularly:
+        https://github.com/browserslist/browserslist#browsers-data-updating
+        Failed to compile.
+        
+        EACCES: permission denied, open '/app/node_modules/.cache/.eslintcache'
+
+So it seems that when I try to perform this directory mapping the ownership of all the files in the container is changed to node:
+
+        docker exec -it ac sh
+
+        ls -l 
+
+        total 2080
+        -rw-rw-r--    1 node     node           275 Jun 22 15:16 Dockerfile
+        -rw-r--r--    1 node     node          3364 Jun 16 16:43 README.md
+        drwxr-xr-x    2 root     root          4096 Jun 22 15:26 data
+        drwxrwxr-x 1080 node     node         36864 Jun  9 17:21 node_modules
+        -rw-rw-r--    1 node     node       1546851 Jun  9 17:19 package-lock.json
+        -rw-r--r--    1 node     node           813 Mar  5  2021 package.json
+        drwxr-xr-x    2 node     node          4096 Mar  9  2021 public
+        drwxr-xr-x    2 node     node          4096 Mar  9  2021 src
+        -rw-r--r--    1 node     node        514422 Jun  9 17:19 yarn.lock
+
+
+and 
+
+        whoami
+
+gives me back
+
+        app
+
+and so I also cannot write anything in the data directory. It seems that the ownership is changed when trying to map the directory, if I try:
+
+        docker run -d -p 3005:3000 -v $(pwd):/app --user 1000:1000 react-app # 1000:1000 is my user ID:group ID as danial 
+        8afc9cdbf9ec47d296ff95dda390fade3cea04747c3d6d7727dcdebf8d1e4956
+
+        docker exec -it a8 sh
+        ls -l
+
+        total 2080
+        -rw-rw-r--    1 node     node           275 Jun 22 15:16 Dockerfile
+        -rw-r--r--    1 node     node          3364 Jun 16 16:43 README.md
+        drwxr-xr-x    2 root     root          4096 Jun 22 15:26 data
+        drwxrwxr-x 1080 node     node         36864 Jun  9 17:21 node_modules
+        -rw-rw-r--    1 node     node       1546851 Jun  9 17:19 package-lock.json
+        -rw-r--r--    1 node     node           813 Mar  5  2021 package.json
+        drwxr-xr-x    2 node     node          4096 Mar  9  2021 public
+        drwxr-xr-x    2 node     node          4096 Mar  9  2021 src
+        -rw-r--r--    1 node     node        514422 Jun  9 17:19 yarn.lock
+
+still whoami returns node and node owns the files as above but:
+
+        docker logs -f a8
+
+i did not get that error:
+
+        > react-app@0.1.0 start /app
+        > react-scripts start
+        
+        ℹ ｢wds｣: Project is running at http://172.17.0.6/
+        ℹ ｢wds｣: webpack output is served from 
+        ℹ ｢wds｣: Content not from webpack is served from /app/public
+        ℹ ｢wds｣: 404s will fallback to /
+        Starting the development server...
+        
+        Browserslist: caniuse-lite is outdated. Please run:
+        npx browserslist@latest --update-db
+        
+        Why you should do it regularly:
+        https://github.com/browserslist/browserslist#browsers-data-updating
+        Compiled successfully!
+        
+        You can now view react-app in the browser.
+        
+          Local:            http://localhost:3000
+          On Your Network:  http://172.17.0.6:3000
+        
+        Note that the development build is not optimized.
+        To create a production build, use yarn build.
+
+and now the change of the title is immediately reflected int he browser, without even refreshing, due to react feature called **hot reloading**. 
+
 
 
 
