@@ -2465,7 +2465,22 @@ which gives me back the logs for this container:
 <a name="62"></a>
 ### Publishing Changes
 
-HERE
+Obviously we don't want to rebuild our application images every time we change our code. So we are going to map our project directory like the backend directory to the app directory inside our container exactly like before. So any changes we make in this directory are immediately visible inside our container. And of course, we have to do the same for the frontend directory separately. We achieve this by adding "volume" property to the definition of the backend service in the compose file:
+
+          backend: 
+            depends_on: 
+              - db
+            build: ./backend
+            ports: 
+              - 3001:3001
+            environment: 
+              DB_URL: mongodb://db/vidly
+            volumes:
+              - ./backend:/app 
+
+with compose file we can use the relative path i.e., './backend', which is a lot easier, in contrast to what we did before that we needed to provide the absolute path when wanted to map the directory in "docker run -v $(pwd):/app". That is all we have to do to share our source code with our container. But when trying to start the application through docker-compose up we get an error of 'sh: nodemon: not found'. nodemon is one of the packaegs that our backend project is dependent on. To solve this we need to go back to the terminal and backend directory and do npm install. 
+
+We have to do the same for the frontend.
 
 <a name="63"></a>
 ### Migrating the Database
