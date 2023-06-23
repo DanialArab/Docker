@@ -2563,7 +2563,7 @@ We can also run the test inside the docker container, which is very slow though.
 Topics:
 
 + Deployment options
-+ Getting a VIrtual Private Server (VPS)
++ Getting a Virtual Private Server (VPS)
 + Using Docker machine
 + Creating optimized production images
 + Deploying the application and its updates
@@ -2575,23 +2575,23 @@ Topics:
 To deploy our dockerized application, we have two options:
 
 + Single-host deployment
-+ Cluster deployment (a groyp of servers), which gives us high availability and scalability
++ Cluster deployment (a group of servers), which gives us high availability and scalability
 
 To run clusters we need special tools called orchestration tools. Docker has its own orchestration tools built into it called **Docker Swarm** but most people use a Google product called **Kubernetes**. 
 
-The focuse of the followings will be on the single-host deployment. 
+The focus of the following will be on the single-host deployment. 
 
 <a name="68"></a>
 ### Getting a Virtual Private Server
 
-To deploy our applciation we need a VPS, which we can get from the following platforms:
+To deploy our application we need a VPS, which we can get from the following platforms:
 
 + Digital Ocean
-+ Google Cloud PLatform (GCP)
++ Google Cloud Platform (GCP)
 + Microsoft Azure
 + Amazon Web Service (AWS)
 
-THe order is that the complexity increases from top to bottom!
+The order is in such a way that the complexity increases from top to bottom!
 
 <a name="69"></a>
 ### Installing Docker Machine
@@ -2615,7 +2615,7 @@ to connect to the server:
 
         docker-machine ls
 
-to connect to the machine we use secure shell (SSH), a protocol for connecting to servers. Using SSH we can open a secure shell session with our server. Setting up a SSH is a pain but the beauty of docker machine is that it abstracts away all these complexities from us:
+to connect to the machine we use secure shell (SSH), a protocol for connecting to servers. Using SSH we can open a secure shell session with our server. Setting up an SSH is a pain but the beauty of docker machine is that it abstracts away all these complexities from us:
 
         docker-machine ssh vidly # name of our machine is vidly 
 
@@ -2624,10 +2624,10 @@ now we are logged into our machine using SSH.
 <a name="72"></a>
 ### Defining the Production Configuration
 
-THe compose file we created is great for development but not ideal for production. 
-For example in our production environment we do not need the volume mapping that we added to share the source code with our container. 
+The compose file we created is great for development but not ideal for production. 
+For example, in our production environment, we do not need the volume mapping that we added to share the source code with our container. 
 
-Also we don't need tho container, web-tests, because we don't want to continuously run our test in the production environment because it slows down our server. So we need to create a separate compose file for our production environment. 
+Also, we don't need the container, web-tests, because we don't want to continuously run our test in the production environment because it slows down our server. So we need to create a separate compose file for our production environment. 
 
 <a name="73"></a>
 ### Reducing the Image Size
@@ -2665,7 +2665,7 @@ so we can troubleshoot the issue!
 <a name="76"></a>
 ### Publishing Changes
 
-We have to properly tag our images before deploying them to the various environemnts. We can properly tag our images through modifying the docker-compose.prod.yml file using image property. 
+We have to properly tag our images before deploying them to the various environments. We can properly tag our images through modifying the docker-compose.prod.yml file using the image property. 
         
 We can use continuous integration and deployment tools to automate our deployment process.   
 
