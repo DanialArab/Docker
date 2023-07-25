@@ -1,6 +1,6 @@
 # Docker
 
-This repo documents my understanding of Docker. The followings are my notes from the course "The Ultimate Docker" by Mosh Hamedani. 
+This repository documents my understanding of Docker. The followings are my notes from the course "The Ultimate Docker" by Mosh Hamedani. 
 
 
 # Table of content
